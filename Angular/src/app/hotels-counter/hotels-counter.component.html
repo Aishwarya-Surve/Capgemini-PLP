@@ -3,8 +3,9 @@
             aria-hidden="true"></span></a>
 </div>
 
-<div class="col-md-3 mt-5 offset-1 card card-body float-left" *ngFor='let hotel of hotelService.hotelArray'>
-    <h6>Hotel Id: {{hotel.hotelId}} </h6>
+<div class="col-md-3 mt-3 card card-body float-left" style="margin-left: 60px;" *ngFor='let hotel of hotelService.hotelArray, index as i'>
+    <img src="/assets/images/{{i+101}}.jpg" style="height: 175px;" alt="">
+    <!-- <h6>Hotel Id: {{hotel.hotelId}} </h6> -->
     <h6>Hotel Name: {{hotel.hotelName}} </h6>
     <h6>Location: {{hotel.location}}</h6>
     <h6>Available AC Rooms: {{hotel.availableAcRoom}}</h6>

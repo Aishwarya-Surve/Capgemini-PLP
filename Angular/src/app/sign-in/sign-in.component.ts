@@ -26,6 +26,7 @@ export class SignInComponent implements OnInit {
   }
 
   loginForm(form: NgForm) {
+    console.log(form.value);
     this.auth.loginData(form.value).subscribe(response => {
       console.log(response);
       form.reset();

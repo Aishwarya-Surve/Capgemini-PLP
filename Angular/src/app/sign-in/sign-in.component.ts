@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,7 @@ export class SignInComponent implements OnInit {
   message = null;
   statusCode = null;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   isLoggedIn(): boolean {
     const userDetails = JSON.parse(localStorage.getItem('user'));
@@ -34,6 +35,7 @@ export class SignInComponent implements OnInit {
       this.statusCode = response.statusCode;
       if (response.statusCode === '201') {
         this.message = response.description;
+        this.router.navigateByUrl('/');
         console.log(this.message);
       } else if (response.statusCode === '401') {
         this.message = response.description;

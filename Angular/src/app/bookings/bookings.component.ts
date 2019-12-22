@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HotelService } from '../hotel.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-bookings',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingsComponent implements OnInit {
 
-  constructor() { }
+ 
+
+  constructor(private hotelService: HotelService) { }
+
+  search(bookingForm: NgForm) {
+    console.log(bookingForm.value);
+    this.hotelService.searchHotel(bookingForm.value);
+  }
 
   ngOnInit() {
   }

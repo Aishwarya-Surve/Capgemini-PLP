@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   loginData(data): Observable<any> {
-    return this.http.get<any>(`${this.api}login?userEmail=${data.userEmail}&password=${data.password}`, data);
+    return this.http.get<any>(`${this.api}login?userEmail=${data.userEmail}&password=${data.password}`);
   }
 
 }

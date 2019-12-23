@@ -16,23 +16,25 @@ import { CustomersCounterComponent } from './customers-counter/customers-counter
 import { RoomsCounterComponent } from './rooms-counter/rooms-counter.component';
 import { HotelsCounterComponent } from './hotels-counter/hotels-counter.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
+import { SearchedHotelsComponent } from './searched-hotels/searched-hotels.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'bookings', component: BookingsComponent },
+  { path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
   { path: 'services', component: ServicesComponent },
   { path: 'reservation', component: ReservationComponent },
   { path: 'food-order', component: FoodOrderComponent },
   { path: 'userRegister', component: UserRegisterComponent },
-  { path: 'userProfile', component: UserProfileComponent },
-  { path: 'adminControl', component: AdminControlComponent },
+  { path: 'userProfile', component: UserProfileComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'adminControl', component: AdminControlComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
   { path: 'employeesCounter', component: EmployeesCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
   { path: 'customersCounter', component: CustomersCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
   { path: 'roomsCounter', component: RoomsCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
   { path: 'hotelsCounter', component: HotelsCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
   { path: 'addHotel', component: AddHotelComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'searchedHotel', component: SearchedHotelsComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -13,6 +13,7 @@ import { Hotel } from '../hotel';
 export class HotelsCounterComponent implements OnInit {
 
   message = null;
+  statusCode = null;
   constructor(private hotelService: HotelService, private router: Router) {
     this.hotelService.getHotelList();
   }
@@ -36,6 +37,7 @@ export class HotelsCounterComponent implements OnInit {
   hotel(addHotel: NgForm) {
     this.hotelService.addHotel(addHotel.value).subscribe(response => {
       console.log(response);
+      this.statusCode = response.statusCode;
       addHotel.reset();
       if (response.statusCode === '201') {
         this.message = response.description;
@@ -71,6 +73,27 @@ export class HotelsCounterComponent implements OnInit {
   addHotel() {
     this.router.navigateByUrl('/addHotel');
   }
+
+  deleteHotel(hotelId) {
+    console.log(hotelId);
+    this.hotelService.deleteHotel(hotelId).subscribe(response => {
+      console.log(response.description);
+      this.statusCode = response.statusCode;
+      this.hotelService.getHotelList();
+      if (response.statusCode === '201') {
+        this.message = response.description;
+        console.log(this.message);
+      } else if (response.statusCode === '401') {
+        this.message = response.description;
+        console.log(this.message);
+      } else {
+        this.message = response.description;
+      }
+    });
+  }
+
+
+
 
   ngOnInit() {
   }

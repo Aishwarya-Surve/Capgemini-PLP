@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelService } from '../hotel.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookings',
@@ -9,13 +10,14 @@ import { NgForm } from '@angular/forms';
 })
 export class BookingsComponent implements OnInit {
 
- 
 
-  constructor(private hotelService: HotelService) { }
+
+  constructor(private hotelService: HotelService, private router: Router) { }
 
   search(bookingForm: NgForm) {
     console.log(bookingForm.value);
     this.hotelService.searchHotel(bookingForm.value);
+    this.router.navigateByUrl('/searchedHotel');
   }
 
   ngOnInit() {

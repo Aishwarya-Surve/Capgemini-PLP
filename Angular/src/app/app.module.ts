@@ -23,6 +23,7 @@ import { RoomsCounterComponent } from './rooms-counter/rooms-counter.component';
 import { HotelsCounterComponent } from './hotels-counter/hotels-counter.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { SearchedHotelsComponent } from './searched-hotels/searched-hotels.component';
+import { SearchedHotelsDetailsComponent } from './searched-hotels-details/searched-hotels-details.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SearchedHotelsComponent } from './searched-hotels/searched-hotels.compo
     RoomsCounterComponent,
     HotelsCounterComponent,
     AddHotelComponent,
-    SearchedHotelsComponent
+    SearchedHotelsComponent,
+    SearchedHotelsDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -33,13 +33,18 @@ export class HotelService {
     return this.http.post<any>(`${this.api}updateHotel`, data);
   }
 
-  searchHotel(location) {
-  this.http.get<any>(`${this.api}getHotelLocationList?location=${location}`).subscribe(data => {
-    console.log(data.hotelList);
-    this.searchedHotel = data.hotelList;
-  }, err => {
-    console.log(err);
-  });
+  deleteHotel(hotelId) {
+    return this.http.delete<any>(`${this.api}removeHotel?hotelId=${hotelId}`);
+  }
+
+  searchHotel(data) {
+    console.log(data.location);
+    this.http.get<any>(`${this.api}getHotelLocationList?location=${data.location}`).subscribe(response => {
+      console.log(response.hotelList);
+      this.searchedHotel = response.hotelList;
+    }, err => {
+      console.log(err);
+    });
   }
 
 }

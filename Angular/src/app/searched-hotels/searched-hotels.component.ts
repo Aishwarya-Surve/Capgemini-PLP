@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HotelService } from '../hotel.service';
 
 @Component({
   selector: 'app-searched-hotels',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchedHotelsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private hotelService: HotelService) {
+   }
 
   ngOnInit() {
   }

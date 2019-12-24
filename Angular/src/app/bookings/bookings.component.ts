@@ -15,9 +15,8 @@ export class BookingsComponent implements OnInit {
   constructor(private hotelService: HotelService, private router: Router) { }
 
   search(bookingForm: NgForm) {
-    console.log(bookingForm.value);
-    this.hotelService.searchHotel(bookingForm.value);
-    this.router.navigateByUrl('/searchedHotel');
+    console.log(bookingForm.value.location);
+    this.hotelService.searchHotel(bookingForm.value.location);
   }
 
   ngOnInit() {

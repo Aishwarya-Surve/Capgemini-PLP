@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Hotel } from '../hotel';
 
 @Component({
   selector: 'app-searched-hotels-details',
@@ -9,9 +10,7 @@ export class SearchedHotelsDetailsComponent implements OnInit {
 
   constructor() { }
 
-  selectHotel(hotel) {
-
-  }
+  @Input() hotelDetails: Hotel;
 
   ngOnInit() {
   }

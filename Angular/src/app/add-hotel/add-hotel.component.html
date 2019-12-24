@@ -1,46 +1,32 @@
 <div class="col-md-4 offset-4 mt-5">
     <div class="hotel-form card card-body">
         <form #addHotel="ngForm" (ngSubmit)="hotel(addHotel)">
-            <h3 >Hotel Details</h3>
-            <div class="text text-success" style="font-weight: bolder; margin-left: 10px;" *ngIf='statusCode===201'>{{message}}</div>
-            <div class="text text-danger" style="font-weight: bolder;  margin-left: 10px;" *ngIf='statusCode===401'>{{message}}</div>
-            <div class="form-group" >
+            <h3>Hotel Details</h3>
+            <div class="form-group">
                 <span class="form-label">Hotel Name</span>
-                <input class="form-control" name="hotelName" #hotelName="ngModel" ngModel type="text" placeholder="Enter hotel name" required>
-            </div>
-            <div *ngIf='hotelName.touched && hotelName.invalid'>
-                <p class="alert alert-danger" *ngIf='hotelName.errors.required'>Hotel name is mandatory</p>
+                <input class="form-control" name="hotelName" #hotelName="ngModel" ngModel type="text"
+                    placeholder="Enter hotel name">
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <span class="form-label">AC Rooms</span>
-                        <input class="form-control" name="availableAcRoom" #availableAcRoom="ngModel" ngModel type="text" required>
+                        <input class="form-control" name="availableAcRoom" #availableAcRoom="ngModel" ngModel
+                            type="text" required>
                     </div>
                 </div>
-                
                 <div class="col-sm-6">
                     <div class="form-group">
                         <span class="form-label">Non AC Rooms</span>
-                        <input class="form-control" name="availableNonAcRoom" #availableNonAcRoom="ngModel" ngModel type="text" required>
+                        <input class="form-control" name="availableNonAcRoom" #availableNonAcRoom="ngModel" ngModel
+                            type="text" required>
                     </div>
                 </div>
             </div>
-            <div *ngIf='availableAcRoom.touched && availableAcRoom.invalid'>
-                <p class="alert alert-danger" *ngIf='availableAcRoom.errors.required'>This field is  mandatory</p>
-            </div>
-            <div *ngIf='availableNonAcRoom.touched && availableNonAcRoom.invalid'>
-                <p class="alert alert-danger" *ngIf='availableNonAcRoom.errors.required'>
-                    This field is
-                    mandatory</p>
-            </div>
-            <div class="form-group" >
+            <div class="form-group">
                 <span class="form-label">Hotel Location</span>
-                <input class="form-control" name="location" #location="ngModel" ngModel type="text" placeholder="Enter hotel Location">
-            </div>
-            <div *ngIf='location.touched && location.invalid'>
-                <p class="alert alert-danger" *ngIf='location.errors.required'>Location
-                    is mandatory</p>
+                <input class="form-control" name="location" #location="ngModel" ngModel type="text"
+                    placeholder="Enter hotel Location">
             </div>
             <div class="form-btn">
                 <button class="submit-btn" [disabled]="addHotel.invalid">Add Hotel</button>

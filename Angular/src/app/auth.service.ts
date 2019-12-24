@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { LoginResponse } from './login-response';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,22 @@ export class AuthService {
   }
 
   loginData(data): Observable<any> {
-    return this.http.get<any>(`${this.api}login?userEmail=${data.userEmail}&password=${data.password}`);
+    return this.http.get<any>(`${this.api}login?userEmail=${data.userEmail}&password=${data.password}`, data);
   }
 
+  getManager(): Observable<any> {
+    return this.http.get<any>(`${this.api}getAllManager`);
+  }
+
+  deleteManager(data): Observable<any> {
+    return this.http.delete<any>(`${this.api}deleteManager?userId=${data}`);
+  }
+
+  getEmployee(): Observable<any> {
+    return this.http.get<any>(`${this.api}getAllEmployees`);
+  }
+
+  deleteEmployee(data) {
+    return this.http.delete(`${this.api}deleteEmployee?userId=${data}`);
+  }
 }

@@ -14,6 +14,9 @@ import { ServicesComponent } from './services/services.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { FoodOrderComponent } from './food-order/food-order.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HotelPoliciesComponent } from './hotel-policies/hotel-policies.component';
+import { TariffPlanFacilitiesComponent } from './tariff-plan-facilities/tariff-plan-facilities.component';
+import { FoodMenuComponent } from './food-menu/food-menu.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdminControlComponent } from './admin-control/admin-control.component';
@@ -23,7 +26,15 @@ import { RoomsCounterComponent } from './rooms-counter/rooms-counter.component';
 import { HotelsCounterComponent } from './hotels-counter/hotels-counter.component';
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { SearchedHotelsComponent } from './searched-hotels/searched-hotels.component';
+import { AddManagerComponent } from './add-manager/add-manager.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { ManagerControlComponent } from './manager-control/manager-control.component';
+import { ManagerCounterComponent } from './manager-counter/manager-counter.component';
+import { DeleteUpdateManagerComponent } from './delete-update-manager/delete-update-manager.component';
+import { DeleteUpdateEmployeeComponent } from './delete-update-employee/delete-update-employee.component';
+import { AdminHotelCounterComponent } from './admin-hotel-counter/admin-hotel-counter.component';
 import { SearchedHotelsDetailsComponent } from './searched-hotels-details/searched-hotels-details.component';
+import { AddRoomComponent } from './add-room/add-room.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +48,9 @@ import { SearchedHotelsDetailsComponent } from './searched-hotels-details/search
     ReservationComponent,
     FoodOrderComponent,
     PageNotFoundComponent,
+    HotelPoliciesComponent,
+    TariffPlanFacilitiesComponent,
+    FoodMenuComponent,
     UserRegisterComponent,
     UserProfileComponent,
     AdminControlComponent,
@@ -46,7 +60,15 @@ import { SearchedHotelsDetailsComponent } from './searched-hotels-details/search
     HotelsCounterComponent,
     AddHotelComponent,
     SearchedHotelsComponent,
-    SearchedHotelsDetailsComponent
+    AddManagerComponent,
+    AddEmployeeComponent,
+    ManagerControlComponent,
+    ManagerCounterComponent,
+    DeleteUpdateManagerComponent,
+    DeleteUpdateEmployeeComponent,
+    AdminHotelCounterComponent,
+    SearchedHotelsDetailsComponent,
+    AddRoomComponent
   ],
   imports: [
     BrowserModule,

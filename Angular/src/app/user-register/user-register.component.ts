@@ -17,7 +17,6 @@ export class UserRegisterComponent implements OnInit {
   };
 
   message = null;
-  statusCode = null;
 
   constructor(private auth: AuthService) { }
 
@@ -30,8 +29,6 @@ export class UserRegisterComponent implements OnInit {
       console.log(response);
       registrationForm.reset();
       console.log(response.statusCode);
-      this.statusCode = response.statusCode;
-
       if (response.statusCode === '201') {
         this.message = response.description;
         console.log(this.message);

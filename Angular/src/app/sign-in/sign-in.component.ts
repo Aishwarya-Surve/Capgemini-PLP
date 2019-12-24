@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +13,7 @@ export class SignInComponent implements OnInit {
   message = null;
   statusCode = null;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService) { }
 
   isLoggedIn(): boolean {
     const userDetails = JSON.parse(localStorage.getItem('user'));
@@ -26,7 +25,6 @@ export class SignInComponent implements OnInit {
   }
 
   loginForm(form: NgForm) {
-    console.log(form.value);
     this.auth.loginData(form.value).subscribe(response => {
       console.log(response);
       form.reset();
@@ -36,7 +34,6 @@ export class SignInComponent implements OnInit {
       this.statusCode = response.statusCode;
       if (response.statusCode === '201') {
         this.message = response.description;
-        this.router.navigateByUrl('/');
         console.log(this.message);
       } else if (response.statusCode === '401') {
         this.message = response.description;

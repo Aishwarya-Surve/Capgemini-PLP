@@ -1,10 +1,7 @@
 <div class="col-md-3 float-left force-overflow card card-body">
-    <div class="card card-body"  *ngFor ='let hotel of hotelService.searchedHotel, index as i'>
-        <img src="/assets/images/{{i+101}}.jpg" class="card-img-top"  alt=""
-        (click)='selectHotel(hotel)'>
+    <div class="card card-body" *ngFor='let hotel of hotelService.searchedHotel, index as i'>
+        <img src="/assets/images/{{hotel.image}}.jpg" class="card-img-top" alt="" (click)='selectHotel(hotel)'>
         <h4 class="text-center">{{hotel.hotelName}}</h4>
+    </div>
 </div>
-</div>
-
-<!-- <app-bike-details [bikeDetails]='selectedBike'></app-bike-details> -->
-<app-searched-hotels-details></app-searched-hotels-details>
+<app-searched-hotels-details [hotelDetails]='selectedHotel'></app-searched-hotels-details>

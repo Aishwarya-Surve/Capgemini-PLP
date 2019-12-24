@@ -1,0 +1,45 @@
+<div class="col-md-4 offset-4 mt-5">
+    <div class="hotel-form card card-body">
+        <form #addRoom="ngForm" (ngSubmit)="room(addRoom)">
+            <h3>Room Details</h3>
+            <div class="form-group">
+                <span class="form-label">Room rent</span>
+                <input class="form-control" name="roomRent" #roomRent="ngModel" ngModel type="text"
+                    placeholder="Enter room rent">
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span class="form-label">Room type</span>
+                        <input class="form-control" name="roomType" #roomType="ngModel" ngModel type="text" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span class="form-label">Room Capacity</span>
+                        <input class="form-control" name="roomCapacity" #roomCapacity="ngModel" ngModel type="text"
+                            required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="form-label">Room Status</span>
+                <input class="form-control" name="roomStatus" #roomStatus="ngModel" ngModel type="text"
+                    placeholder="Enter room status">
+            </div>
+            <div class="form-group">
+                <span class="form-label">Hotel Id</span>
+                <input class="form-control" name="hotelId" #hotelId="ngModel" ngModel type="text"
+                    placeholder="Enter Hotel Id">
+            </div>
+            <div class="form-group">
+                <span class="form-label">Room Facility</span>
+                <input class="form-control" name="roomFacility" #roomFacility="ngModel" ngModel type="text"
+                    placeholder="Enter room facility">
+            </div>
+            <div class="form-btn">
+                <button class="submit-btn" [disabled]="addRoom.invalid">Add Room</button>
+            </div>
+        </form>
+    </div>
+</div>

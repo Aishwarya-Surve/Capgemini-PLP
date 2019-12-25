@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
+import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Repository
 public class HotelDAOImplementation implements HotelDAO {
@@ -22,7 +23,7 @@ public class HotelDAOImplementation implements HotelDAO {
 	EntityTransaction entityTransaction;
 
 	@Override
-	public boolean addHotel(HotelBean hotelBean) {
+	public boolean addHotel(HotelBean hotelBean) throws HotelManagementSystemExceptionController {
 		boolean addHotel = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -33,13 +34,13 @@ public class HotelDAOImplementation implements HotelDAO {
 			entityManager.close();
 			addHotel = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		return addHotel;
 	}
 
 	@Override
-	public boolean deleteHotel(int hotelId) {
+	public boolean deleteHotel(int hotelId) throws HotelManagementSystemExceptionController {
 		boolean roomHotel = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -50,13 +51,13 @@ public class HotelDAOImplementation implements HotelDAO {
 			entityTransaction.commit();
 			roomHotel = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		return roomHotel;
 	}
 
 	@Override
-	public boolean updateHotel(HotelBean hotelBean) {
+	public boolean updateHotel(HotelBean hotelBean) throws HotelManagementSystemExceptionController {
 		entityManager = entityManagerFactory.createEntityManager();
 		HotelBean existingHotelDetails = entityManager.find(HotelBean.class, hotelBean.getHotelId());
 		boolean hotelUpdated = false;
@@ -89,7 +90,7 @@ public class HotelDAOImplementation implements HotelDAO {
 				entityTransaction.commit();
 				hotelUpdated = true;
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 			}
 			entityManager.close();
 		}
@@ -97,7 +98,7 @@ public class HotelDAOImplementation implements HotelDAO {
 	}
 
 	@Override
-	public List<HotelBean> getAllHotel() {
+	public List<HotelBean> getAllHotel() throws HotelManagementSystemExceptionController {
 		List<HotelBean> hotelList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -105,13 +106,13 @@ public class HotelDAOImplementation implements HotelDAO {
 			Query query = entityManager.createQuery(jpql);
 			hotelList = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		return hotelList;
 	}
 
 	@Override
-	public List<HotelBean> searchHotel(String location) {
+	public List<HotelBean> searchHotel(String location) throws HotelManagementSystemExceptionController {
 		List<HotelBean> hotelList = null;
 		entityManager = entityManagerFactory.createEntityManager();
 		String jpql = "from HotelBean where location =:location";
@@ -121,7 +122,7 @@ public class HotelDAOImplementation implements HotelDAO {
 		try {
 			hotelList = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		return hotelList;
 	}

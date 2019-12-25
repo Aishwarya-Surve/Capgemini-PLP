@@ -10,12 +10,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
+import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
+import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.service.AdminUserService;
 import com.capgemini.hotelmanagementsystem.service.BookingInfoService;
+import com.capgemini.hotelmanagementsystem.service.FoodOrderService;
 import com.capgemini.hotelmanagementsystem.service.HotelService;
+import com.capgemini.hotelmanagementsystem.service.MenuCardService;
 import com.capgemini.hotelmanagementsystem.service.RoomService;
 
 import junit.framework.TestCase;
@@ -28,6 +32,8 @@ public class HotelmanagementsystemApplicationTests {
 	public HotelBean hotelBean;
 	public RoomBean roomBean;
 	public UserInfoBean userInfoBean;
+	public MenuCardBean menuCardBean;
+	public FoodOrderBean foodOrderBean;
 
 	@Autowired
 	private AdminUserService adminUserService;
@@ -37,6 +43,10 @@ public class HotelmanagementsystemApplicationTests {
 	private HotelService hotelService;
 	@Autowired
 	private RoomService roomService;
+	@Autowired
+	private MenuCardService menuCardService;
+	@Autowired
+	private FoodOrderService foodOrderService;
 
 	@BeforeEach
 	public void createObject() {
@@ -44,6 +54,8 @@ public class HotelmanagementsystemApplicationTests {
 		bookingInfoBean = new BookingInfoBean();
 		hotelBean = new HotelBean();
 		roomBean = new RoomBean();
+		menuCardBean = new MenuCardBean();
+		foodOrderBean = new FoodOrderBean();
 	}
 
 	// ********************** Junit On user,employee,manager&Admin
@@ -53,7 +65,7 @@ public class HotelmanagementsystemApplicationTests {
 	@Test
 	public void testValidAdminLogin() {
 		String userEmail = "sam@01gmail.com";
-		String password = "sam@0123";
+		String password = "Sam@0123";
 		adminUserBean = adminUserService.login(userEmail, password);
 		String expected = "admin";
 		String actual = adminUserBean.getUserType();
@@ -65,7 +77,7 @@ public class HotelmanagementsystemApplicationTests {
 	@Test
 	public void testValidEmployeeLogin() {
 		String userEmail = "om@02gmail.com";
-		String password = "om@01234";
+		String password = "Om@01234";
 		adminUserBean = adminUserService.login(userEmail, password);
 		String expected = "employee";
 		String actual = adminUserBean.getUserType();
@@ -77,7 +89,7 @@ public class HotelmanagementsystemApplicationTests {
 	@Test
 	public void testValidManagerLogin() {
 		String userEmail = "ram@03gmail.com";
-		String password = "ram@0123";
+		String password = "Ram@0123";
 		adminUserBean = adminUserService.login(userEmail, password);
 		String expected = "manager";
 		String actual = adminUserBean.getUserType();
@@ -89,7 +101,7 @@ public class HotelmanagementsystemApplicationTests {
 	@Test
 	public void testValidUserLogin() {
 		String userEmail = "niya@05gmail.com";
-		String password = "niya@0123";
+		String password = "Niya@0123";
 		adminUserBean = adminUserService.login(userEmail, password);
 		String expected = "user";
 		String actual = adminUserBean.getUserType();
@@ -98,17 +110,20 @@ public class HotelmanagementsystemApplicationTests {
 	}
 
 	// ****** user register with valid data
-	@Test
-	public void userRegister() {
-		adminUserBean.setUserName("jam");
-		adminUserBean.setUserType("user");
-		adminUserBean.setPassword("jam@0123");
-		adminUserBean.setUserEmail("jam@04gmail.com");
-
-		boolean expected = true;
-		boolean actual = adminUserService.userRegister(adminUserBean);
-		Assert.assertEquals(expected, actual);
-	}
+//	@Test
+//	public void userRegister() {
+//		adminUserBean=new AdminUserBean();
+//		adminUserBean.setUserName("mam dige");
+//		adminUserBean.setUserType("user");
+//		adminUserBean.setPassword("Mam@0123");
+//		adminUserBean.setUserEmail("mam@04gmail.com");
+//
+//		boolean expected = true;
+//		boolean actual = adminUserService.userRegister(adminUserBean);
+//		Assert.assertEquals(expected, actual);
+//		
+//		TestCase.assertEquals(false, adminUserService.userRegister(adminUserBean));
+//	}
 
 //	@Test
 //	public void testDeleteUser() {
@@ -136,6 +151,12 @@ public class HotelmanagementsystemApplicationTests {
 //		userInfoBean.setAddress("Goa,maharashtra");
 //		userInfoBean.setNationality("Indiana");
 //		TestCase.assertEquals(true, adminUserService.userProfile(userInfoBean));
+//	}
+
+//	@Test
+//	public void testDeleteManager() {
+//		adminUserBean = new AdminUserBean();
+//		TestCase.assertEquals(true, adminUserService.deleteManager(9));
 //	}
 
 //********************** Junit On Hotel Funtionality*****************
@@ -212,7 +233,7 @@ public class HotelmanagementsystemApplicationTests {
 
 	// ********************** Junit On Booked Room Funtionality*****************
 
-//	@Test   ********
+//	@Test  
 //	public void testBookingRoom() {
 //		bookingInfoBean= new BookingInfoBean();
 //		bookingInfoBean.setRoomId(7);
@@ -220,19 +241,86 @@ public class HotelmanagementsystemApplicationTests {
 //		bookingInfoBean.setAmount(4000.000);
 //		bookingInfoBean.setPaymentStatus("Paid");
 //		bookingInfoBean.setModeOfPayment("cash");
-//		bookingInfoBean.setCheckInDate(2019 12 22);
-//		bookingInfoBean.setCheckOutDate(2019 12 24);
+//		bookingInfoBean.setCheckInDate(2019-12-22);
+//		bookingInfoBean.setCheckOutDate(2019-12-24);
 //		bookingInfoBean.setHotelId(1);
 //		boolean expected = true;
 //		boolean actual = bookingInfoService.bookingInfo(bookingInfoBean);
 //		TestCase.assertEquals(expected, actual);
 //	}
+//
+//	@Test
+//	public void testCancelBooking() {
+//		boolean expected = true;
+//		boolean actual = bookingInfoService.cancelBooking(3);
+//		Assert.assertEquals(expected, actual);
+//	}
 
-	@Test
-	public void testCancelBooking() {
-		boolean expected = true;
-		boolean actual = bookingInfoService.cancelBooking(3);
-		Assert.assertEquals(expected, actual);
-	}
+	// ************** Junit On MenuCard Funtionality**********
+
+//	@Test
+//	public void testAddMenuCard() {
+//		menuCardBean = new MenuCardBean();
+//		menuCardBean.setFoodType("Non Veg");
+//		menuCardBean.setFoodName("Chicken Chilli");
+//		menuCardBean.setFoodPrice(400);
+//		boolean expected = true;
+//		boolean actual = menuCardService.addMenu(menuCardBean);
+//		Assert.assertEquals(expected, actual);
+//	}
+
+//	@Test
+//	public void testUpdateMenuCard() {
+//		menuCardBean = new MenuCardBean();
+//		menuCardBean.setFoodId(5);
+//		menuCardBean.setFoodType("Non Veg");
+//		menuCardBean.setFoodName("Chicken Chilli");
+//		menuCardBean.setFoodPrice(500);
+//		boolean expected = true;
+//		boolean actual = menuCardService.updateMenu(menuCardBean);
+//		Assert.assertEquals(expected, actual);
+//	}
+
+//	@Test
+//	public void testRemoveMenuCard() {
+//		boolean expected = true;
+//		boolean actual = menuCardService.deleteMenu(5);
+//		Assert.assertEquals(expected, actual);
+//	}
+
+	// *******Junit On foodOrder Funtionality**********
+	
+	
+//	@Test
+//	public void testFoodOrder() {
+//		foodOrderBean= new FoodOrderBean();
+//		foodOrderBean.setUserId(4);
+//		foodOrderBean.setRoomId(7);
+//		foodOrderBean.setFoodId(2);
+//		foodOrderBean.setFoodQuantity(2);
+//		boolean expected = true;
+//		boolean actual = foodOrderService.foodOrder(4, 7, 2, 2);
+//		Assert.assertEquals(expected, actual);
+//	}
+	
+//	@Test
+//	public void testGetFoodBill() {
+//		Double expected=400.00;
+//		Double actual = foodOrderService.foodBill(4);
+//		Assert.assertEquals(expected, actual);
+//	}
+	
+//	@Test
+//	public void testDeleteFoodOrder() {
+//		boolean expected = true;
+//		boolean actual = foodOrderService.deleteOrder(4);
+//		Assert.assertEquals(expected, actual);
+//	}
+
+	
+	
+	
+	
+	
 
 }

@@ -11,6 +11,15 @@ public class FoodOrderBean {
 	@Id
 	@Column(name = "order_id")
 	private int orderId;
+
+	@Column(name = "room_id")
+	private int roomId;
+	@Column(name = "user_id")
+	private int userId;
+
+	@Column(name = "user_name")
+	private String userName;
+
 	@Column(name = "food_id")
 	private int foodId;
 	@Column(name = "food_type")
@@ -69,6 +78,30 @@ public class FoodOrderBean {
 
 	public void setFoodQuantity(int foodQuantity) {
 		this.foodQuantity = foodQuantity;
+	}
+
+	public int getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

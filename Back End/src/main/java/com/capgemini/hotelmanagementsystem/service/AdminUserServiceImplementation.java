@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.dao.AdminUserDAO;
+import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Service
 public class AdminUserServiceImplementation implements AdminUserService {
@@ -17,55 +18,108 @@ public class AdminUserServiceImplementation implements AdminUserService {
 	@Override
 	public AdminUserBean login(String userEmail, String password) {
 
-		return adminUserDAO.login(userEmail, password);
+		try {
+			return adminUserDAO.login(userEmail, password);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return null;
 	}
-
-//	@Override
-//	public AdminUserBean managerLogin(String userEmail, String password) {
-//		return adminUserDAO.managerLogin(userEmail, password);
-//	}
-//
-//	@Override
-//	public AdminUserBean userLogin(String userEmail, String password) {
-//		return adminUserDAO.userLogin(userEmail, password);
-//	}
-//
-//	@Override
-//	public AdminUserBean employeeLogin(String userEmail, String password) {
-//		return adminUserDAO.employeeLogin(userEmail, password);
-//	}
 
 	@Override
 	public boolean userRegister(AdminUserBean adminUserBean) {
-		return adminUserDAO.userRegister(adminUserBean);
+		try {
+			return adminUserDAO.userRegister(adminUserBean);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
 	}
 
 	@Override
 	public List<AdminUserBean> getAllUsers() {
-		// TODO Auto-generated method stub
-		return adminUserDAO.getAllUsers();
+		try {
+			return adminUserDAO.getAllUsers();
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return null;
 	}
 
 	@Override
 	public List<AdminUserBean> getAllEmployee() {
-		// TODO Auto-generated method stub
-		return adminUserDAO.getAllEmployee();
+		try {
+			return adminUserDAO.getAllEmployee();
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return null;
 	}
 
 	@Override
 	public boolean deleteUser(int userId) {
-		// TODO Auto-generated method stub
-		return adminUserDAO.deleteUser(userId);
+		try {
+			return adminUserDAO.deleteUser(userId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
 	}
 
 	@Override
 	public boolean deleteEmployee(int userId) {
-		return adminUserDAO.deleteEmployee(userId);
+		try {
+			return adminUserDAO.deleteEmployee(userId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
 	}
 
 	@Override
-	public boolean userProfile(UserInfoBean userInfoBean) {
-		return adminUserDAO.userProfile(userInfoBean);
+	public boolean userProfile(int userId,long phoneNumber, String address, String nationality) {
+		try {
+			return adminUserDAO.userProfile(userId, phoneNumber, address, nationality);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
 	}
 
+	@Override
+	public List<UserInfoBean> displayUserProfile(int userId) {
+		try {
+			return adminUserDAO.displayUserProfile(userId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean deleteManager(int userId) {
+		try {
+			return adminUserDAO.deleteManager(userId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
+	}
+
+	@Override
+	public List<AdminUserBean> getAllManager() {
+		try {
+			return adminUserDAO.getAllManager();
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@Override
+	public List<AdminUserBean> displayUserProfileById(int userId) {
+		return adminUserDAO.displayUserProfileById(userId);
+	}
+
+	
 }

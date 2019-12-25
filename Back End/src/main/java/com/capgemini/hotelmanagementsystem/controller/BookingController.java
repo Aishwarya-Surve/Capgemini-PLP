@@ -38,14 +38,14 @@ public class BookingController {
 		return hotelManagementResponse;
 	}// end of bookingRoom()
 
-	@GetMapping("/getBookedRoomList")
+	@GetMapping("/bookingList")
 	public HotelManagementResponse getRoomList() {
-		List<BookingInfoBean> boookedRoomList = bookingInfoService.bookedRoomList();
-		if (boookedRoomList != null && !boookedRoomList.isEmpty()) {
+		List<BookingInfoBean> bookedRoomList = bookingInfoService.bookedRoomList();
+		if (bookedRoomList != null && !bookedRoomList.isEmpty()) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("boookedRoomList ");
-			hotelManagementResponse.setBoookedRoomList(boookedRoomList);
+			hotelManagementResponse.setBookedRoomList(bookedRoomList);
 		} else {
 			hotelManagementResponse.setStatusCode(401);
 			hotelManagementResponse.setMessage("Failed");
@@ -98,5 +98,8 @@ public class BookingController {
 		}
 		return hotelManagementResponse;
 	}// end of getBill()
+	
+	
+	
 
 }

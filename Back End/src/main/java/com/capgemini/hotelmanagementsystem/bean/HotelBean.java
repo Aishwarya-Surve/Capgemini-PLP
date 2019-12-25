@@ -2,28 +2,33 @@ package com.capgemini.hotelmanagementsystem.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GeneratorType;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "hotel")
 public class HotelBean {
 	@Id
 	@Column(name = "hotel_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//	@Pattern(regexp="[0-9]", message="It Accepts only number")
 	private int hotelId;
+	
 	@Column(name = "hotel_name")
 	private String hotelName;
+	
 	@Column(name = "location")
+	@Pattern(regexp="[a-zA-z]+([\\\\s][a-zA-z]+)*")
 	private String location;
+	
 	@Column(name = "available_ac")
 	private int availableAcRoom;
+	
 	@Column(name = "available_non_ac")
 	private int availableNonAcRoom;
+	
+	@Column
+	private int image;
 	// getter & setter
 
 	public int getHotelId() {
@@ -66,4 +71,13 @@ public class HotelBean {
 		this.location = location;
 	}
 
+	public int getImage() {
+		return image;
+	}
+
+	public void setImage(int image) {
+		this.image = image;
+	}
+
+	
 }// end of bean class

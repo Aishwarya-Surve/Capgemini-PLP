@@ -7,16 +7,9 @@ import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 
 public interface AdminUserService {
 
+	//admin login
 	public AdminUserBean login(String userEmail, String password);
 
-	// login for manager
-//	public AdminUserBean managerLogin(String userEmail, String password);
-//
-//	// login for user(customer)
-//	public AdminUserBean userLogin(String userEmail, String password);
-//
-//	// login for employee
-//	public AdminUserBean employeeLogin(String userEmail, String password);
 
 	// registeration only for customer
 	public boolean userRegister(AdminUserBean adminUserBean);
@@ -32,7 +25,19 @@ public interface AdminUserService {
 
 	// delete Employee by admin
 	public boolean deleteEmployee(int userId);
+
+	// user update his details or add
+	public boolean userProfile(int userId, long phoneNumber, String address, String nationality);
+
+	// display userprofile
+	public List<UserInfoBean> displayUserProfile(int userId);
 	
-	//user update his details or add
-		public boolean userProfile( UserInfoBean userInfoBean );
+	// display userprofile by id
+		public List<AdminUserBean> displayUserProfileById(int userId);
+
+	// remove Manager by admin
+	public boolean deleteManager(int userId);
+
+	// see all Manager which is present in database
+	public List<AdminUserBean> getAllManager();
 }

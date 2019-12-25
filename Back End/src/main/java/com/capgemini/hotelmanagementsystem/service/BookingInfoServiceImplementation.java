@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.dao.BookingInfoDAO;
+import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Service
 public class BookingInfoServiceImplementation implements BookingInfoService {
@@ -15,27 +16,52 @@ public class BookingInfoServiceImplementation implements BookingInfoService {
 
 	@Override
 	public boolean bookingInfo(BookingInfoBean bookingInfoBean) {
-		return bookingInfoDAO.bookingInfo(bookingInfoBean);
+		try {
+			return bookingInfoDAO.bookingInfo(bookingInfoBean);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
 	}
 
 	@Override
 	public boolean cancelBooking(int bookingId) {
-		return bookingInfoDAO.cancelBooking(bookingId);
+		try {
+			return bookingInfoDAO.cancelBooking(bookingId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return false;
 	}
 
 	@Override
 	public List<BookingInfoBean> bookedRoomList() {
-		return bookingInfoDAO.bookedRoomList();
+		try {
+			return bookingInfoDAO.bookedRoomList();
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return null;
 	}
 
 	@Override
 	public float getDays(int bookingId) {
-		return bookingInfoDAO.getDays(bookingId);
+		try {
+			return bookingInfoDAO.getDays(bookingId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return bookingId;
 	}
 
 	@Override
 	public double getBill(int bookingId) {
-		return bookingInfoDAO.getBill(bookingId);
+		try {
+			return bookingInfoDAO.getBill(bookingId);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return bookingId;
 	}
 
 }

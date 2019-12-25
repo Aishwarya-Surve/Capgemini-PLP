@@ -37,47 +37,14 @@ public class AdminUserController {
 			hotelManagementResponse.setStatusCode(401);
 			hotelManagementResponse.setMessage("Failed");
 			hotelManagementResponse.setDescription("Please Enter Valid Credentials");
+			hotelManagementResponse.setErrorMessage("");
 		}
 		return hotelManagementResponse;
 	}// End of adminLogin()
 
-//	@GetMapping(path = "/employeeLogin")
-//	public HotelManagementResponse employeeLogin(@RequestParam String userEmail, @RequestParam String password) {
-//		AdminUserBean adminUserBean = adminUserService.employeeLogin(userEmail, password);
-//		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-//		if (adminUserBean != null) {
-//			hotelManagementResponse.setStatusCode(201);
-//			hotelManagementResponse.setMessage("Success");
-//			hotelManagementResponse.setDescription("Log In Scussessfully!!!");
-//			hotelManagementResponse.setAdminUserBean(adminUserBean);
-//		} else {
-//			hotelManagementResponse.setStatusCode(401);
-//			hotelManagementResponse.setMessage("Failed");
-//			hotelManagementResponse.setDescription("Please Enter Valid Credentials");
-//		}
-//		return hotelManagementResponse;
-//	}// End of employeeLogin()
-
-//	@GetMapping(path = "/managerLogin")
-//	public HotelManagementResponse managerLogin(@RequestParam String userEmail, @RequestParam String password) {
-//		AdminUserBean adminUserBean = adminUserService.managerLogin(userEmail, password);
-//		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-//		if (adminUserBean != null) {
-//			hotelManagementResponse.setStatusCode(201);
-//			hotelManagementResponse.setMessage("Success");
-//			hotelManagementResponse.setDescription("Log In Scussessfully!!!");
-//			hotelManagementResponse.setAdminUserBean(adminUserBean);
-//		} else {
-//			hotelManagementResponse.setStatusCode(401);
-//			hotelManagementResponse.setMessage("Failed");
-//			hotelManagementResponse.setDescription("Please Enter Valid Credentials");
-//		}
-//		return hotelManagementResponse;
-//	}// End of managerLogin()
-
 //	@GetMapping(path = "/userLogin")
 //	public HotelManagementResponse userLogin(@RequestParam String userEmail, @RequestParam String password) {
-//		AdminUserBean adminUserBean = adminUserService.userLogin(userEmail, password);
+//		AdminUserBean adminUserBean = adminUserService.login(userEmail, password);
 //		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
 //		if (adminUserBean != null) {
 //			hotelManagementResponse.setStatusCode(201);
@@ -158,8 +125,7 @@ public class AdminUserController {
 		}
 		return hotelManagementResponse;
 	} // End of deleteUser()
-	
-	
+
 	@DeleteMapping(path = "/deleteEmployee", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HotelManagementResponse deleteEmployee(@RequestParam int userId) {
 		boolean userDelete = adminUserService.deleteUser(userId);
@@ -175,10 +141,11 @@ public class AdminUserController {
 		}
 		return hotelManagementResponse;
 	} // End of deleteUser()
-	
-	@PostMapping(path = "/userProfile", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public HotelManagementResponse userProfile(@RequestBody UserInfoBean userInfoBean) {
-		boolean userProfile = adminUserService.userProfile(userInfoBean);
+
+	@PostMapping(path = "/userProfile")
+	public HotelManagementResponse userProfile(@RequestParam int userId, @RequestParam long phoneNumber,
+			@RequestParam String address, @RequestParam String nationality) {
+		boolean userProfile = adminUserService.userProfile(userId, phoneNumber, address, nationality);
 		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
 		if (userProfile) {
 			hotelManagementResponse.setStatusCode(201);
@@ -191,4 +158,71 @@ public class AdminUserController {
 		}
 		return hotelManagementResponse;
 	}// End of userProfile()
+
+	@GetMapping(path = "/getUserProfile")
+	public HotelManagementResponse getUserProfile(@RequestParam int userId) {
+		List<UserInfoBean> getUserProfile = adminUserService.displayUserProfile(userId);
+		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+		if (getUserProfile != null) {
+			hotelManagementResponse.setStatusCode(201);
+			hotelManagementResponse.setMessage("Success");
+			hotelManagementResponse.setGetUserProfile(getUserProfile);
+		} else {
+			hotelManagementResponse.setStatusCode(401);
+			hotelManagementResponse.setMessage("Failed");
+			hotelManagementResponse.setDescription("Information is not found");
+		}
+		return hotelManagementResponse;
+	}// End of getUserProfile()
+	
+	@GetMapping(path = "/getUserProfileById")
+	public HotelManagementResponse getUserProfileById(@RequestParam int userId) {
+		List<AdminUserBean> getUserProfile = adminUserService.displayUserProfileById(userId);
+		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+		if (getUserProfile != null) {
+			hotelManagementResponse.setStatusCode(201);
+			hotelManagementResponse.setMessage("Success");
+			hotelManagementResponse.setGetUserProfileById(getUserProfile);
+		} else {
+			hotelManagementResponse.setStatusCode(401);
+			hotelManagementResponse.setMessage("Failed");
+			hotelManagementResponse.setDescription("Information is not found");
+		}
+		return hotelManagementResponse;
+	}// End of getUserProfile()
+	
+	
+	@GetMapping(path = "/getAllManager")
+	public HotelManagementResponse getAllManager() {
+		List<AdminUserBean> getAllManager = adminUserService.getAllManager();
+		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+		if (getAllManager != null) {
+			hotelManagementResponse.setStatusCode(201);
+			hotelManagementResponse.setMessage("Success");
+			hotelManagementResponse.setGetAllManager(getAllManager);
+		} else {
+			hotelManagementResponse.setStatusCode(401);
+			hotelManagementResponse.setMessage("Failed");
+			hotelManagementResponse.setDescription("Information is not found");
+		}
+		return hotelManagementResponse;
+	}// End of getUserProfile()
+	
+
+	
+	@DeleteMapping(path = "/deleteManager")
+	public HotelManagementResponse deleteManager(@RequestParam int userId) {
+		boolean deleteManager = adminUserService.deleteManager(userId);
+		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+		if (deleteManager) {
+			hotelManagementResponse.setStatusCode(201);
+			hotelManagementResponse.setMessage("Success");
+			hotelManagementResponse.setDescription("Manager Deleted successfully.......");
+		} else {
+			hotelManagementResponse.setStatusCode(401);
+			hotelManagementResponse.setMessage("Failed");
+			hotelManagementResponse.setDescription("Unable To Delete Manager........");
+		}
+		return hotelManagementResponse;
+	} // End of deleteManager()
 }

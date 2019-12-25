@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
+import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Repository
 public class RoomDAOImplementation implements RoomDAO {
@@ -21,7 +22,7 @@ public class RoomDAOImplementation implements RoomDAO {
 	EntityTransaction entityTransaction;
 
 	@Override
-	public boolean addRoom(RoomBean roomBean) {
+	public boolean addRoom(RoomBean roomBean)  throws HotelManagementSystemExceptionController {
 		boolean addRoom = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -31,14 +32,14 @@ public class RoomDAOImplementation implements RoomDAO {
 			entityTransaction.commit();
 			addRoom = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		entityManager.close();
 		return addRoom;
 	}// end of addRoom()
 
 	@Override
-	public List<RoomBean> getRoom() {
+	public List<RoomBean> getRoom()  throws HotelManagementSystemExceptionController{
 		List<RoomBean> roomList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -46,13 +47,13 @@ public class RoomDAOImplementation implements RoomDAO {
 			Query query = entityManager.createQuery(jpql);
 			roomList = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		return roomList;
 	}
 
 	@Override
-	public boolean removeRoom(int roomId) {
+	public boolean removeRoom(int roomId) throws HotelManagementSystemExceptionController {
 		boolean roomRemoved = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -63,13 +64,13 @@ public class RoomDAOImplementation implements RoomDAO {
 			entityTransaction.commit();
 			roomRemoved = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 		}
 		return roomRemoved;
 	}// end of removeRoom()
 
 	@Override
-	public boolean updateRoom(RoomBean roomBean) {
+	public boolean updateRoom(RoomBean roomBean) throws HotelManagementSystemExceptionController {
 		entityManager = entityManagerFactory.createEntityManager();
 		RoomBean existingRoomDetails = entityManager.find(RoomBean.class, roomBean.getRoomId());
 		boolean roomUpdated = false;
@@ -111,7 +112,7 @@ public class RoomDAOImplementation implements RoomDAO {
 				entityTransaction.commit();
 				roomUpdated = true;
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new HotelManagementSystemExceptionController("please enter your correct creatential");
 			}
 
 			entityManager.close();

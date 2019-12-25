@@ -55,6 +55,9 @@ CREATE TABLE `food_order` (
   `food_name` varchar(50) NOT NULL,
   `food_price` double(6,2) NOT NULL,
   `food_quantity` int(10) NOT NULL,
+  `room_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,7 +74,7 @@ CREATE TABLE `hibernate_sequence` (
 /*Data for the table `hibernate_sequence` */
 
 insert  into `hibernate_sequence`(`next_val`) values 
-(4);
+(7);
 
 /*Table structure for table `hotel` */
 
@@ -85,15 +88,17 @@ CREATE TABLE `hotel` (
   `available_non_ac` int(50) NOT NULL,
   PRIMARY KEY (`hotel_id`),
   UNIQUE KEY `hotel_name` (`hotel_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `hotel` */
 
 insert  into `hotel`(`hotel_id`,`hotel_name`,`location`,`available_ac`,`available_non_ac`) values 
 (1,'Taj Hotel','Mumbai',50,75),
-(2,'Oberoi','Goa',50,50),
+(2,'Oberoi','Goa',50,75),
 (3,'Velocity Inc.','Goa',23,32),
-(4,'Trilok','Banglore',24,56);
+(4,'Trilok','Banglore',24,56),
+(8,'Paradise Resort','Goa',45,57),
+(11,'Mansion','Mumbai',10,20);
 
 /*Table structure for table `menu_card` */
 
@@ -151,20 +156,23 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `user_id` int(10) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) NOT NULL,
-  `user_email` varchar(50) NOT NULL,
-  `user_type` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_type` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `unique` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `unique` (`user_email`),
+  KEY `password` (`password`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`user_name`,`user_email`,`user_type`,`password`) values 
 (1,'akash','akash@gmail.com','admin','Akash@11'),
 (2,'pooja','pooja@gmail.com','user','pooja@123'),
-(3,'diksha','diksha@gmail.com','employee','diksha@123');
+(3,'diksha','diksha@gmail.com','employee','diksha@123'),
+(6,'Tiger Shroff','tiger@gmail.com','manager','Tiger@123'),
+(8,'Nishi Shah','nishi@gmail.com','manager','Nishi@123');
 
 /*Table structure for table `user_other_info` */
 
@@ -173,15 +181,18 @@ DROP TABLE IF EXISTS `user_other_info`;
 CREATE TABLE `user_other_info` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_type` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `phone_no` bigint(10) NOT NULL,
   `address` varchar(50) NOT NULL,
   `nationality` varchar(50) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `user_email` varchar(255) DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL,
-  `user_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique` (`phone_no`)
+  UNIQUE KEY `unique` (`phone_no`),
+  KEY `user_id` (`user_id`),
+  KEY `user_email` (`user_email`),
+  KEY `password` (`password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_other_info` */

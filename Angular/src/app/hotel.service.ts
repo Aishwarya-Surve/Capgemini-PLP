@@ -18,6 +18,17 @@ export class HotelService {
 
   searchedHotel = [];
 
+  bookingHotelRoom = {
+    roomId: null,
+    userId: null,
+    hotelId: null,
+    roomAmount: null,
+    paymentStatus: null,
+    modeOfPayment: null,
+    checkInDate: null,
+    checkOutDate: null
+  };
+
   constructor(private http: HttpClient, private router: Router) { }
 
   addHotel(data): Observable<any> {
@@ -75,6 +86,12 @@ export class HotelService {
 
   getCustomer(): Observable<any> {
     return this.http.get<any>(`${this.api}bookingList`);
+  }
+
+  bookRoom(hotelDetails) {
+    this.bookingHotelRoom.hotelId = hotelDetails.hotelId;
+    this.router.navigateByUrl('/bookRoom');
+
   }
 
 }

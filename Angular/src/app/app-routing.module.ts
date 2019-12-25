@@ -24,6 +24,7 @@ import { DeleteUpdateManagerComponent } from './delete-update-manager/delete-upd
 import { DeleteUpdateEmployeeComponent } from './delete-update-employee/delete-update-employee.component';
 import { SearchedHotelsComponent } from './searched-hotels/searched-hotels.component';
 import { AdminHotelCounterComponent } from './admin-hotel-counter/admin-hotel-counter.component';
+import { BookRoomComponent } from './book-room/book-room.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'food-order', component: FoodOrderComponent },
   { path: 'userRegister', component: UserRegisterComponent },
   { path: 'searchedHotel', component: SearchedHotelsComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'bookRoom', component: BookRoomComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
   { path: '**', component: PageNotFoundComponent }
 ];
 

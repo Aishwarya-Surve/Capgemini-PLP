@@ -35,6 +35,7 @@ import { DeleteUpdateEmployeeComponent } from './delete-update-employee/delete-u
 import { AdminHotelCounterComponent } from './admin-hotel-counter/admin-hotel-counter.component';
 import { SearchedHotelsDetailsComponent } from './searched-hotels-details/searched-hotels-details.component';
 import { AddRoomComponent } from './add-room/add-room.component';
+import { BookRoomComponent } from './book-room/book-room.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AddRoomComponent } from './add-room/add-room.component';
     DeleteUpdateEmployeeComponent,
     AdminHotelCounterComponent,
     SearchedHotelsDetailsComponent,
-    AddRoomComponent
+    AddRoomComponent,
+    BookRoomComponent
   ],
   imports: [
     BrowserModule,

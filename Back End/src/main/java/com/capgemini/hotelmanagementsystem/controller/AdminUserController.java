@@ -35,29 +35,13 @@ public class AdminUserController {
 			hotelManagementResponse.setAdminUserBean(adminUserBean);
 		} else {
 			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Please Enter Valid Credentials");
-			hotelManagementResponse.setErrorMessage("");
+			hotelManagementResponse.setMessage(" Log In Failed!!!");
+			hotelManagementResponse.setDescription(
+					"Please enter password which contain atleast one uppercase letter,one lowercase letter and a digit.");
+
 		}
 		return hotelManagementResponse;
 	}// End of adminLogin()
-
-//	@GetMapping(path = "/userLogin")
-//	public HotelManagementResponse userLogin(@RequestParam String userEmail, @RequestParam String password) {
-//		AdminUserBean adminUserBean = adminUserService.login(userEmail, password);
-//		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-//		if (adminUserBean != null) {
-//			hotelManagementResponse.setStatusCode(201);
-//			hotelManagementResponse.setMessage("Success");
-//			hotelManagementResponse.setDescription("Log In Scussessfully!!!");
-//			hotelManagementResponse.setAdminUserBean(adminUserBean);
-//		} else {
-//			hotelManagementResponse.setStatusCode(401);
-//			hotelManagementResponse.setMessage("Failed");
-//			hotelManagementResponse.setDescription("Please Enter Valid Credentials");
-//		}
-//		return hotelManagementResponse;
-//	}// End of userLogin()
 
 	@PutMapping(path = "/userRegister", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public HotelManagementResponse userRegister(@RequestBody AdminUserBean adminUserBean) {
@@ -69,8 +53,8 @@ public class AdminUserController {
 			hotelManagementResponse.setDescription("You Registered Scussessfully!!");
 		} else {
 			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Failed To Register...");
+			hotelManagementResponse.setMessage(" Register Failed");
+			hotelManagementResponse.setDescription("Please enter  valid password which contain atleast one uppercase letter,one lowercase letter and a digit.");
 		}
 		return hotelManagementResponse;
 	}// End of userRegister()
@@ -143,9 +127,8 @@ public class AdminUserController {
 	} // End of deleteUser()
 
 	@PostMapping(path = "/userProfile")
-	public HotelManagementResponse userProfile(@RequestParam int userId, @RequestParam long phoneNumber,
-			@RequestParam String address, @RequestParam String nationality) {
-		boolean userProfile = adminUserService.userProfile(userId, phoneNumber, address, nationality);
+	public HotelManagementResponse userProfile(@RequestBody UserInfoBean userInfoBean) {
+		boolean userProfile = adminUserService.userProfile(userInfoBean.getUserId(), userInfoBean.getPhoneNumber(), userInfoBean.getAddress(), userInfoBean.getNationality());
 		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
 		if (userProfile) {
 			hotelManagementResponse.setStatusCode(201);
@@ -174,55 +157,6 @@ public class AdminUserController {
 		}
 		return hotelManagementResponse;
 	}// End of getUserProfile()
-	
-	@GetMapping(path = "/getUserProfileById")
-	public HotelManagementResponse getUserProfileById(@RequestParam int userId) {
-		List<AdminUserBean> getUserProfile = adminUserService.displayUserProfileById(userId);
-		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-		if (getUserProfile != null) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setGetUserProfileById(getUserProfile);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Information is not found");
-		}
-		return hotelManagementResponse;
-	}// End of getUserProfile()
-	
-	
-	@GetMapping(path = "/getAllManager")
-	public HotelManagementResponse getAllManager() {
-		List<AdminUserBean> getAllManager = adminUserService.getAllManager();
-		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-		if (getAllManager != null) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setGetAllManager(getAllManager);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Information is not found");
-		}
-		return hotelManagementResponse;
-	}// End of getUserProfile()
-	
 
 	
-	@DeleteMapping(path = "/deleteManager")
-	public HotelManagementResponse deleteManager(@RequestParam int userId) {
-		boolean deleteManager = adminUserService.deleteManager(userId);
-		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-		if (deleteManager) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Manager Deleted successfully.......");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable To Delete Manager........");
-		}
-		return hotelManagementResponse;
-	} // End of deleteManager()
 }

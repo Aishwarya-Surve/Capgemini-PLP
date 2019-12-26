@@ -6,6 +6,7 @@ import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
+import com.capgemini.hotelmanagementsystem.bean.ManagerBean;
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
@@ -16,7 +17,6 @@ public class HotelManagementResponse {
 	private int statusCode;
 	private String message;
 	private String description;
-	private String errorMessage;
 
 	public AdminUserBean adminUserBean;
 
@@ -25,84 +25,28 @@ public class HotelManagementResponse {
 
 	public List<HotelBean> hotelList;
 
-	public List<BookingInfoBean> bookedRoomList;
+	public List<BookingInfoBean> boookedRoomList;
 
 	private UserInfoBean userInfoBean;
 
 	public List<UserInfoBean> getUserProfile;
+
+	public ManagerBean managerBean;
+
+	private List<ManagerBean> getAllManager;
+
+	private List<MenuCardBean> listMenuCard;
+
+	private MenuCardBean menuCardBean;
+
+	private List<FoodOrderBean> foodList;
+
+	private List<BookingInfoBean> bookedRoomList;
 	
-	public List<AdminUserBean> getUserProfileById;
-
-	public List<AdminUserBean> getAllManager;
-
-	public List<MenuCardBean> listMenuCard;
-
-	public MenuCardBean menuCardBean;
-
-	public List<FoodOrderBean> foodList;
+	private double bill;
 	
-	public double  foodBill;
-
-
-	
-
-	
-
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-
-	public double getFoodBill() {
-		return foodBill;
-	}
-
-	public void setFoodBill(double foodBill) {
-		this.foodBill = foodBill;
-	}
-
-	public List<FoodOrderBean> getFoodList() {
-		return foodList;
-	}
-
-	public void setFoodList(List<FoodOrderBean> foodList) {
-		this.foodList = foodList;
-	}
-
-	public MenuCardBean getMenuCardBean() {
-		return menuCardBean;
-	}
-
-	public void setMenuCardBean(MenuCardBean menuCardBean) {
-		this.menuCardBean = menuCardBean;
-	}
-
-	public List<MenuCardBean> getListMenuCard() {
-		return listMenuCard;
-	}
-
-	public void setListMenuCard(List<MenuCardBean> listMenuCard) {
-		this.listMenuCard = listMenuCard;
-	}
-
-	public List<AdminUserBean> getGetAllManager() {
-		return getAllManager;
-	}
-
-	public void setGetAllManager(List<AdminUserBean> getAllManager) {
-		this.getAllManager = getAllManager;
-	}
-
-	public List<UserInfoBean> getGetUserProfile() {
-		return getUserProfile;
-	}
-
-	public void setGetUserProfile(List<UserInfoBean> getUserProfile) {
-		this.getUserProfile = getUserProfile;
-	}
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	public double foodBill;
 
 	public int getStatusCode() {
 		return statusCode;
@@ -160,14 +104,12 @@ public class HotelManagementResponse {
 		this.hotelList = hotelList;
 	}
 
-	
-
-	public List<BookingInfoBean> getBookedRoomList() {
-		return bookedRoomList;
+	public List<BookingInfoBean> getBoookedRoomList() {
+		return boookedRoomList;
 	}
 
-	public void setBookedRoomList(List<BookingInfoBean> bookedRoomList) {
-		this.bookedRoomList = bookedRoomList;
+	public void setBoookedRoomList(List<BookingInfoBean> boookedRoomList) {
+		this.boookedRoomList = boookedRoomList;
 	}
 
 	public UserInfoBean getUserInfoBean() {
@@ -178,13 +120,78 @@ public class HotelManagementResponse {
 		this.userInfoBean = userInfoBean;
 	}
 
-	public List<AdminUserBean> getGetUserProfileById() {
-		return getUserProfileById;
+	public List<UserInfoBean> getGetUserProfile() {
+		return getUserProfile;
 	}
 
-	public void setGetUserProfileById(List<AdminUserBean> getUserProfileById) {
-		this.getUserProfileById = getUserProfileById;
+	public void setGetUserProfile(List<UserInfoBean> getUserProfile) {
+		this.getUserProfile = getUserProfile;
 	}
 
+	public ManagerBean getManagerBean() {
+		return managerBean;
+	}
+
+	public void setManagerBean(ManagerBean managerBean) {
+		this.managerBean = managerBean;
+	}
+
+	public List<ManagerBean> getGetAllManager() {
+		return getAllManager;
+	}
+
+	public void setGetAllManager(List<ManagerBean> getAllManager) {
+		this.getAllManager = getAllManager;
+	}
+
+	public List<MenuCardBean> getListMenuCard() {
+		return listMenuCard;
+	}
+
+	public void setListMenuCard(List<MenuCardBean> listMenuCard) {
+		this.listMenuCard = listMenuCard;
+	}
+
+	public MenuCardBean getMenuCardBean() {
+		return menuCardBean;
+	}
+
+	public void setMenuCardBean(MenuCardBean menuCardBean) {
+		this.menuCardBean = menuCardBean;
+	}
+
+	public List<FoodOrderBean> getFoodList() {
+		return foodList;
+	}
+
+	public void setFoodList(List<FoodOrderBean> foodList) {
+		this.foodList = foodList;
+	}
+
+	public double getFoodBill() {
+		return foodBill;
+	}
+
+	public void setFoodBill(double foodBill) {
+		this.foodBill = foodBill;
+	}
+
+	public List<BookingInfoBean> getBookedRoomList() {
+		return bookedRoomList;
+	}
+
+	public void setBookedRoomList(List<BookingInfoBean> bookedRoomList) {
+		this.bookedRoomList = bookedRoomList;
+	}
+
+	public double getBill() {
+		return bill;
+	}
+
+	public void setBill(double bill) {
+		this.bill = bill;
+	}
 	
+	
+
 }

@@ -1,8 +1,10 @@
 package com.capgemini.hotelmanagementsystem;
 
-import org.junit.Assert;
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,7 @@ import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
+import com.capgemini.hotelmanagementsystem.bean.ManagerBean;
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
@@ -19,6 +22,7 @@ import com.capgemini.hotelmanagementsystem.service.AdminUserService;
 import com.capgemini.hotelmanagementsystem.service.BookingInfoService;
 import com.capgemini.hotelmanagementsystem.service.FoodOrderService;
 import com.capgemini.hotelmanagementsystem.service.HotelService;
+import com.capgemini.hotelmanagementsystem.service.ManagerService;
 import com.capgemini.hotelmanagementsystem.service.MenuCardService;
 import com.capgemini.hotelmanagementsystem.service.RoomService;
 
@@ -34,6 +38,7 @@ public class HotelmanagementsystemApplicationTests {
 	public UserInfoBean userInfoBean;
 	public MenuCardBean menuCardBean;
 	public FoodOrderBean foodOrderBean;
+	public ManagerBean managerBean;
 
 	@Autowired
 	private AdminUserService adminUserService;
@@ -47,6 +52,8 @@ public class HotelmanagementsystemApplicationTests {
 	private MenuCardService menuCardService;
 	@Autowired
 	private FoodOrderService foodOrderService;
+	@Autowired
+	private ManagerService managerService;
 
 	@BeforeEach
 	public void createObject() {
@@ -56,58 +63,47 @@ public class HotelmanagementsystemApplicationTests {
 		roomBean = new RoomBean();
 		menuCardBean = new MenuCardBean();
 		foodOrderBean = new FoodOrderBean();
+		managerBean = new ManagerBean();
 	}
 
 	// ********************** Junit On user,employee,manager&Admin
 	// Funtionality*****************
 
 	// admin login
-	@Test
-	public void testValidAdminLogin() {
-		String userEmail = "sam@01gmail.com";
-		String password = "Sam@0123";
-		adminUserBean = adminUserService.login(userEmail, password);
-		String expected = "admin";
-		String actual = adminUserBean.getUserType();
-
-		Assert.assertEquals(expected, actual);
-	}
+//	@Test
+//	public void testValidAdminLogin() {
+//		String userEmail = "pooja@gmail.com";
+//		String password = "Pooja@123";
+//		adminUserBean = adminUserService.login(userEmail, password);
+//		String expected = "admin";
+//		String actual = adminUserBean.getUserType();
+//
+//		assertEquals(expected, actual);
+//	}
 
 	// employee login
-	@Test
-	public void testValidEmployeeLogin() {
-		String userEmail = "om@02gmail.com";
-		String password = "Om@01234";
-		adminUserBean = adminUserService.login(userEmail, password);
-		String expected = "employee";
-		String actual = adminUserBean.getUserType();
-
-		Assert.assertEquals(expected, actual);
-	}
-
-	// manager login
-	@Test
-	public void testValidManagerLogin() {
-		String userEmail = "ram@03gmail.com";
-		String password = "Ram@0123";
-		adminUserBean = adminUserService.login(userEmail, password);
-		String expected = "manager";
-		String actual = adminUserBean.getUserType();
-
-		Assert.assertEquals(expected, actual);
-	}
+//	@Test
+//	public void testValidEmployeeLogin() {
+//		String userEmail = "om@02gmail.com";
+//		String password = "Om@01234";
+//		adminUserBean = adminUserService.login(userEmail, password);
+//		String expected = "employee";
+//		String actual = adminUserBean.getUserType();
+//
+//		Assert.assertEquals(expected, actual);
+//	}
 
 	// user login
-	@Test
-	public void testValidUserLogin() {
-		String userEmail = "niya@05gmail.com";
-		String password = "Niya@0123";
-		adminUserBean = adminUserService.login(userEmail, password);
-		String expected = "user";
-		String actual = adminUserBean.getUserType();
-
-		Assert.assertEquals(expected, actual);
-	}
+//	@Test
+//	public void testValidUserLogin() {
+//		String userEmail = "niya@05gmail.com";
+//		String password = "Niya@0123";
+//		adminUserBean = adminUserService.login(userEmail, password);
+//		String expected = "user";
+//		String actual = adminUserBean.getUserType();
+//
+//		Assert.assertEquals(expected, actual);
+//	}
 
 	// ****** user register with valid data
 //	@Test
@@ -151,12 +147,6 @@ public class HotelmanagementsystemApplicationTests {
 //		userInfoBean.setAddress("Goa,maharashtra");
 //		userInfoBean.setNationality("Indiana");
 //		TestCase.assertEquals(true, adminUserService.userProfile(userInfoBean));
-//	}
-
-//	@Test
-//	public void testDeleteManager() {
-//		adminUserBean = new AdminUserBean();
-//		TestCase.assertEquals(true, adminUserService.deleteManager(9));
 //	}
 
 //********************** Junit On Hotel Funtionality*****************
@@ -245,7 +235,7 @@ public class HotelmanagementsystemApplicationTests {
 //		bookingInfoBean.setCheckOutDate(2019-12-24);
 //		bookingInfoBean.setHotelId(1);
 //		boolean expected = true;
-//		boolean actual = bookingInfoService.bookingInfo(bookingInfoBean);
+//		boolean actual = bookingInfoService.bookingInfo(bookingInfoBean, hotelId, roomId);
 //		TestCase.assertEquals(expected, actual);
 //	}
 //
@@ -289,8 +279,7 @@ public class HotelmanagementsystemApplicationTests {
 //	}
 
 	// *******Junit On foodOrder Funtionality**********
-	
-	
+
 //	@Test
 //	public void testFoodOrder() {
 //		foodOrderBean= new FoodOrderBean();
@@ -302,14 +291,14 @@ public class HotelmanagementsystemApplicationTests {
 //		boolean actual = foodOrderService.foodOrder(4, 7, 2, 2);
 //		Assert.assertEquals(expected, actual);
 //	}
-	
+
 //	@Test
 //	public void testGetFoodBill() {
 //		Double expected=400.00;
 //		Double actual = foodOrderService.foodBill(4);
 //		Assert.assertEquals(expected, actual);
 //	}
-	
+
 //	@Test
 //	public void testDeleteFoodOrder() {
 //		boolean expected = true;
@@ -317,10 +306,32 @@ public class HotelmanagementsystemApplicationTests {
 //		Assert.assertEquals(expected, actual);
 //	}
 
-	
-	
-	
-	
-	
+	// *******Junit On managerFuntionality**********
+
+	// manager login
+//	@Test
+//	public void testValidManagerLogin() {		
+//		ManagerBean actual = managerService.managerlogin("sudheerpawan@gmail.com", "Sudheer@01");
+//		int  expected = 1;
+//		assertEquals(expected, actual.getManagerId());
+//	}
+
+//		@Test
+//		public void managerRegister() {
+//			managerBean=new ManagerBean();
+//			managerBean.setManagerName("pam dige");
+//			managerBean.setManagerEmail("pam@0123gmail.com");
+//			managerBean.setPassword("Pam@0123");
+//			managerBean.setHotelId(1);
+//			boolean expected = true;
+//			boolean actual = managerService.managerRegister(managerBean);
+//			Assert.assertEquals(expected, actual);
+//		}
+
+//		@Test
+//		public void testDeleteManager() {
+//			managerBean = new ManagerBean();
+//			TestCase.assertEquals(true, managerService.deleteManager(3));
+//		}
 
 }

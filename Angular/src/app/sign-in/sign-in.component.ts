@@ -13,7 +13,7 @@ export class SignInComponent implements OnInit {
   message = null;
   statusCode = null;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   isLoggedIn(): boolean {
     const userDetails = JSON.parse(localStorage.getItem('user'));
@@ -28,17 +28,18 @@ export class SignInComponent implements OnInit {
     this.auth.loginData(form.value).subscribe(response => {
       console.log(response);
       form.reset();
-      localStorage.setItem('user', JSON.stringify(response));
-      const userDetail = localStorage.getItem('user');
-      console.log(response.statusCode);
-      this.statusCode = response.statusCode;
-      if (response.statusCode === '201') {
+      if (response.statusCode === 201) {
+        localStorage.setItem('user', JSON.stringify(response));
+        const userDetail = localStorage.getItem('user');
         this.message = response.description;
-        console.log(this.message);
-      } else if (response.statusCode === '401') {
+        this.router.navigate(['/']);
+        alert(this.message);
+      } else if (response.statusCode === 401) {
         this.message = response.description;
+        alert(this.message);
       } else {
         this.message = response.description;
+        alert(this.message);
       }
     }, err => {
       console.log(err);

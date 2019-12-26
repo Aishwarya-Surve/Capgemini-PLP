@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelService } from '../hotel.service';
 import { Router } from '@angular/router';
-import { User } from 'user';
+import { User } from 'src/app/user';
 import { AuthService } from '../auth.service';
 
 @Component({

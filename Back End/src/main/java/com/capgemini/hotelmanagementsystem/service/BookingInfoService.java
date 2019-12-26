@@ -5,15 +5,13 @@ import java.util.List;
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 
 public interface BookingInfoService {
-	public boolean bookingInfo(BookingInfoBean bookingInfoBean);
-
-	public boolean cancelBooking(int bookingId);
 
 	public List<BookingInfoBean> bookedRoomList();
 
-	// To Get Days
-	public float getDays(int bookingId);
+	public boolean cancelBooking(int bookingId);
 
-	// To get Bill
-	public double getBill(int bookingId);
-}
+	public double getBill(BookingInfoBean bookingInfoBean);
+	
+	//To Book Room
+			public BookingInfoBean booking(BookingInfoBean bookingInfoBean);
+}// end of interface

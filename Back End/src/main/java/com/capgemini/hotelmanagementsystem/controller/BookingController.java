@@ -19,87 +19,73 @@ import com.capgemini.hotelmanagementsystem.service.BookingInfoService;
 @CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 public class BookingController {
 	@Autowired
-	public BookingInfoService bookingInfoService;
+	private BookingInfoService bookingInfoService;
 
 	HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
 
-	@PostMapping("/booking")
-	public HotelManagementResponse bookingRoom(@RequestBody BookingInfoBean bookingInfoBean) {
-		boolean isRoomBooked = bookingInfoService.bookingInfo(bookingInfoBean);
-		if (isRoomBooked) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Room Booked Successfully");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to Book Room");
-		}
-		return hotelManagementResponse;
-	}// end of bookingRoom()
-
 	@GetMapping("/bookingList")
-	public HotelManagementResponse getRoomList() {
+	public HotelManagementResponse bookedRoom() {
 		List<BookingInfoBean> bookedRoomList = bookingInfoService.bookedRoomList();
-		if (bookedRoomList != null && !bookedRoomList.isEmpty()) {
+		if (bookedRoomList != null) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("boookedRoomList ");
+			hotelManagementResponse.setDescription("Booked Room List");
 			hotelManagementResponse.setBookedRoomList(bookedRoomList);
 		} else {
 			hotelManagementResponse.setStatusCode(401);
 			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to fetch boookedRoomList ");
+			hotelManagementResponse.setDescription("Unable to fetch List");
 		}
 		return hotelManagementResponse;
-	}// end of getBookedRoomList()
+	}// end of bookedRoom()
 
 	@DeleteMapping("/cancelBooking")
 	public HotelManagementResponse cancelBooking(@RequestParam int bookingId) {
-		boolean cancelBooking = bookingInfoService.cancelBooking(bookingId);
-		if (cancelBooking) {
+		boolean canceled = bookingInfoService.cancelBooking(bookingId);
+		if (canceled) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Removed Successfully");
+			hotelManagementResponse.setDescription("Booking Canceled Successfully");
 		} else {
 			hotelManagementResponse.setStatusCode(401);
 			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to remove");
+			hotelManagementResponse.setDescription("Unable to Cancel Booking");
 		}
 		return hotelManagementResponse;
 	}// end of cancelBooking()
 
-	@GetMapping("/days")
-	public HotelManagementResponse days(@RequestParam int bookingId) {
-		float days = bookingInfoService.getDays(bookingId);
-		if (days > 0.0) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Days" + days);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable");
-		}
-		return hotelManagementResponse;
-	}// end of days()
-
-	@GetMapping("/getBill")
-	public HotelManagementResponse getBill(@RequestParam int bookingId) {
-		double totalAmount = bookingInfoService.getBill(bookingId);
+	@PostMapping("/bill")
+	public HotelManagementResponse bill(@RequestBody BookingInfoBean bookingInfoBean) {
+		System.err.println("Check in Date " + bookingInfoBean.getCheckInDate());
+		System.err.println("Check out Date " + bookingInfoBean.getCheckOutDate());
+		double totalAmount = bookingInfoService.getBill(bookingInfoBean);
 		if (totalAmount > 0.0) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Days" + totalAmount);
+			hotelManagementResponse.setDescription("Total Bill :" + totalAmount);
+			hotelManagementResponse.setBill(totalAmount);
 		} else {
 			hotelManagementResponse.setStatusCode(401);
 			hotelManagementResponse.setMessage("Failed");
 			hotelManagementResponse.setDescription("Unable");
 		}
 		return hotelManagementResponse;
-	}// end of getBill()
-	
-	
-	
+	}
 
-}
+	@PostMapping("/booking")
+	public HotelManagementResponse booking(@RequestBody BookingInfoBean bookingInfoBean) {
+		BookingInfoBean roomBooking = bookingInfoService.booking(bookingInfoBean);
+		HotelManagementResponse roomBookingResponse = new HotelManagementResponse();
+		if (roomBooking != null) {
+			roomBookingResponse.setStatusCode(201);
+			roomBookingResponse.setMessage("Success");
+			roomBookingResponse.setDescription("Room Booked Successfully");
+			// roomBookingResponse.setDays(roomBooking);
+		} else {
+			roomBookingResponse.setStatusCode(401);
+			roomBookingResponse.setMessage("Failed");
+			roomBookingResponse.setDescription("Room Not Available");
+		}
+		return roomBookingResponse;
+	}// end of booking()
+}// end of controller

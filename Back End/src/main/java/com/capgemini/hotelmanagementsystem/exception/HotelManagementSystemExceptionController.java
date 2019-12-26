@@ -1,16 +1,8 @@
 package com.capgemini.hotelmanagementsystem.exception;
 
-public class HotelManagementSystemExceptionController extends Exception {
-	String message;
-
+@SuppressWarnings("serial")
+public class HotelManagementSystemExceptionController extends RuntimeException {
 	public HotelManagementSystemExceptionController(String message) {
-		super();
-		this.message = message;
+		super(message);
 	}
-
-	@Override
-	public String getMessage() {
-		return message;
-	}
-
 }

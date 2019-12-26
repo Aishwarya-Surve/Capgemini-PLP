@@ -17,7 +17,6 @@ public class AdminUserBean {
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Pattern(regexp = "[0-9]", message = "It Accepts only number")
 	private int userId;
 
 	@Column(name = "user_name")
@@ -30,9 +29,9 @@ public class AdminUserBean {
 	private String userType;
 
 	@Column(name = "password")
-	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{5,10}$", message = "Invalid Password Pattern!!!Password must\r\n"
-			+ " contain atleast one uppercase letter,one lowercase letter and a digit.")
-	@Size(min = 5, max = 10, message = "This field requires minimum 5 and maximum 10 characters")
+//	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{5,10}$", message = "Invalid Password Pattern!!!Password must\r\n"
+//			+ " contain atleast one uppercase letter,one lowercase letter and a digit.")
+//	@Size(min = 5, max = 10, message = "This field requires minimum 5 and maximum 10 characters")
 	private String password;
 
 	@Column(name = "user_email")

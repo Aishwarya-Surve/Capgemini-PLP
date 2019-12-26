@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -18,7 +19,7 @@ export class UserRegisterComponent implements OnInit {
 
   message = null;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   RegisterUser(registrationForm: NgForm) {
     this.user.userName = registrationForm.value.userName;
@@ -29,13 +30,15 @@ export class UserRegisterComponent implements OnInit {
       console.log(response);
       registrationForm.reset();
       console.log(response.statusCode);
-      if (response.statusCode === '201') {
+      if (response.statusCode === 201) {
         this.message = response.description;
-        console.log(this.message);
-      } else if (response.statusCode === '401') {
+        alert(this.message);
+      } else if (response.statusCode === 401) {
         this.message = response.description;
+        alert(this.message);
       } else {
         this.message = response.description;
+        alert(this.message);
       }
     }, err => {
       console.log(err);

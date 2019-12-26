@@ -1,76 +1,91 @@
-<div class="col-md-3 mt-3 card card-body float-left" style="margin-left: 60px;" *ngFor='let hotel of hotelService.hotelArray, index as i'>
+<div class="text-left">
+    <a type="button" class="btn btn-danger" routerLink="/addHotel">Add Hotels<span class="glyphicon glyphicon-pencil"
+            aria-hidden="true"></span></a>
+</div>
+<div class="text text-success" style="font-weight: bolder; margin-left: 10px;" *ngIf='statusCode===201'>{{message}}
+</div>
+<div class="text text-danger" style="font-weight: bolder;  margin-left: 10px;" *ngIf='statusCode===401'>{{message}}
+</div>
+<div class="col-md-3 mt-3 card card-body float-left" style="margin-left: 60px;"
+    *ngFor='let hotel of hotelService.hotelArray, index as i'>
     <img src="/assets/images/{{i+101}}.jpg" style="height: 175px;" alt="">
     <h6>Hotel Name: {{hotel.hotelName}} </h6>
     <h6>Location: {{hotel.location}}</h6>
     <h6>Available AC Rooms: {{hotel.availableAcRoom}}</h6>
     <h6>Available Non-AC Rooms: {{hotel.availableNonAcRoom}}</h6>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-        (click)="selectHotel(hotel)">
-        Update
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Hotel Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        (click)="hotelService.getHotelList()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form #updateHotel="ngForm" (ngSubmit)="updateHotelForm(updateHotel)">
-                        <div class="form-group">
-                            <label for="hotelName">Hotel Name</label>
-                            <input type="text" name="hotel_name" class="form-control" #hotelName="ngModel"
-                                [(ngModel)]="selectedHotel.hotelName" required>
-                            <div *ngIf='hotelName.touched && hotelName.invalid'>
-                                <p class="alert alert-danger" *ngIf='hotelName.errors.required'>Hotel
-                                    name is mandatory</p>
+    <div class="row">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary offset-2" data-toggle="modal" data-target="#exampleModal"
+            (click)="selectHotel(hotel)">
+            Update
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Hotel Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="hotelService.getHotelList()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #updateHotel="ngForm" (ngSubmit)="updateHotelForm(updateHotel)">
+                            <div class="form-group">
+                                <label for="hotelName">Hotel Name</label>
+                                <input type="text" name="hotel_name" class="form-control" #hotelName="ngModel"
+                                    [(ngModel)]="selectedHotel.hotelName" required>
+                                <div *ngIf='hotelName.touched && hotelName.invalid'>
+                                    <p class="alert alert-danger" *ngIf='hotelName.errors.required'>Hotel
+                                        name is mandatory</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" name="location" class="form-control" #location="ngModel"
-                                [(ngModel)]="selectedHotel.location" required>
-                            <div *ngIf='location.touched && location.invalid'>
-                                <p class="alert alert-danger" *ngIf='location.errors.required'>Location
-                                    is mandatory</p>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" name="location" class="form-control" #location="ngModel"
+                                    [(ngModel)]="selectedHotel.location" required>
+                                <div *ngIf='location.touched && location.invalid'>
+                                    <p class="alert alert-danger" *ngIf='location.errors.required'>Location
+                                        is mandatory</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="availableAcRoom">Available Ac Rooms</label>
-                            <input type="number" name="availableAcRoom" class="form-control" #availableAcRoom="ngModel"
-                                [(ngModel)]="selectedHotel.availableAcRoom" required>
-                            <div *ngIf='availableAcRoom.touched && availableAcRoom.invalid'>
-                                <p class="alert alert-danger" *ngIf='availableAcRoom.errors.required'>This
-                                    field is
-                                    mandatory</p>
+                            <div class="form-group">
+                                <label for="availableAcRoom">Available Ac Rooms</label>
+                                <input type="number" name="availableAcRoom" class="form-control"
+                                    #availableAcRoom="ngModel" [(ngModel)]="selectedHotel.availableAcRoom" required>
+                                <div *ngIf='availableAcRoom.touched && availableAcRoom.invalid'>
+                                    <p class="alert alert-danger" *ngIf='availableAcRoom.errors.required'>This
+                                        field is
+                                        mandatory</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="availableNonAcRoom">Available Non-AC Rooms</label>
-                            <input type="number" name="availableNonAcRoom" class="form-control"
-                                #availableNonAcRoom="ngModel" [(ngModel)]="selectedHotel.availableNonAcRoom" required>
-                            <div *ngIf='availableNonAcRoom.touched && availableNonAcRoom.invalid'>
-                                <p class="alert alert-danger" *ngIf='availableNonAcRoom.errors.required'>
-                                    This field is
-                                    mandatory</p>
+                            <div class="form-group">
+                                <label for="availableNonAcRoom">Available Non-AC Rooms</label>
+                                <input type="number" name="availableNonAcRoom" class="form-control"
+                                    #availableNonAcRoom="ngModel" [(ngModel)]="selectedHotel.availableNonAcRoom"
+                                    required>
+                                <div *ngIf='availableNonAcRoom.touched && availableNonAcRoom.invalid'>
+                                    <p class="alert alert-danger" *ngIf='availableNonAcRoom.errors.required'>
+                                        This field is
+                                        mandatory</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="btn-group float-right">
-                            <button type="reset" class="btn btn-outline-dark">Reset
-                            </button>
-                            <button type="submit" class="btn btn-outline-primary"
-                                [disabled]='updateHotel.invalid'>Update
-                            </button>
-                        </div>
-                    </form>
+                            <div class="btn-group float-right">
+                                <button type="reset" class="btn btn-outline-dark">Reset
+                                </button>
+                                <button type="submit" class="btn btn-outline-primary"
+                                    [disabled]='updateHotel.invalid'>Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <button type="submit" class="btn btn-danger offset-3" (click)="deleteHotel(hotel.hotelId)"><img
+                src="/assets/icons/trash-fill.svg" alt="" width="32" height="32" title="Trash"
+                (click)="deleteHotel(hotel.hotelId)"></button>
     </div>
 </div>

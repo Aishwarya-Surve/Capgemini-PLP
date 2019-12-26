@@ -22,7 +22,7 @@ public class RoomDAOImplementation implements RoomDAO {
 	EntityTransaction entityTransaction;
 
 	@Override
-	public boolean addRoom(RoomBean roomBean)  throws HotelManagementSystemExceptionController {
+	public boolean addRoom(RoomBean roomBean) throws HotelManagementSystemExceptionController {
 		boolean addRoom = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -32,22 +32,23 @@ public class RoomDAOImplementation implements RoomDAO {
 			entityTransaction.commit();
 			addRoom = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Add Room");
 		}
 		entityManager.close();
 		return addRoom;
 	}// end of addRoom()
 
 	@Override
-	public List<RoomBean> getRoom()  throws HotelManagementSystemExceptionController{
+	public List<RoomBean> getRoom(int hotelId) throws HotelManagementSystemExceptionController {
 		List<RoomBean> roomList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
-			String jpql = "from RoomBean";
+			String jpql = "from RoomBean where hotelId=: hotelId";
 			Query query = entityManager.createQuery(jpql);
+			query.setParameter("hotelId", hotelId);
 			roomList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch  roomList");
 		}
 		return roomList;
 	}
@@ -64,7 +65,7 @@ public class RoomDAOImplementation implements RoomDAO {
 			entityTransaction.commit();
 			roomRemoved = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To remove Room");
 		}
 		return roomRemoved;
 	}// end of removeRoom()
@@ -112,7 +113,7 @@ public class RoomDAOImplementation implements RoomDAO {
 				entityTransaction.commit();
 				roomUpdated = true;
 			} catch (Exception e) {
-				throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+				throw new HotelManagementSystemExceptionController("Something went wrong......Unable To update Room");
 			}
 
 			entityManager.close();

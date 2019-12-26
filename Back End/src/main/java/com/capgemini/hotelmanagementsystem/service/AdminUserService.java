@@ -31,13 +31,5 @@ public interface AdminUserService {
 
 	// display userprofile
 	public List<UserInfoBean> displayUserProfile(int userId);
-	
-	// display userprofile by id
-		public List<AdminUserBean> displayUserProfileById(int userId);
 
-	// remove Manager by admin
-	public boolean deleteManager(int userId);
-
-	// see all Manager which is present in database
-	public List<AdminUserBean> getAllManager();
 }

@@ -24,9 +24,9 @@ public class RoomServiceImplementation implements RoomService {
 	}
 
 	@Override
-	public List<RoomBean> getRoom() {
+	public List<RoomBean> getRoom(int hotelId) {
 		try {
-			return roomDAO.getRoom();
+			return roomDAO.getRoom(hotelId);
 		} catch (HotelManagementSystemExceptionController e) {
 			e.getMessage();
 		}

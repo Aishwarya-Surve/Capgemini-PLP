@@ -31,7 +31,7 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 			Query query = entityManager.createQuery(jpql);
 			menuCartList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch  menuCartList");
 		}
 		return menuCartList;
 	}// end of menuCart()
@@ -47,7 +47,7 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 			entityTransaction.commit();
 			menuAdded = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Add Food To menu card");
 		}
 		entityManager.close();
 		return menuAdded;
@@ -65,7 +65,7 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 			menuDeleted = true;
 			entityTransaction.commit();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Delete  Food From menu card");
 		}
 		entityManager.close();
 		return menuDeleted;
@@ -99,7 +99,7 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 				entityTransaction.commit();
 				menuUpdated = true;
 			} catch (Exception e) {
-				throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+				throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Update  Food  menu card");
 			}
 			entityManager.close();
 		}

@@ -39,8 +39,8 @@ public class RoomController {
 	}// end of addRoom()
 
 	@GetMapping("/getRoomList")
-	public HotelManagementResponse getRoomList() {
-		List<RoomBean> roomList = roomService.getRoom();
+	public HotelManagementResponse getRoomList(@RequestParam int hotelId) {
+		List<RoomBean> roomList = roomService.getRoom(hotelId);
 		if (roomList != null && !roomList.isEmpty()) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");

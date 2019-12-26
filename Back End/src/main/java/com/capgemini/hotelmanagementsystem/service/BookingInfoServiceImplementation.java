@@ -12,27 +12,7 @@ import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExcept
 @Service
 public class BookingInfoServiceImplementation implements BookingInfoService {
 	@Autowired
-	private BookingInfoDAO bookingInfoDAO;
-
-	@Override
-	public boolean bookingInfo(BookingInfoBean bookingInfoBean) {
-		try {
-			return bookingInfoDAO.bookingInfo(bookingInfoBean);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
-	}
-
-	@Override
-	public boolean cancelBooking(int bookingId) {
-		try {
-			return bookingInfoDAO.cancelBooking(bookingId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
-	}
+	BookingInfoDAO bookingInfoDAO;
 
 	@Override
 	public List<BookingInfoBean> bookedRoomList() {
@@ -45,23 +25,33 @@ public class BookingInfoServiceImplementation implements BookingInfoService {
 	}
 
 	@Override
-	public float getDays(int bookingId) {
+	public boolean cancelBooking(int bookingId) {
 		try {
-			return bookingInfoDAO.getDays(bookingId);
+			return bookingInfoDAO.cancelBooking(bookingId);
 		} catch (HotelManagementSystemExceptionController e) {
 			e.getMessage();
 		}
-		return bookingId;
+		return true;
 	}
 
 	@Override
-	public double getBill(int bookingId) {
+	public double getBill(BookingInfoBean bookingInfoBean) {
 		try {
-			return bookingInfoDAO.getBill(bookingId);
+			return bookingInfoDAO.getBill(bookingInfoBean);
 		} catch (HotelManagementSystemExceptionController e) {
 			e.getMessage();
 		}
-		return bookingId;
+		return 0;
 	}
 
-}
+	@Override
+	public BookingInfoBean booking(BookingInfoBean bookingInfoBean) {
+		try {
+			return bookingInfoDAO.booking(bookingInfoBean);
+		} catch (HotelManagementSystemExceptionController e) {
+			e.getMessage();
+		}
+		return bookingInfoBean;
+	}
+
+}// end of service

@@ -2,15 +2,13 @@
     <div class="card col-md-6 col-6 col-sm-6 col-lg-6 offset-3 mt-5">
         <div class="card-body">
             <h2 style="text-align: center;">Sign in</h2>
-            <div class="text text-success" style="font-weight: bolder; margin-left: 10px;" *ngIf='statusCode===201'>
-                {{message}}</div>
-            <div class="text text-danger" style="font-weight: bolder;  margin-left: 10px;" *ngIf='statusCode===401'>
-                {{message}}</div>
+            <div class="text text-success" style="font-weight: bolder; margin-left: 10px;" *ngIf='statusCode===201'>{{message}}</div>
+            <div class="text text-danger" style="font-weight: bolder;  margin-left: 10px;" *ngIf='statusCode===401'>{{message}}</div>
             <form #Form='ngForm' (ngSubmit)="loginForm(Form)">
                 <div class="form-group">
                     <label for="userEmail">Username</label>
                     <input type="text" class="form-control" name="userEmail" #userEmail='ngModel' ngModel
-                        placeholder="Your Email Id"  required minlength="5" ngModel email>
+                        placeholder="Your Email Id" required minlength="5" ngModel email>
                 </div>
                 <!-- Email Validation Starts -->
                 <div *ngIf='userEmail.touched && userEmail.invalid'>
@@ -20,9 +18,6 @@
                     <p class="alert alert-warning" *ngIf='userEmail.errors.email'>
                         The field accepts only Email Id
                     </p>
-                    <!-- <p class="alert alert-warning" *ngIf='userEmail.errors.pattern'>
-                        The field accepts only Email Id
-                    </p> -->
                 </div>
                 <!-- Email Validation Ends -->
                 <div class="form-group">
@@ -45,8 +40,8 @@
                 <!-- Password Validation Ends -->
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-                <button class="btn btn-outline-primary float-right" type="submit" [disabled]='Form.invalid'>Sign
+                  </label>
+                <button class="btn btn-outline-primary float-right" type="submit" [disabled]='loginForm.invalid'>Sign
                     in</button>
             </form>
             <a routerLink="/userRegister" style="color: red;">Click Here To Sign up</a>

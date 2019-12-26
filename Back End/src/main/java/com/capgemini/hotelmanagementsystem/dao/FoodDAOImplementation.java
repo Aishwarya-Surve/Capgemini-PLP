@@ -14,6 +14,7 @@ import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
+import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Repository
 public class FoodDAOImplementation implements FoodDAO {
@@ -36,7 +37,7 @@ public class FoodDAOImplementation implements FoodDAO {
 		try {
 			adminUserBean = (AdminUserBean) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch UserId");
 		}
 
 		String jpql1 = "from MenuCardBean where foodId =: foodId";
@@ -46,7 +47,7 @@ public class FoodDAOImplementation implements FoodDAO {
 		try {
 			menuCardBean = (MenuCardBean) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch FoodId");
 		}
 
 		String jpql2 = "from RoomBean where roomId=:roomId";
@@ -56,9 +57,8 @@ public class FoodDAOImplementation implements FoodDAO {
 		try {
 			roomBean = (RoomBean) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch RoomId");
 		}
-
 		FoodOrderBean foodOrderBean = new FoodOrderBean();
 		foodOrderBean.setUserId(userId);
 		foodOrderBean.setUserName(adminUserBean.getUserName());
@@ -73,8 +73,8 @@ public class FoodDAOImplementation implements FoodDAO {
 			entityManager.persist(foodOrderBean);
 			entityTransaction.commit();
 			foodOrder = true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch FoodId");
 		}
 //		String jpql3 = "update MenuCardBean set foodQuantity =:userQuantity where foodId =:foodId";
 //		query = entityManager.createQuery(jpql3);
@@ -84,6 +84,7 @@ public class FoodDAOImplementation implements FoodDAO {
 //		int result = query.executeUpdate();
 //		entityTransaction.commit();
 		return foodOrder;
+
 	}// end of foodOrder()
 
 	@Override
@@ -96,7 +97,7 @@ public class FoodDAOImplementation implements FoodDAO {
 			query.setParameter("userId", userId);
 			foodList = query.getResultList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch FoodOrder");
 		}
 		return foodList;
 	}// end of bookingList()
@@ -112,7 +113,8 @@ public class FoodDAOImplementation implements FoodDAO {
 			query.setParameter("userId", userId);
 			bill = (double) query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController(
+					"Something went wrong......Unable To Fetch UserId To Cancel Food Bill");
 		}
 		return bill;
 	}// end of payment
@@ -131,7 +133,8 @@ public class FoodDAOImplementation implements FoodDAO {
 			entityTransaction.commit();
 			deleteOrder = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new HotelManagementSystemExceptionController(
+					"Something went wrong......Unable To Fetch UserId To Cancel Food Order");
 		}
 		return deleteOrder;
 

@@ -11,7 +11,6 @@ import javax.validation.constraints.Pattern;
 public class HotelBean {
 	@Id
 	@Column(name = "hotel_id")
-	//	@Pattern(regexp="[0-9]", message="It Accepts only number")
 	private int hotelId;
 	
 	@Column(name = "hotel_name")
@@ -78,6 +77,6 @@ public class HotelBean {
 	public void setImage(int image) {
 		this.image = image;
 	}
-
 	
+
 }// end of bean class

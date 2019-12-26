@@ -9,7 +9,7 @@ public interface RoomService {
 			public boolean addRoom(RoomBean roomBean);
 
 			//To Get List of All Rooms in Hotel
-			public List<RoomBean> getRoom();
+			public List<RoomBean> getRoom(int hotelId);
 			
 			//To Remove Room from Hotel
 			public boolean removeRoom(int roomId);

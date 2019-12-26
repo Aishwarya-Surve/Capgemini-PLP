@@ -32,10 +32,12 @@ import { ManagerControlComponent } from './manager-control/manager-control.compo
 import { ManagerCounterComponent } from './manager-counter/manager-counter.component';
 import { DeleteUpdateManagerComponent } from './delete-update-manager/delete-update-manager.component';
 import { DeleteUpdateEmployeeComponent } from './delete-update-employee/delete-update-employee.component';
-import { AdminHotelCounterComponent } from './admin-hotel-counter/admin-hotel-counter.component';
-import { SearchedHotelsDetailsComponent } from './searched-hotels-details/searched-hotels-details.component';
 import { AddRoomComponent } from './add-room/add-room.component';
+import { SearchedHotelsDetailsComponent } from './searched-hotels-details/searched-hotels-details.component';
 import { BookRoomComponent } from './book-room/book-room.component';
+import { AdminHotelCounterComponent } from './admin-hotel-counter/admin-hotel-counter.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 
 @NgModule({
   declarations: [
@@ -67,10 +69,12 @@ import { BookRoomComponent } from './book-room/book-room.component';
     ManagerCounterComponent,
     DeleteUpdateManagerComponent,
     DeleteUpdateEmployeeComponent,
-    AdminHotelCounterComponent,
-    SearchedHotelsDetailsComponent,
     AddRoomComponent,
-    BookRoomComponent
+    SearchedHotelsDetailsComponent,
+    BookRoomComponent,
+    AdminHotelCounterComponent,
+    UpdateProfileComponent,
+    PaymentModeComponent
   ],
   imports: [
     BrowserModule,

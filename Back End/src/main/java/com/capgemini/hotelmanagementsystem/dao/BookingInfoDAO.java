@@ -6,19 +6,17 @@ import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 public interface BookingInfoDAO {
-	//To Book Room
-	public boolean bookingInfo(BookingInfoBean bookingInfoBean)throws HotelManagementSystemExceptionController;
 
-    //To cancel Booking
-	public boolean cancelBooking(int bookingId) throws HotelManagementSystemExceptionController;
-
-	// get all BookedRoom
+	//To get List of all Booked Rooms
 	public List<BookingInfoBean> bookedRoomList() throws HotelManagementSystemExceptionController;
-
-	// To Get Days
-	public float getDays(int bookingId) throws HotelManagementSystemExceptionController;
-
-	// To get Bill
-	public double getBill(int bookingId) throws HotelManagementSystemExceptionController;
-
-}
+	
+	//To cancel the booking
+	public boolean cancelBooking(int bookingId) throws HotelManagementSystemExceptionController;
+	
+	//To get Bill
+	public double getBill(BookingInfoBean bookingInfoBean) throws HotelManagementSystemExceptionController;
+	
+	//To Book Room
+		public BookingInfoBean booking(BookingInfoBean bookingInfoBean) throws HotelManagementSystemExceptionController;
+		
+}// end of interface

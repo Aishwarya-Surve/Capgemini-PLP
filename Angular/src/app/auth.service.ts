@@ -11,6 +11,8 @@ export class AuthService {
 
   api = 'http://localhost:8080/';
 
+  profile = {};
+
   constructor(public http: HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
@@ -44,5 +46,19 @@ export class AuthService {
 
   deleteEmployee(data) {
     return this.http.delete(`${this.api}deleteEmployee?userId=${data}`);
+  }
+
+  updateProfile(data): Observable<any> {
+    console.log(data);
+    return this.http.post<any>(`${this.api}userProfile`, data);
+  }
+
+  getProfile(userId) {
+    this.http.get<any>(`${this.api}getUserProfile?userId=${userId}`).subscribe(response => {
+      console.log(response.getUserProfile);
+      this.profile = response.getUserProfile;
+    }, err => {
+      console.log(err);
+    });
   }
 }

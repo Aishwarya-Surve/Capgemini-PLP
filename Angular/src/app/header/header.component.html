@@ -15,7 +15,7 @@
                 <a class="nav-link" routerLink="/bookings">Bookings</a>
             </li>
             <li class="nav-item active" *ngIf='auth.isLoggedIn() && isUser()'>
-                <a class="nav-link" routerLink="/userProfile">Profile</a>
+                <a class="nav-link" routerLink="/userUpdateProfile">Profile</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" routerLink="/services">Services</a>
@@ -25,6 +25,9 @@
             </li>
             <li class="nav-item active" *ngIf='auth.isLoggedIn() && isAdmin()'>
                 <a class="nav-link" routerLink="/addHotel">Add Hotel</a>
+            </li>
+            <li class="nav-item active" *ngIf='auth.isLoggedIn() && isManager()'>
+                <a class="nav-link" routerLink="/addRoom">Add Room</a>
             </li>
             <li class="nav-item active" *ngIf='auth.isLoggedIn() && isManager()'>
                 <a class="nav-link" routerLink="/managerControl">Manager</a>

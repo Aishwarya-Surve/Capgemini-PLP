@@ -10,7 +10,7 @@ public interface RoomDAO  {
 	public boolean addRoom(RoomBean roomBean) throws HotelManagementSystemExceptionController;
 
 	// To Get List of All Rooms in Hotel
-	public List<RoomBean> getRoom() throws HotelManagementSystemExceptionController;
+	public List<RoomBean> getRoom(int hotelId) throws HotelManagementSystemExceptionController;
 
 	// To Remove Room from Hotel
 	public boolean removeRoom(int roomId) throws HotelManagementSystemExceptionController;

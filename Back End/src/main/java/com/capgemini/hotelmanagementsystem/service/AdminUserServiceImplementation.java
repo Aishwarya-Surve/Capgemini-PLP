@@ -48,12 +48,7 @@ public class AdminUserServiceImplementation implements AdminUserService {
 
 	@Override
 	public List<AdminUserBean> getAllEmployee() {
-		try {
-			return adminUserDAO.getAllEmployee();
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return null;
+		return adminUserDAO.getAllEmployee();
 	}
 
 	@Override
@@ -88,38 +83,15 @@ public class AdminUserServiceImplementation implements AdminUserService {
 
 	@Override
 	public List<UserInfoBean> displayUserProfile(int userId) {
-		try {
-			return adminUserDAO.displayUserProfile(userId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return null;
+//		try {
+//			return adminUserDAO.displayUserProfile(userId);
+//		} catch (HotelManagementSystemExceptionController e) {
+//			e.getMessage();
+//		}
+//		return null;
+		return adminUserDAO.displayUserProfile(userId);
 	}
 
-	@Override
-	public boolean deleteManager(int userId) {
-		try {
-			return adminUserDAO.deleteManager(userId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
-	}
-
-	@Override
-	public List<AdminUserBean> getAllManager() {
-		try {
-			return adminUserDAO.getAllManager();
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return null;
-	}
-
-	@Override
-	public List<AdminUserBean> displayUserProfileById(int userId) {
-		return adminUserDAO.displayUserProfileById(userId);
-	}
 
 	
 }

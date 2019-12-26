@@ -12,4 +12,5 @@ public class HotelManagementConfiguratio {
 		localEntityManagerFactoryBean.setPersistenceUnitName("hotelManagementSystem");
 		return localEntityManagerFactoryBean;
 	}// end 
+	
 }

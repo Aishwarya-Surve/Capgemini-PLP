@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Hotel } from './hotel';
-import { User } from 'user';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,9 +10,11 @@ export class HotelService {
 
   api = 'http://localhost:8080/';
 
-  roomArray: [];
+  totalBill = null;
 
   hotelArray: [];
+
+  roomArray: [];
 
   searchedHotel = [];
 
@@ -29,7 +29,11 @@ export class HotelService {
     checkOutDate: null
   };
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    this.bookingHotelRoom.userId = userDetails.adminUserBean.userId;
+
+  }
 
   addHotel(data): Observable<any> {
     return this.http.post<any>(`${this.api}addHotel`, data);
@@ -48,8 +52,14 @@ export class HotelService {
     return this.http.post<any>(`${this.api}updateHotel`, data);
   }
 
-  searchHotel(location) {
-    this.http.get<any>(`${this.api}getHotelLocationList?location=${location}`).subscribe(data => {
+  deleteHotel(hotelId) {
+    return this.http.delete<any>(`${this.api}removeHotel?hotelId=${hotelId}`);
+  }
+
+  searchHotel(bookingForm) {
+    this.bookingHotelRoom.checkInDate = bookingForm.checkInDate;
+    this.bookingHotelRoom.checkOutDate = bookingForm.checkOutDate;
+    this.http.get<any>(`${this.api}getHotelLocationList?location=${bookingForm.location}`).subscribe(data => {
       console.log(data.hotelList);
       this.searchedHotel = data.hotelList;
       this.router.navigateByUrl('/searchedHotel');
@@ -58,17 +68,14 @@ export class HotelService {
     });
   }
 
-  deleteHotel(hotelId) {
-    return this.http.delete<any>(`${this.api}removeHotel?hotelId=${hotelId}`);
-  }
-
   addRoom(data): Observable<any> {
     console.log(data);
     return this.http.post<any>(`${this.api}addRoom`, data);
   }
 
   getRoomList() {
-    this.http.get<any>(`${this.api}getRoomList`).subscribe(data => {
+    console.log(this.bookingHotelRoom.hotelId);
+    this.http.get<any>(`${this.api}getRoomList?hotelId=${this.bookingHotelRoom.hotelId}`).subscribe(data => {
       console.log(data.roomList);
       this.roomArray = data.roomList;
     }, err => {
@@ -90,8 +97,39 @@ export class HotelService {
 
   bookRoom(hotelDetails) {
     this.bookingHotelRoom.hotelId = hotelDetails.hotelId;
+    console.log(this.bookingHotelRoom.hotelId);
     this.router.navigateByUrl('/bookRoom');
+  }
 
+  bookHotelRoom(data) {
+    return this.http.post<any>(`${this.api}bookRoom`, data);
+  }
+
+  getBill(roomId) {
+    this.bookingHotelRoom.roomId = roomId;
+    console.log(this.bookingHotelRoom);
+    this.http.post<any>(`${this.api}bill`, this.bookingHotelRoom).subscribe(response => {
+      console.log(response);
+      console.log(this.bookingHotelRoom);
+      this.totalBill = response.bill;
+      this.router.navigateByUrl('/paymentMode');
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  paymentCashMode(): Observable<any> {
+    this.bookingHotelRoom.modeOfPayment = 'cash';
+    this.bookingHotelRoom.paymentStatus = 'UnPaid';
+    console.log(this.bookingHotelRoom);
+    return this.http.post<any>(`${this.api}booking`, this.bookingHotelRoom);
+  }
+
+  paymentCardMode(): Observable<any> {
+    this.bookingHotelRoom.modeOfPayment = 'card';
+    this.bookingHotelRoom.paymentStatus = 'Done';
+    console.log(this.bookingHotelRoom);
+    return this.http.post<any>(`${this.api}booking`, this.bookingHotelRoom);
   }
 
 }

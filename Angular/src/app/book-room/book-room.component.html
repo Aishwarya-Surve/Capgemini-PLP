@@ -1,1 +1,20 @@
-<p>book-room works!</p>
+<div class="text text-success" style="font-weight: bolder; margin-left: 10px;" *ngIf='statusCode===201'>{{message}}
+</div>
+<div class="text text-danger" style="font-weight: bolder;  margin-left: 10px;" *ngIf='statusCode===401'>{{message}}
+</div>
+<div class="col-md-3 mt-3 card card-body float-left" style="margin-left: 60px;"
+    *ngFor='let room of hotelService.roomArray, index as i'>
+    <h6>Room Id: {{room.roomId}} </h6>
+    <h6>Hotel Id: {{room.hotelId}}</h6>
+    <h6>Room Rent: {{room.roomRent}}</h6>
+    <h6>Room Type: {{room.roomType}}</h6>
+    <h6>Room Capacity: {{room.roomCapacity}}</h6>
+    <h6>Room Status: {{room.roomStatus}}</h6>
+    <h6>Room Facility: {{room.roomFacility}}</h6>
+    <div class="row">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            (click)="paymentTransfer(room.roomId)">
+            Book Now
+        </button>
+    </div>
+</div>

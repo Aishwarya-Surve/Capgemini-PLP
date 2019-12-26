@@ -21,7 +21,6 @@ export class AddManagerComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   RegisterUser(registrationForm: NgForm) {
-    console.log(registrationForm.value);
     this.user.userName = registrationForm.value.userName;
     this.user.password = registrationForm.value.password;
     this.user.userType = 'manager';

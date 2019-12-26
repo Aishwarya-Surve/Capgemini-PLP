@@ -15,13 +15,14 @@ public class UserInfoBean {
 	@Id
 	@Column(name = "id")
 	private int id;
+	
 	@Column(name = "user_id")
 	private int userId;
 
 	@Column(name = "user_name")
 	@NotBlank(message = "Name cannot be Blank...")
-	@Pattern(regexp = "[a-zA-z]+([\\s][a-zA-z]+)*", message = "It Accepts only Characters")
-	@Size(min = 6, max = 35, message = "It Accepts only 35 characters")
+	//@Pattern(regexp = "[a-zA-z]+([\\s][a-zA-z]+)*", message = "It Accepts only Characters")
+	//@Size(min = 6, max = 35, message = "It Accepts only 35 characters")
 	private String userName;
 
 	@Column(name = "user_type")
@@ -54,8 +55,8 @@ public class UserInfoBean {
 	private String address;
 
 	@Column(name = "nationality")
-	@NotBlank(message = "Nationlity cacanot be null")
-	@Pattern(regexp = "^[a-zA-z]+(?:[\\s-][a-zA-Z]+)*$", message = "It Accepts only characters")
+	//@NotBlank(message = "Nationlity cacanot be null")
+	//@Pattern(regexp = "^[a-zA-z]+(?:[\\s-][a-zA-Z]+)*$", message = "It Accepts only characters")
 	private String nationality;
 
 	// getter & setter

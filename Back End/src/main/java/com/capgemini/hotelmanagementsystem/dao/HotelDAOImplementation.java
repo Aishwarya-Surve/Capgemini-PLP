@@ -34,7 +34,7 @@ public class HotelDAOImplementation implements HotelDAO {
 			entityManager.close();
 			addHotel = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch  Hotel");
 		}
 		return addHotel;
 	}
@@ -51,7 +51,7 @@ public class HotelDAOImplementation implements HotelDAO {
 			entityTransaction.commit();
 			roomHotel = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Delete Hotel");
 		}
 		return roomHotel;
 	}
@@ -90,7 +90,7 @@ public class HotelDAOImplementation implements HotelDAO {
 				entityTransaction.commit();
 				hotelUpdated = true;
 			} catch (Exception e) {
-				throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+				throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch Details");
 			}
 			entityManager.close();
 		}
@@ -106,7 +106,7 @@ public class HotelDAOImplementation implements HotelDAO {
 			Query query = entityManager.createQuery(jpql);
 			hotelList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Get HotelList");
 		}
 		return hotelList;
 	}
@@ -122,7 +122,7 @@ public class HotelDAOImplementation implements HotelDAO {
 		try {
 			hotelList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct creatential");
+			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Serach Hotel ");
 		}
 		return hotelList;
 	}

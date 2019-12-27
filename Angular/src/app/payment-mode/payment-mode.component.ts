@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HotelService } from '../hotel.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-mode',
@@ -12,7 +14,7 @@ export class PaymentModeComponent implements OnInit {
 
   selectedRoomDetails = null;
 
-  constructor(private hotelService: HotelService) {
+  constructor(private hotelService: HotelService, private router: Router) {
     console.log(this.hotelService.totalBill);
     this.totalAmount = this.hotelService.totalBill;
     this.selectedRoomDetails = this.hotelService.bookingHotelRoom;
@@ -26,13 +28,11 @@ export class PaymentModeComponent implements OnInit {
       console.log(err);
     });
   }
-  payment() {
-    this.hotelService.paymentCardMode().subscribe(response => {
-      console.log(response);
-    }, err => {
-      console.log(err);
-    });
+
+  cardPayment() {
+    this.router.navigateByUrl('/cardPayment');
   }
+
 
   ngOnInit() {
   }

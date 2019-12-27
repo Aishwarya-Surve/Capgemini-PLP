@@ -38,6 +38,10 @@ import { BookRoomComponent } from './book-room/book-room.component';
 import { AdminHotelCounterComponent } from './admin-hotel-counter/admin-hotel-counter.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
+import { FilterPipe } from './filter.pipe';
+import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
+import { CardPaymentComponent } from './card-payment/card-payment.component';
+import { BookingDoneComponent } from './booking-done/booking-done.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +78,11 @@ import { PaymentModeComponent } from './payment-mode/payment-mode.component';
     BookRoomComponent,
     AdminHotelCounterComponent,
     UpdateProfileComponent,
-    PaymentModeComponent
+    PaymentModeComponent,
+    FilterPipe,
+    CancelBookingComponent,
+    CardPaymentComponent,
+    BookingDoneComponent
   ],
   imports: [
     BrowserModule,

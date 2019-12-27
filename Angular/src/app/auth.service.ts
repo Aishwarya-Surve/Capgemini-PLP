@@ -25,11 +25,11 @@ export class AuthService {
   }
 
   registerData(data): Observable<any> {
-    return this.http.put<any>(`${this.api}userRegister`, data);
+    return this.http.post<any>(`${this.api}userRegister`, data);
   }
 
   loginData(data): Observable<any> {
-    return this.http.get<any>(`${this.api}login?userEmail=${data.userEmail}&password=${data.password}`, data);
+    return this.http.post<any>(`${this.api}login?userEmail=${data.userEmail}&password=${data.password}`, data);
   }
 
   getManager(): Observable<any> {

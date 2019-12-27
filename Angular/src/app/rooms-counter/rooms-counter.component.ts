@@ -42,13 +42,16 @@ export class RoomsCounterComponent implements OnInit {
     this.hotelService.addRoom(addRoom.value).subscribe(response => {
       console.log(response);
       addRoom.reset();
-      if (response.statusCode === '201') {
+      if (response.statusCode === 201) {
         this.message = response.description;
         console.log(this.message);
-      } else if (response.statusCode === '401') {
+        alert(this.message);
+      } else if (response.statusCode === 401) {
         this.message = response.description;
+        alert(this.message);
       } else {
         this.message = response.description;
+        alert(this.message);
       }
     }, err => {
       console.log(err);

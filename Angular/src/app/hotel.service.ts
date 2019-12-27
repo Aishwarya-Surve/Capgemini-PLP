@@ -36,6 +36,7 @@ export class HotelService {
   }
 
   addHotel(data): Observable<any> {
+    console.log(data);
     return this.http.post<any>(`${this.api}addHotel`, data);
   }
 
@@ -97,7 +98,6 @@ export class HotelService {
 
   bookRoom(hotelDetails) {
     this.bookingHotelRoom.hotelId = hotelDetails.hotelId;
-    console.log(this.bookingHotelRoom.hotelId);
     this.router.navigateByUrl('/bookRoom');
   }
 
@@ -130,6 +130,17 @@ export class HotelService {
     this.bookingHotelRoom.paymentStatus = 'Done';
     console.log(this.bookingHotelRoom);
     return this.http.post<any>(`${this.api}booking`, this.bookingHotelRoom);
+  }
+
+  userBookedRoom(): Observable<any> {
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    const userId = userDetails.adminUserBean.userId;
+    console.log(userId);
+    return this.http.get<any>(`${this.api}userBookedList?userId=${userId}`, userId);
+  }
+
+  cancelBooking(bookingId): Observable<any> {
+    return this.http.delete<any>(`${this.api}cancelBooking?bookingId=${bookingId}`);
   }
 
 }

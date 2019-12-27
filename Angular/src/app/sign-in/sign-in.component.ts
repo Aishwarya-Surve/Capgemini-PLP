@@ -32,8 +32,11 @@ export class SignInComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(response));
         const userDetail = localStorage.getItem('user');
         this.message = response.description;
-        this.router.navigate(['/']);
-        alert(this.message);
+        if (response.adminUserBean.userType === 'user') {
+          this.router.navigateByUrl('/bookings');
+        } else {
+          this.router.navigate(['/']);
+        }
       } else if (response.statusCode === 401) {
         this.message = response.description;
         alert(this.message);

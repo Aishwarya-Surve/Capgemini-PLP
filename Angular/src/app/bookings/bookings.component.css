@@ -1,6 +1,6 @@
 .section {
 	position: relative;
-	height: 100vh;
+	height: 600px;
 }
 
 .section .section-center {
@@ -126,7 +126,7 @@
 }
 
 .booking-cta h1 {
-	font-size: 52px;
+	font-size: 65px;
 	text-transform: uppercase;
 	color: #fff;
 	font-weight: 700;

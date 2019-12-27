@@ -27,152 +27,38 @@ import { SearchedHotelsComponent } from './searched-hotels/searched-hotels.compo
 import { BookRoomComponent } from './book-room/book-room.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
+import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
+import { CardPaymentComponent } from './card-payment/card-payment.component';
+import { BookingDoneComponent } from './booking-done/booking-done.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sign-in', component: SignInComponent },
-  {
-    path: 'bookings', component: BookingsComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
+  { path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'cardPayment', component: CardPaymentComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
   { path: 'services', component: ServicesComponent },
-  {
-    path: 'reservation', component: ReservationComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
-  {
-    path: 'userProfile', component: UserProfileComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
-  {
-    path: 'userUpdateProfile', component: UpdateProfileComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
-  {
-    path: 'adminControl', component: AdminControlComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'managerControl', component: ManagerControlComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['manager']
-    }
-  },
-  {
-    path: 'managerCounter', component: ManagerCounterComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['manager']
-    }
-  },
-  {
-    path: 'employeesCounter', component: EmployeesCounterComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'customersCounter', component: CustomersCounterComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'roomsCounter', component: RoomsCounterComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'hotelsCounter', component: HotelsCounterComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'addHotel', component: AddHotelComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'addRoom', component: AddRoomComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['manager']
-    }
-  },
-  {
-    path: 'deleteUpdateManager', component: DeleteUpdateManagerComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'deleteUpdateEmployee', component: DeleteUpdateEmployeeComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['manager']
-    }
-  },
-  {
-    path: 'addManager', component: AddManagerComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['admin']
-    }
-  },
-  {
-    path: 'addEmployee', component: AddEmployeeComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['manager']
-    }
-  },
-  {
-    path: 'searchedHotel', component: SearchedHotelsComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
-  {
-    path: 'bookRoom', component: BookRoomComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
-  {
-    path: 'paymentMode', component: PaymentModeComponent,
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['user']
-    }
-  },
+  { path: 'reservation', component: ReservationComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'userProfile', component: UserProfileComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'userUpdateProfile', component: UpdateProfileComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'adminControl', component: AdminControlComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'managerControl', component: ManagerControlComponent, canActivate: [AuthGuard], data: { expectedRole: ['manager'] } },
+  { path: 'managerCounter', component: ManagerCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['manager'] } },
+  { path: 'employeesCounter', component: EmployeesCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'customersCounter', component: CustomersCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'roomsCounter', component: RoomsCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'bookingDone', component: BookingDoneComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'hotelsCounter', component: HotelsCounterComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'addHotel', component: AddHotelComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'addRoom', component: AddRoomComponent, canActivate: [AuthGuard], data: { expectedRole: ['manager'] } },
+  { path: 'deleteUpdateManager', component: DeleteUpdateManagerComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'deleteUpdateEmployee', component: DeleteUpdateEmployeeComponent, canActivate: [AuthGuard], data: { expectedRole: ['manager'] } },
+  { path: 'addManager', component: AddManagerComponent, canActivate: [AuthGuard], data: { expectedRole: ['admin'] } },
+  { path: 'addEmployee', component: AddEmployeeComponent, canActivate: [AuthGuard], data: { expectedRole: ['manager'] } },
+  { path: 'searchedHotel', component: SearchedHotelsComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'bookRoom', component: BookRoomComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'bookingHistory', component: CancelBookingComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
+  { path: 'paymentMode', component: PaymentModeComponent, canActivate: [AuthGuard], data: { expectedRole: ['user'] } },
   { path: 'food-order', component: FoodOrderComponent },
   { path: 'userRegister', component: UserRegisterComponent },
   { path: '**', component: PageNotFoundComponent }

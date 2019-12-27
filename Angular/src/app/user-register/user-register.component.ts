@@ -33,6 +33,7 @@ export class UserRegisterComponent implements OnInit {
       if (response.statusCode === 201) {
         this.message = response.description;
         alert(this.message);
+        this.router.navigateByUrl('/sign-in');
       } else if (response.statusCode === 401) {
         this.message = response.description;
         alert(this.message);

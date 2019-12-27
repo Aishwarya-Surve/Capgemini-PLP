@@ -10,22 +10,33 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <span class="form-label">Room type</span>
-                        <input class="form-control" name="roomType" #roomType="ngModel" ngModel type="text" required>
+                        <label for="roomType">Room Type</label>
+                        <select name="roomType" id="roomType" #roomType='ngModel' ngModel class="form-control" required placeholder="Enter Room Type">
+                <option value="1">1 BED</option>
+                <option value="2">2 BED</option>
+                <option value="3">3 BED</option>
+                </select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <span class="form-label">Room Capacity</span>
-                        <input class="form-control" name="roomCapacity" #roomCapacity="ngModel" ngModel type="text"
-                            required>
+                            <label for="roomCapacity">Room Capacity</label>
+            <select name="capacity" id="roomCapacity" #roomCapacity='ngModel' ngModel class="form-control" required placeholder="Enter Room Capacity">
+                <option value="1">1 Person</option>
+                <option value="2">2 Person</option>
+                <option value="3">3 Person</option>
+                 <option value="2">4 Person</option>
+                <option value="3">5 Person</option>
+                </select>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <span class="form-label">Room Status</span>
-                <input class="form-control" name="roomStatus" #roomStatus="ngModel" ngModel type="text"
-                    placeholder="Enter room status">
+                    <label for="roomStatus">Room Status</label>
+            <select name="roomStatus" id="roomStatus" #roomStatus='ngModel' ngModel class="form-control" required placeholder="Enter Room Status">
+                <option value="Available">Available</option>
+                <option value="Unavailable">Unavailable</option>
+                </select>
             </div>
             <div class="form-group">
                 <span class="form-label">Hotel Id</span>
@@ -33,12 +44,14 @@
                     placeholder="Enter Hotel Id">
             </div>
             <div class="form-group">
-                <span class="form-label">Room Facility</span>
-                <input class="form-control" name="roomFacility" #roomFacility="ngModel" ngModel type="text"
-                    placeholder="Enter room facility">
+                <label for="roomFacility">Room Facility</label>
+                        <select name="roomFacility" id="roomFacility" #roomFacility='ngModel' ngModel class="form-control" required placeholder="Enter Room Type">
+                <option value="AC">AC</option>
+                <option value="NON-AC">NON AC</option>
+                </select>
             </div>
             <div class="form-btn">
-                <button class="submit-btn" [disabled]="addRoom.invalid">Add Room</button>
+                <button  type="submit" class="btn btn-outline-primary" [disabled]="addRoom.invalid">Add Room</button>
             </div>
         </form>
     </div>

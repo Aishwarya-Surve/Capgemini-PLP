@@ -10,6 +10,13 @@ import { NgForm } from '@angular/forms';
 })
 export class BookingsComponent implements OnInit {
 
+  dateObject = new Date();
+  date = this.dateObject.getDate();
+  month = this.dateObject.getMonth();
+  year = this.dateObject.getFullYear();
+
+  todaysDate = `${this.year}-${this.month + 1}-${this.date}`;
+
   constructor(private hotelService: HotelService, private router: Router) { }
 
   search(bookingForm: NgForm) {

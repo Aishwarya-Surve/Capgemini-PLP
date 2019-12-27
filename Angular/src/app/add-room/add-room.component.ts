@@ -14,9 +14,12 @@ export class AddRoomComponent implements OnInit {
   constructor(private hotelService: HotelService) { }
 
   room(addRoom: NgForm) {
+    console.log(addRoom.value);
     this.hotelService.addRoom(addRoom.value).subscribe(response => {
       addRoom.reset();
       this.message = response.description;
+    }, err => {
+      console.log(err);
     });
   }
 

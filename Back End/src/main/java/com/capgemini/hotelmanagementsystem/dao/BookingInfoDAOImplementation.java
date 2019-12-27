@@ -25,12 +25,15 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 	EntityTransaction entityTransaction;
 
 	BookingInfoBean bookingInfoBean;
+
 	@Override
-	public BookingInfoBean booking(BookingInfoBean bookingInfoBean) throws HotelManagementSystemExceptionController {
+	public BookingInfoBean booking(BookingInfoBean bookingInfoBean) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		RoomBean roomBean;
 		double daysBetween;
+		double days;
 		try {
+			entityManager = entityManagerFactory.createEntityManager();
 			entityTransaction = entityManager.getTransaction();
 			bookingInfoBean.setCheckInDate(bookingInfoBean.getCheckInDate());
 			bookingInfoBean.setCheckOutDate(bookingInfoBean.getCheckOutDate());
@@ -40,8 +43,14 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			roomBean = (RoomBean) query.getSingleResult();
 			bookingInfoBean.setHotelId(roomBean.getHotelId());
 			daysBetween = 0;
+			days=0;
 			daysBetween = ChronoUnit.DAYS.between(bookingInfoBean.getCheckInDate(), bookingInfoBean.getCheckOutDate());
-			double bill = daysBetween * roomBean.getRoomRent();
+			if (daysBetween == 0) {
+				days = 1;
+			}else {
+				days = ChronoUnit.DAYS.between(bookingInfoBean.getCheckInDate(), bookingInfoBean.getCheckOutDate());
+			}
+			double bill = days * roomBean.getRoomRent();
 			bookingInfoBean.setRoomAmount(bill);
 			bookingInfoBean.setRoomId(bookingInfoBean.getRoomId());
 			bookingInfoBean.setHotelId(bookingInfoBean.getHotelId());
@@ -50,7 +59,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			bookingInfoBean.setCheckInDate(bookingInfoBean.getCheckInDate());
 			bookingInfoBean.setCheckOutDate(bookingInfoBean.getCheckOutDate());
 			int roomQuantity = 1;
-			if (roomBean.getRoomFacility() == "ac") {
+			if (roomBean.getRoomFacility() == "AC") {
 				HotelBean hotelBean = entityManager.find(HotelBean.class, bookingInfoBean.getHotelId());
 				hotelBean.setAvailableAcRoom(hotelBean.getAvailableAcRoom() - roomQuantity);
 			} else {
@@ -62,7 +71,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			entityTransaction.commit();
 
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong...Please enter valid Information");
+			new HotelManagementSystemExceptionController("Something went wrong...Please enter valid Information");
 
 		}
 		entityManager.close();
@@ -70,7 +79,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 	}// end of booking()
 
 	@Override
-	public List<BookingInfoBean> bookedRoomList() throws HotelManagementSystemExceptionController {
+	public List<BookingInfoBean> bookedRoomList() {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		List<BookingInfoBean> bookedList = null;
 		try {
@@ -79,61 +88,79 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			Query query = entityManager.createQuery(jpql);
 			bookedList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Unable to fetch Data ");
+			new HotelManagementSystemExceptionController("Unable to fetch Data ");
 		}
 		return bookedList;
 	}// end of bookingList()
 
 	@Override
-	public boolean cancelBooking(int bookingId)
-			throws HotelManagementSystemExceptionController {
+	public boolean cancelBooking(int bookingId) {
 		boolean canceled = false;
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityTransaction = entityManager.getTransaction();
-		System.err.println("Booking id"+ bookingId);
 		BookingInfoBean bookingInfoBean = entityManager.find(BookingInfoBean.class, bookingId);
 		try {
-			//entityTransaction.begin();
+			// entityTransaction.begin();
 			RoomBean roomBean = entityManager.find(RoomBean.class, bookingInfoBean.getRoomId());
 			int roomQuantity = 1;
-			if (roomBean.getRoomFacility() == "ac") {
+			if (roomBean.getRoomFacility() == "AC") {
 				HotelBean hotelBean = entityManager.find(HotelBean.class, bookingInfoBean.getHotelId());
 				hotelBean.setAvailableAcRoom(hotelBean.getAvailableAcRoom() + roomQuantity);
 			} else {
 				HotelBean hotelBean = entityManager.find(HotelBean.class, bookingInfoBean.getHotelId());
 				hotelBean.setAvailableNonAcRoom(hotelBean.getAvailableNonAcRoom() + roomQuantity);
 			}
-			
-			//bookingInfoBean = entityManager.find(BookingInfoBean.class, bookingId);
+
 			entityTransaction.begin();
 			entityManager.remove(bookingInfoBean);
 			entityTransaction.commit();
 			canceled = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong...Unable to Cancel Booking");
+			new HotelManagementSystemExceptionController("Something went wrong...Unable to Cancel Booking");
 		}
 		return canceled;
 	}// end of cancelBooking()
 
 	@Override
-	
-	public double getBill(BookingInfoBean bookingInfoBean) throws HotelManagementSystemExceptionController {
+	public double getBill(BookingInfoBean bookingInfoBean) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		double totalBill = 0;
 		try {
-			entityManager = entityManagerFactory.createEntityManager();
+			double daysBetween= 0;
+			double days=0;
 			LocalDate checkInDate = bookingInfoBean.getCheckInDate();
 			LocalDate checkOutDate = bookingInfoBean.getCheckOutDate();
-			double daysBetween = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+			daysBetween = ChronoUnit.DAYS.between(bookingInfoBean.getCheckInDate(), bookingInfoBean.getCheckOutDate());
+			if (daysBetween == 0) {
+				days = 1;
+			}else {
+				days = ChronoUnit.DAYS.between(bookingInfoBean.getCheckInDate(), bookingInfoBean.getCheckOutDate());
+			}
 			String roomQuery = "from RoomBean where roomId=: roomId";
 			Query query6 = entityManager.createQuery(roomQuery);
 			query6.setParameter("roomId", bookingInfoBean.getRoomId());
 			RoomBean roomBean = (RoomBean) query6.getSingleResult();
-			totalBill = daysBetween * roomBean.getRoomRent();
+			totalBill = days * roomBean.getRoomRent();
+			bookingInfoBean.setPaymentStatus("Paid");
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong...Unable to get Bill");
+			new HotelManagementSystemExceptionController("Something went wrong...Unable to get Bill");
 		}
 		return totalBill;
 	}
+
+	@Override
+	public List<BookingInfoBean> userBookedRooms(int userId) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		String jpql = "from BookingInfoBean where userId=:userId";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("userId", userId);
+		List<BookingInfoBean> userBookedList = null;
+		try {
+			userBookedList = query.getResultList();
+		} catch (Exception e) {
+			new HotelManagementSystemExceptionController("You haven't booked room yet");
+		}
+		return userBookedList;
+	}// end of userBookedRooms()
 
 }// end of implementation

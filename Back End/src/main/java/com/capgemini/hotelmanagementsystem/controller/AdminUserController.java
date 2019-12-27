@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
+import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 import com.capgemini.hotelmanagementsystem.response.HotelManagementResponse;
 import com.capgemini.hotelmanagementsystem.service.AdminUserService;
 
@@ -23,8 +24,9 @@ import com.capgemini.hotelmanagementsystem.service.AdminUserService;
 public class AdminUserController {
 	@Autowired
 	private AdminUserService adminUserService;
+	
 
-	@GetMapping(path = "/login")
+	@PostMapping(path = "/login")
 	public HotelManagementResponse adminUserLogin(@RequestParam String userEmail, @RequestParam String password) {
 		AdminUserBean adminUserBean = adminUserService.login(userEmail, password);
 		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
@@ -35,28 +37,46 @@ public class AdminUserController {
 			hotelManagementResponse.setAdminUserBean(adminUserBean);
 		} else {
 			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage(" Log In Failed!!!");
-			hotelManagementResponse.setDescription(
-					"Please enter password which contain atleast one uppercase letter,one lowercase letter and a digit.");
+			hotelManagementResponse.setMessage("Failed");
+			hotelManagementResponse.setDescription(" Log In Failed!!!");
 
 		}
 		return hotelManagementResponse;
 	}// End of adminLogin()
 
-	@PutMapping(path = "/userRegister", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/userRegister")
 	public HotelManagementResponse userRegister(@RequestBody AdminUserBean adminUserBean) {
-		boolean registerUser = adminUserService.userRegister(adminUserBean);
 		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-		if (registerUser) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("You Registered Scussessfully!!");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage(" Register Failed");
-			hotelManagementResponse.setDescription("Please enter  valid password which contain atleast one uppercase letter,one lowercase letter and a digit.");
-		}
-		return hotelManagementResponse;
+		String email = adminUserBean.getUserEmail();
+		boolean isEmailPresent = adminUserService.emailPresent(email);
+		if (!isEmailPresent) {
+			boolean registerUser = adminUserService.userRegister(adminUserBean);
+			if (registerUser) {
+				hotelManagementResponse.setStatusCode(201);
+				hotelManagementResponse.setMessage("Success");
+				hotelManagementResponse.setDescription("User Registered Successfully.......");
+			} else {
+				hotelManagementResponse.setStatusCode(401);
+				hotelManagementResponse.setMessage("Failed");
+				hotelManagementResponse.setDescription("User Registration Failed........");
+			}
+			return hotelManagementResponse;
+			} else {
+				hotelManagementResponse.setStatusCode(401);
+				hotelManagementResponse.setMessage("Failed");
+				hotelManagementResponse.setDescription("Email Already Exists........");
+				return hotelManagementResponse;
+			}
+//		if (registerUser) {
+//			hotelManagementResponse.setStatusCode(201);
+//			hotelManagementResponse.setMessage("Success");
+//			hotelManagementResponse.setDescription("You Registered Scussessfully!!");
+//		} else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage(" Register Failed");
+//			hotelManagementResponse.setDescription("Invalid Credentials");
+//		}
+//		return hotelManagementResponse;
 	}// End of userRegister()
 
 	@GetMapping(path = "/getAllUsers", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

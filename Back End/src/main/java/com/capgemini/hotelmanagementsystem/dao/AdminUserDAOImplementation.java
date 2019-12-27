@@ -34,10 +34,9 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			query.setParameter("userEmail", userEmail);
 			query.setParameter("password", password);
 			adminUserBean = (AdminUserBean) query.getSingleResult();
-			System.out.println(" login successfully");
 
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("please enter your correct createntials!!!!!");
+			 new HotelManagementSystemExceptionController("please enter your correct createntials!!!!!");
 		}
 		return adminUserBean;
 	}
@@ -55,6 +54,7 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			isRegister = true;
 			entityManager.close();
 		} catch (Exception e) {
+			System.out.println("Exception");
 			throw new HotelManagementSystemExceptionController("please enter your proper creadentials !!!");
 		}
 		return isRegister;
@@ -75,14 +75,14 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 
 		} catch (Exception e) {
 
-			throw new HotelManagementSystemExceptionController("Unable To Fetch All Users List!!!!");
+			 new HotelManagementSystemExceptionController("Unable To Fetch All Users List!!!!");
 		}
 		return userList;
 		// End of showAllUsers()
 	}
 
 	@Override
-	public List<AdminUserBean> getAllEmployee() throws HotelManagementSystemExceptionController {
+	public List<AdminUserBean> getAllEmployee(){
 		List<AdminUserBean> employeeList = null;
 
 		try {
@@ -96,7 +96,7 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 
 		} catch (Exception e) {
 
-			throw new HotelManagementSystemExceptionController("Unable To Fetch All Employee List!!!");
+			 new HotelManagementSystemExceptionController("Unable To Fetch All Employee List!!!");
 		}
 		return employeeList;
 	}
@@ -154,8 +154,7 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 	}
 
 	@Override
-	public boolean userProfile(int userId, long phoneNumber, String address, String nationality)
-			throws HotelManagementSystemExceptionController {
+	public boolean userProfile(int userId, long phoneNumber, String address, String nationality) {
 
 		boolean isUpdate = false;
 
@@ -183,7 +182,7 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			isUpdate = true;
 			entityManager.close();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController(" please register yourself ");
+			 new HotelManagementSystemExceptionController(" please register yourself ");
 		}
 		return isUpdate;
 	}
@@ -201,9 +200,31 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			displayUserProfile = query.getResultList();
 			entityManager.close();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController(" please register yourself ");
+			 new HotelManagementSystemExceptionController(" please register yourself ");
 		}
 		return displayUserProfile;
+	}
+
+	@Override
+	public boolean emailPresent(String email) {
+		entityManager = entityManagerFactory.createEntityManager();
+		boolean unique = false;
+		try {
+			String jpql = "FROM AdminUserBean";
+			Query query = entityManager.createQuery(jpql);
+			List<AdminUserBean> userList = (List<AdminUserBean>) query.getResultList();
+			for (AdminUserBean userBean : userList) {
+				if (email.equals(userBean.getUserEmail())) {
+					unique = true;
+					return unique;
+				}
+			}
+			
+		} catch (Exception e) {
+			throw new HotelManagementSystemExceptionController("Failed Email Check");
+		}
+		return unique;
+	
 	}
 
 

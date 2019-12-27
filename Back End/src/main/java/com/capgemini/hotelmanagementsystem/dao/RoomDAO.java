@@ -3,18 +3,17 @@ package com.capgemini.hotelmanagementsystem.dao;
 import java.util.List;
 
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 public interface RoomDAO  {
 	// To add Room in Hotel
-	public boolean addRoom(RoomBean roomBean) throws HotelManagementSystemExceptionController;
+	public boolean addRoom(RoomBean roomBean);
 
 	// To Get List of All Rooms in Hotel
-	public List<RoomBean> getRoom(int hotelId) throws HotelManagementSystemExceptionController;
+	public List<RoomBean> getRoom(int hotelId);
 
 	// To Remove Room from Hotel
-	public boolean removeRoom(int roomId) throws HotelManagementSystemExceptionController;
+	public boolean removeRoom(int roomId);
 
 	// To Update Details of Room
-	public boolean updateRoom(RoomBean roomBean)throws HotelManagementSystemExceptionController;
+	public boolean updateRoom(RoomBean roomBean);
 }

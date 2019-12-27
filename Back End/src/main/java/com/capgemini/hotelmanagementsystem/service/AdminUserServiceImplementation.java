@@ -9,6 +9,8 @@ import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.dao.AdminUserDAO;
 import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
+import cucumber.api.java.lu.a;
+
 @Service
 public class AdminUserServiceImplementation implements AdminUserService {
 
@@ -17,23 +19,12 @@ public class AdminUserServiceImplementation implements AdminUserService {
 
 	@Override
 	public AdminUserBean login(String userEmail, String password) {
-
-		try {
-			return adminUserDAO.login(userEmail, password);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return null;
+		return adminUserDAO.login(userEmail, password);
 	}
 
 	@Override
 	public boolean userRegister(AdminUserBean adminUserBean) {
-		try {
-			return adminUserDAO.userRegister(adminUserBean);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return adminUserDAO.userRegister(adminUserBean);
 	}
 
 	@Override
@@ -63,22 +54,12 @@ public class AdminUserServiceImplementation implements AdminUserService {
 
 	@Override
 	public boolean deleteEmployee(int userId) {
-		try {
-			return adminUserDAO.deleteEmployee(userId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return adminUserDAO.deleteEmployee(userId);
 	}
 
 	@Override
 	public boolean userProfile(int userId,long phoneNumber, String address, String nationality) {
-		try {
-			return adminUserDAO.userProfile(userId, phoneNumber, address, nationality);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return adminUserDAO.userProfile(userId, phoneNumber, address, nationality);
 	}
 
 	@Override
@@ -90,6 +71,11 @@ public class AdminUserServiceImplementation implements AdminUserService {
 //		}
 //		return null;
 		return adminUserDAO.displayUserProfile(userId);
+	}
+
+	@Override
+	public boolean emailPresent(String email) {
+		return adminUserDAO.emailPresent(email);
 	}
 
 

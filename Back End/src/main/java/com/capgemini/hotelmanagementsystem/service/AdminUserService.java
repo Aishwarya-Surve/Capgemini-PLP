@@ -31,5 +31,8 @@ public interface AdminUserService {
 
 	// display userprofile
 	public List<UserInfoBean> displayUserProfile(int userId);
+	
+	//Email checker
+		public boolean emailPresent(String email);
 
 }

@@ -2,24 +2,22 @@ package com.capgemini.hotelmanagementsystem.dao;
 
 import java.util.List;
 
-import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 public interface HotelDAO {
 	// add hotel by admin
-	public boolean addHotel(HotelBean hotelBean) throws HotelManagementSystemExceptionController;
+	public boolean addHotel(HotelBean hotelBean);
 
 	// delete hotel by admin
-	public boolean deleteHotel(int hotelId) throws HotelManagementSystemExceptionController;
+	public boolean deleteHotel(int hotelId);
 
 	// update hotel by admin
-	public boolean updateHotel(HotelBean hotelBean) throws HotelManagementSystemExceptionController;
+	public boolean updateHotel(HotelBean hotelBean);
 
 	// get all hotel list
-	public List<HotelBean> getAllHotel() throws HotelManagementSystemExceptionController;
+	public List<HotelBean> getAllHotel();
 
 	// serach hotel by location
-	public List<HotelBean> searchHotel(String location)throws HotelManagementSystemExceptionController;
+	public List<HotelBean> searchHotel(String location);
 
 }

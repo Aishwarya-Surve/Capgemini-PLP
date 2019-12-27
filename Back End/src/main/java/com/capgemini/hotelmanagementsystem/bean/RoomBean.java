@@ -11,7 +11,6 @@ import javax.validation.constraints.Pattern;
 public class RoomBean {
 	@Id
 	@Column(name = "room_id")
-	@Pattern(regexp="[0-9]", message="It Accepts only number")
 	private int roomId;
 	
 	
@@ -21,14 +20,12 @@ public class RoomBean {
 	private String roomType;
 	
 	@Column(name = "room_capacity")
-	@Pattern(regexp="[0-9]", message="It Accepts only number")
 	private int roomCapacity;
 	
 	@Column(name = "room_status")
 	private String roomStatus;
 	
 	@Column(name = "hotel_id")
-	@Pattern(regexp="[0-9]", message="It Accepts only number")
 	private int hotelId;
 	
 	@Column(name = "room_facility")

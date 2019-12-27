@@ -20,29 +20,29 @@ import com.capgemini.hotelmanagementsystem.service.BookingInfoService;
 public class BookingController {
 	@Autowired
 	private BookingInfoService bookingInfoService;
-
-	HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-
+	
 	@GetMapping("/bookingList")
 	public HotelManagementResponse bookedRoom() {
-		List<BookingInfoBean> bookedRoomList = bookingInfoService.bookedRoomList();
-		if (bookedRoomList != null) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Booked Room List");
-			hotelManagementResponse.setBookedRoomList(bookedRoomList);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to fetch List");
-		}
-		return hotelManagementResponse;
+	List<BookingInfoBean> bookedRoomList = bookingInfoService.bookedRoomList();
+	HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+	if(bookedRoomList != null) {
+		hotelManagementResponse.setStatusCode(201);
+		hotelManagementResponse.setMessage("Success");
+		hotelManagementResponse.setDescription("Booked Room List");
+		hotelManagementResponse.setBookedRoomList(bookedRoomList);
+	} else {
+		hotelManagementResponse.setStatusCode(401);
+		hotelManagementResponse.setMessage("Failed");
+		hotelManagementResponse.setDescription("Unable to fetch List");
+	}
+	return hotelManagementResponse;
 	}// end of bookedRoom()
-
+	
 	@DeleteMapping("/cancelBooking")
 	public HotelManagementResponse cancelBooking(@RequestParam int bookingId) {
 		boolean canceled = bookingInfoService.cancelBooking(bookingId);
-		if (canceled) {
+		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+		if(canceled) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Booking Canceled Successfully");
@@ -53,16 +53,15 @@ public class BookingController {
 		}
 		return hotelManagementResponse;
 	}// end of cancelBooking()
-
+	
 	@PostMapping("/bill")
 	public HotelManagementResponse bill(@RequestBody BookingInfoBean bookingInfoBean) {
-		System.err.println("Check in Date " + bookingInfoBean.getCheckInDate());
-		System.err.println("Check out Date " + bookingInfoBean.getCheckOutDate());
 		double totalAmount = bookingInfoService.getBill(bookingInfoBean);
-		if (totalAmount > 0.0) {
+		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
+		if(totalAmount > 0.0) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("Total Bill :" + totalAmount);
+			hotelManagementResponse.setDescription("Total Bill :"+totalAmount);
 			hotelManagementResponse.setBill(totalAmount);
 		} else {
 			hotelManagementResponse.setStatusCode(401);
@@ -71,16 +70,16 @@ public class BookingController {
 		}
 		return hotelManagementResponse;
 	}
-
+	
 	@PostMapping("/booking")
 	public HotelManagementResponse booking(@RequestBody BookingInfoBean bookingInfoBean) {
 		BookingInfoBean roomBooking = bookingInfoService.booking(bookingInfoBean);
 		HotelManagementResponse roomBookingResponse = new HotelManagementResponse();
-		if (roomBooking != null) {
+		if(roomBooking != null) {
 			roomBookingResponse.setStatusCode(201);
 			roomBookingResponse.setMessage("Success");
 			roomBookingResponse.setDescription("Room Booked Successfully");
-			// roomBookingResponse.setDays(roomBooking);
+//			roomBookingResponse.setDays(roomBooking);
 		} else {
 			roomBookingResponse.setStatusCode(401);
 			roomBookingResponse.setMessage("Failed");
@@ -88,4 +87,21 @@ public class BookingController {
 		}
 		return roomBookingResponse;
 	}// end of booking()
+	
+	@GetMapping("/userBookedList")
+	public HotelManagementResponse userBookedList(@RequestParam int userId) {
+		List<BookingInfoBean> userBookedRooms = bookingInfoService.userBookedRooms(userId);
+		HotelManagementResponse bookedRooms = new HotelManagementResponse();
+		if(userBookedRooms != null) {
+			bookedRooms.setStatusCode(201);
+			bookedRooms.setMessage("Success");
+			bookedRooms.setDescription("Room List");
+			bookedRooms.setBookedRoomList(userBookedRooms);
+		} else {
+			bookedRooms.setStatusCode(401);
+			bookedRooms.setMessage("Failed");
+			bookedRooms.setDescription("Room Not Available");
+		}
+		return bookedRooms;
+	}// end of userBookedList()
 }// end of controller

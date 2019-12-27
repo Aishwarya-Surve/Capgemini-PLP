@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 @Entity
 @Table(name = "user")
 public class AdminUserBean {
@@ -22,7 +24,7 @@ public class AdminUserBean {
 	@Column(name = "user_name")
 	@NotBlank(message = "Name cannot be Blank...")
 	@Pattern(regexp = "[a-zA-z]+([\\s][a-zA-z]+)*", message = "It Accepts only Characters")
-	@Size(min = 6, max = 35, message = "It Accepts only 35 characters")
+	//@Size(min = 6, max = 35, message = "It Accepts only 35 characters")
 	private String userName;
 
 	@Column(name = "user_type")
@@ -36,6 +38,7 @@ public class AdminUserBean {
 
 	@Column(name = "user_email")
 	@Email(message = "Email should be valid...")
+	//@UniqueElements(message = "Email already exists")
 	private String userEmail;
 
 	// getter & setter

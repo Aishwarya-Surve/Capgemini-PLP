@@ -22,7 +22,7 @@ public class RoomDAOImplementation implements RoomDAO {
 	EntityTransaction entityTransaction;
 
 	@Override
-	public boolean addRoom(RoomBean roomBean) throws HotelManagementSystemExceptionController {
+	public boolean addRoom(RoomBean roomBean){
 		boolean addRoom = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -39,11 +39,11 @@ public class RoomDAOImplementation implements RoomDAO {
 	}// end of addRoom()
 
 	@Override
-	public List<RoomBean> getRoom(int hotelId) throws HotelManagementSystemExceptionController {
+	public List<RoomBean> getRoom(int hotelId) {
 		List<RoomBean> roomList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
-			String jpql = "from RoomBean where hotelId=: hotelId";
+			String jpql = "from RoomBean where hotelId=:hotelId";
 			Query query = entityManager.createQuery(jpql);
 			query.setParameter("hotelId", hotelId);
 			roomList = query.getResultList();
@@ -71,7 +71,7 @@ public class RoomDAOImplementation implements RoomDAO {
 	}// end of removeRoom()
 
 	@Override
-	public boolean updateRoom(RoomBean roomBean) throws HotelManagementSystemExceptionController {
+	public boolean updateRoom(RoomBean roomBean) {
 		entityManager = entityManagerFactory.createEntityManager();
 		RoomBean existingRoomDetails = entityManager.find(RoomBean.class, roomBean.getRoomId());
 		boolean roomUpdated = false;

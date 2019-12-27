@@ -24,7 +24,7 @@ public class ManagerDAOImplementation implements ManagerDAO {
 	EntityTransaction entityTransaction = null;
 
 	@Override
-	public ManagerBean managerlogin(String managerEmail, String password) throws HotelManagementSystemExceptionController {
+	public ManagerBean managerlogin(String managerEmail, String password){
 		ManagerBean managerBean = null;
 		try {
 			EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -60,7 +60,7 @@ public class ManagerDAOImplementation implements ManagerDAO {
 	}
 
 	@Override
-	public List<ManagerBean> managerList() throws HotelManagementSystemExceptionController {
+	public List<ManagerBean> managerList() {
 		List<ManagerBean> managerList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -78,7 +78,7 @@ public class ManagerDAOImplementation implements ManagerDAO {
 	}
 
 	@Override
-	public boolean deleteManager(int managerId) throws HotelManagementSystemExceptionController {
+	public boolean deleteManager(int managerId){
 		EntityManagerFactory entityManagerFactory = null;
 		EntityManager entityManager = null;
 		EntityTransaction entityTransaction = null;

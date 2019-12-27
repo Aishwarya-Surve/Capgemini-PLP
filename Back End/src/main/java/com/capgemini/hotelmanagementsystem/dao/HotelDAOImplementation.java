@@ -10,7 +10,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
 import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
@@ -23,7 +22,7 @@ public class HotelDAOImplementation implements HotelDAO {
 	EntityTransaction entityTransaction;
 
 	@Override
-	public boolean addHotel(HotelBean hotelBean) throws HotelManagementSystemExceptionController {
+	public boolean addHotel(HotelBean hotelBean){
 		boolean addHotel = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -40,7 +39,7 @@ public class HotelDAOImplementation implements HotelDAO {
 	}
 
 	@Override
-	public boolean deleteHotel(int hotelId) throws HotelManagementSystemExceptionController {
+	public boolean deleteHotel(int hotelId){
 		boolean roomHotel = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -98,7 +97,7 @@ public class HotelDAOImplementation implements HotelDAO {
 	}
 
 	@Override
-	public List<HotelBean> getAllHotel() throws HotelManagementSystemExceptionController {
+	public List<HotelBean> getAllHotel(){
 		List<HotelBean> hotelList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -112,7 +111,7 @@ public class HotelDAOImplementation implements HotelDAO {
 	}
 
 	@Override
-	public List<HotelBean> searchHotel(String location) throws HotelManagementSystemExceptionController {
+	public List<HotelBean> searchHotel(String location){
 		List<HotelBean> hotelList = null;
 		entityManager = entityManagerFactory.createEntityManager();
 		String jpql = "from HotelBean where location =:location";

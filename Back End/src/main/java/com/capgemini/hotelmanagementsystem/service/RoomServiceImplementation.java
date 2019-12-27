@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
 import com.capgemini.hotelmanagementsystem.dao.RoomDAO;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 @Service
 public class RoomServiceImplementation implements RoomService {
 	@Autowired
@@ -15,42 +14,22 @@ public class RoomServiceImplementation implements RoomService {
 
 	@Override
 	public boolean addRoom(RoomBean roomBean) {
-		try {
-			return roomDAO.addRoom(roomBean);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return roomDAO.addRoom(roomBean);
 	}
 
 	@Override
 	public List<RoomBean> getRoom(int hotelId) {
-		try {
-			return roomDAO.getRoom(hotelId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return null;
+		return roomDAO.getRoom(hotelId);
 	}
 
 	@Override
 	public boolean removeRoom(int roomId) {
-		try {
-			return roomDAO.removeRoom(roomId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return roomDAO.removeRoom(roomId);
 	}
 
 	@Override
 	public boolean updateRoom(RoomBean roomBean) {
-		try {
-			return roomDAO.updateRoom(roomBean);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return roomDAO.updateRoom(roomBean);
 	}
 
 }

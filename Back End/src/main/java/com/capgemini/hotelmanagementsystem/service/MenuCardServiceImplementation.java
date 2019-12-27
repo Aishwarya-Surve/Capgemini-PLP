@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.dao.MenuCardDAO;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Service
 public class MenuCardServiceImplementation implements MenuCardService {
@@ -16,42 +15,22 @@ public class MenuCardServiceImplementation implements MenuCardService {
 
 	@Override
 	public List<MenuCardBean> menuCard() {
-		try {
-			return menuCardDAO.menuCard();
-		} catch (HotelManagementSystemExceptionController e) {
-			e.printStackTrace();
-		}
-		return null;
+		return menuCardDAO.menuCard();
 	}
 
 	@Override
 	public boolean addMenu(MenuCardBean menuCardBean) {
-		try {
-			return menuCardDAO.addMenu(menuCardBean);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.printStackTrace();
-		}
-		return false;
+		return menuCardDAO.addMenu(menuCardBean);
 	}
 
 	@Override
 	public boolean deleteMenu(int foodId) {
-		try {
-			return menuCardDAO.deleteMenu(foodId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.printStackTrace();
-		}
-		return false;
+		return menuCardDAO.deleteMenu(foodId);
 	}
 
 	@Override
 	public boolean updateMenu(MenuCardBean menuCardBean) {
-		try {
-			return menuCardDAO.updateMenu(menuCardBean);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.printStackTrace();
-		}
-		return false;
+		return menuCardDAO.updateMenu(menuCardBean);
 	}
 
 }

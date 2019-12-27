@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.hotelmanagementsystem.bean.ManagerBean;
 import com.capgemini.hotelmanagementsystem.dao.ManagerDAO;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 @Service
 public class ManagerServiceImplementation implements ManagerService {

@@ -11,7 +11,11 @@ public interface BookingInfoService {
 	public boolean cancelBooking(int bookingId);
 
 	public double getBill(BookingInfoBean bookingInfoBean);
+
+	// To Book Room
+	public BookingInfoBean booking(BookingInfoBean bookingInfoBean);
+
+	// To Display Users Booked Rooms
+	public List<BookingInfoBean> userBookedRooms(int userId);
 	
-	//To Book Room
-			public BookingInfoBean booking(BookingInfoBean bookingInfoBean);
 }// end of interface

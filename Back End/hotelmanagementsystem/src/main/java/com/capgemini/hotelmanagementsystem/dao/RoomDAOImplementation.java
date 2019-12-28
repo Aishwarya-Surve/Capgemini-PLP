@@ -1,4 +1,4 @@
-package com.capgemini.hotelmanagementsystem.dao;
+package com.capgemini.hotelmanagementsystem.dao; 
 
 import java.util.List;
 
@@ -11,10 +11,14 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
+import com.capgemini.hotelmanagementsystem.exception.FetchNullListException;
+import com.capgemini.hotelmanagementsystem.exception.UnableDeleteException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToAddException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToUpdateException;
 
 @Repository
 public class RoomDAOImplementation implements RoomDAO {
+	
 	@PersistenceUnit
 	public EntityManagerFactory entityManagerFactory;
 
@@ -32,7 +36,7 @@ public class RoomDAOImplementation implements RoomDAO {
 			entityTransaction.commit();
 			addRoom = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Add Room");
+			throw new UnableToAddException();
 		}
 		entityManager.close();
 		return addRoom;
@@ -48,13 +52,13 @@ public class RoomDAOImplementation implements RoomDAO {
 			query.setParameter("hotelId", hotelId);
 			roomList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch  roomList");
+			throw new FetchNullListException();
 		}
 		return roomList;
 	}
 
 	@Override
-	public boolean removeRoom(int roomId) throws HotelManagementSystemExceptionController {
+	public boolean removeRoom(int roomId) {
 		boolean roomRemoved = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -65,7 +69,7 @@ public class RoomDAOImplementation implements RoomDAO {
 			entityTransaction.commit();
 			roomRemoved = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To remove Room");
+			throw new UnableDeleteException();
 		}
 		return roomRemoved;
 	}// end of removeRoom()
@@ -113,7 +117,7 @@ public class RoomDAOImplementation implements RoomDAO {
 				entityTransaction.commit();
 				roomUpdated = true;
 			} catch (Exception e) {
-				throw new HotelManagementSystemExceptionController("Something went wrong......Unable To update Room");
+				throw new UnableToUpdateException();
 			}
 
 			entityManager.close();
@@ -121,5 +125,19 @@ public class RoomDAOImplementation implements RoomDAO {
 		}
 		return roomUpdated;
 	}// end of updatedRoom()
+
+	@Override
+	public List<RoomBean> getRoomManager() {
+		List<RoomBean> roomList = null;
+		try {
+			entityManager = entityManagerFactory.createEntityManager();
+			String jpql = "from RoomBean";
+			Query query = entityManager.createQuery(jpql);
+			roomList = query.getResultList();
+		} catch (Exception e) {
+			throw new FetchNullListException();
+		}
+		return roomList;
+	}
 
 }

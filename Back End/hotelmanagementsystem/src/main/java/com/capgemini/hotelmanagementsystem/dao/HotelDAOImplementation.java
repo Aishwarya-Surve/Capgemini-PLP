@@ -11,7 +11,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
+import com.capgemini.hotelmanagementsystem.exception.FetchNullListException;
+import com.capgemini.hotelmanagementsystem.exception.UnableDeleteException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToAddException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToUpdateException;
 
 @Repository
 public class HotelDAOImplementation implements HotelDAO {
@@ -33,7 +36,7 @@ public class HotelDAOImplementation implements HotelDAO {
 			entityManager.close();
 			addHotel = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch  Hotel");
+			throw new UnableToAddException();
 		}
 		return addHotel;
 	}
@@ -50,13 +53,13 @@ public class HotelDAOImplementation implements HotelDAO {
 			entityTransaction.commit();
 			roomHotel = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Delete Hotel");
+			throw new UnableDeleteException();
 		}
 		return roomHotel;
 	}
 
 	@Override
-	public boolean updateHotel(HotelBean hotelBean) throws HotelManagementSystemExceptionController {
+	public boolean updateHotel(HotelBean hotelBean) {
 		entityManager = entityManagerFactory.createEntityManager();
 		HotelBean existingHotelDetails = entityManager.find(HotelBean.class, hotelBean.getHotelId());
 		boolean hotelUpdated = false;
@@ -89,7 +92,7 @@ public class HotelDAOImplementation implements HotelDAO {
 				entityTransaction.commit();
 				hotelUpdated = true;
 			} catch (Exception e) {
-				throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch Details");
+				throw new UnableToUpdateException();
 			}
 			entityManager.close();
 		}
@@ -105,7 +108,7 @@ public class HotelDAOImplementation implements HotelDAO {
 			Query query = entityManager.createQuery(jpql);
 			hotelList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Get HotelList");
+			throw new FetchNullListException();
 		}
 		return hotelList;
 	}
@@ -121,7 +124,7 @@ public class HotelDAOImplementation implements HotelDAO {
 		try {
 			hotelList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Serach Hotel ");
+			throw new FetchNullListException();
 		}
 		return hotelList;
 	}

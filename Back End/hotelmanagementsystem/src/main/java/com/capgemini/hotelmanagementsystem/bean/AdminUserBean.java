@@ -24,21 +24,17 @@ public class AdminUserBean {
 	@Column(name = "user_name")
 	@NotBlank(message = "Name cannot be Blank...")
 	@Pattern(regexp = "[a-zA-z]+([\\s][a-zA-z]+)*", message = "It Accepts only Characters")
-	//@Size(min = 6, max = 35, message = "It Accepts only 35 characters")
 	private String userName;
 
 	@Column(name = "user_type")
 	private String userType;
 
 	@Column(name = "password")
-//	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{5,10}$", message = "Invalid Password Pattern!!!Password must\r\n"
-//			+ " contain atleast one uppercase letter,one lowercase letter and a digit.")
-//	@Size(min = 5, max = 10, message = "This field requires minimum 5 and maximum 10 characters")
+	
 	private String password;
 
 	@Column(name = "user_email")
 	@Email(message = "Email should be valid...")
-	//@UniqueElements(message = "Email already exists")
 	private String userEmail;
 
 	// getter & setter
@@ -82,4 +78,36 @@ public class AdminUserBean {
 		this.userEmail = userEmail;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AdminUserBean other = (AdminUserBean) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (userEmail == null) {
+			if (other.userEmail != null)
+				return false;
+		} else if (!userEmail.equals(other.userEmail))
+			return false;
+		return true;
+	}
+
+	
 }// end of bean class

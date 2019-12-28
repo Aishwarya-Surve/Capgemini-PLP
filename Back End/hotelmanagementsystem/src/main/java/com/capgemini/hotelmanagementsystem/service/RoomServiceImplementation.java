@@ -32,4 +32,9 @@ public class RoomServiceImplementation implements RoomService {
 		return roomDAO.updateRoom(roomBean);
 	}
 
+	@Override
+	public List<RoomBean> getRoomManager() {
+		return roomDAO.getRoomManager();
+	}
+
 }

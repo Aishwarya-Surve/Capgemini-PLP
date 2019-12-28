@@ -16,4 +16,7 @@ public interface RoomDAO  {
 
 	// To Update Details of Room
 	public boolean updateRoom(RoomBean roomBean);
+	
+	// To Get List of All Rooms in Hotel
+		public List<RoomBean> getRoomManager();
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.dao.AdminUserDAO;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
 
 import cucumber.api.java.lu.a;
 
@@ -29,12 +28,7 @@ public class AdminUserServiceImplementation implements AdminUserService {
 
 	@Override
 	public List<AdminUserBean> getAllUsers() {
-		try {
-			return adminUserDAO.getAllUsers();
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return null;
+		return adminUserDAO.getAllUsers();
 	}
 
 	@Override
@@ -44,12 +38,7 @@ public class AdminUserServiceImplementation implements AdminUserService {
 
 	@Override
 	public boolean deleteUser(int userId) {
-		try {
-			return adminUserDAO.deleteUser(userId);
-		} catch (HotelManagementSystemExceptionController e) {
-			e.getMessage();
-		}
-		return false;
+		return adminUserDAO.deleteUser(userId);
 	}
 
 	@Override
@@ -78,6 +67,19 @@ public class AdminUserServiceImplementation implements AdminUserService {
 		return adminUserDAO.emailPresent(email);
 	}
 
+	@Override
+	public List<AdminUserBean> managerList() {
+		return adminUserDAO.managerList();
+	}
 
+	@Override
+	public boolean deleteManager(int userId) {
+		return adminUserDAO.deleteManager(userId);
+	}
+
+	@Override
+	public boolean passwordChecker(String userEmail, String password) {
+		return adminUserDAO.passwordChecker(userEmail, password);
+	}
 	
 }

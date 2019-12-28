@@ -30,11 +30,12 @@ public class BookingController {
 		hotelManagementResponse.setMessage("Success");
 		hotelManagementResponse.setDescription("Booked Room List");
 		hotelManagementResponse.setBookedRoomList(bookedRoomList);
-	} else {
-		hotelManagementResponse.setStatusCode(401);
-		hotelManagementResponse.setMessage("Failed");
-		hotelManagementResponse.setDescription("Unable to fetch List");
-	}
+	} 
+//	else {
+//		hotelManagementResponse.setStatusCode(401);
+//		hotelManagementResponse.setMessage("Failed");
+//		hotelManagementResponse.setDescription("Unable to fetch List");
+//	}
 	return hotelManagementResponse;
 	}// end of bookedRoom()
 	
@@ -46,11 +47,12 @@ public class BookingController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Booking Canceled Successfully");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to Cancel Booking");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to Cancel Booking");
+//		}
 		return hotelManagementResponse;
 	}// end of cancelBooking()
 	
@@ -63,11 +65,12 @@ public class BookingController {
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Total Bill :"+totalAmount);
 			hotelManagementResponse.setBill(totalAmount);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable");
+//		}
 		return hotelManagementResponse;
 	}
 	
@@ -80,11 +83,12 @@ public class BookingController {
 			roomBookingResponse.setMessage("Success");
 			roomBookingResponse.setDescription("Room Booked Successfully");
 //			roomBookingResponse.setDays(roomBooking);
-		} else {
-			roomBookingResponse.setStatusCode(401);
-			roomBookingResponse.setMessage("Failed");
-			roomBookingResponse.setDescription("Room Not Available");
-		}
+		} 
+//		else {
+//			roomBookingResponse.setStatusCode(401);
+//			roomBookingResponse.setMessage("Failed");
+//			roomBookingResponse.setDescription("Room Not Available");
+//		}
 		return roomBookingResponse;
 	}// end of booking()
 	
@@ -97,11 +101,12 @@ public class BookingController {
 			bookedRooms.setMessage("Success");
 			bookedRooms.setDescription("Room List");
 			bookedRooms.setBookedRoomList(userBookedRooms);
-		} else {
-			bookedRooms.setStatusCode(401);
-			bookedRooms.setMessage("Failed");
-			bookedRooms.setDescription("Room Not Available");
-		}
+		} 
+//		else {
+//			bookedRooms.setStatusCode(401);
+//			bookedRooms.setMessage("Failed");
+//			bookedRooms.setDescription("Room Not Available");
+//		}
 		return bookedRooms;
 	}// end of userBookedList()
 }// end of controller

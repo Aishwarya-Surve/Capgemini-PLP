@@ -30,11 +30,12 @@ public class MenuCardController {
 			hotelManagementResponse.setMessage("SuccessfullY");
 			hotelManagementResponse.setDescription("Menu Cart List");
 			hotelManagementResponse.setListMenuCard(listMenuCard);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to fetch");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to fetch");
+//		}
 		return hotelManagementResponse;
 	}// end of getMenuCard
 
@@ -46,32 +47,29 @@ public class MenuCardController {
 			hotelManagementResponse.setMessage("Successfull");
 			hotelManagementResponse.setDescription("Menu Added Successfully");
 //			hotelManagementResponse.setMenuCardBean(menuCardBean);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to add Menu");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to add Menu");
+//		}
 		return hotelManagementResponse;
 	}// end of addMenu()
 
 	@DeleteMapping("/deleteMenu")
 	public HotelManagementResponse deleteMenu(@RequestParam int foodId) {
-		try {
 			boolean menuDeleted = menuCardService.deleteMenu(foodId);
 			if (menuDeleted) {
 				hotelManagementResponse.setStatusCode(201);
 				hotelManagementResponse.setMessage("Successfull");
 				hotelManagementResponse.setDescription("Menu deleted Successfully");
-			} else {
-				hotelManagementResponse.setStatusCode(401);
-				hotelManagementResponse.setMessage("Failed");
-				hotelManagementResponse.setDescription("Unable to delete Menu");
-			}
+			} 
+//			else {
+//				hotelManagementResponse.setStatusCode(401);
+//				hotelManagementResponse.setMessage("Failed");
+//				hotelManagementResponse.setDescription("Unable to delete Menu");
+//			}
 			return hotelManagementResponse;
-		} catch (Exception e) {
-			System.out.println("Please enter valid Food ID");
-		}
-		return hotelManagementResponse;
 	}// end of deleteMenu()
 
 	@PostMapping("/updateMenu")
@@ -81,11 +79,12 @@ public class MenuCardController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Successfull");
 			hotelManagementResponse.setDescription("Menu Updated Successfully");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to Update Menu");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to Update Menu");
+//		}
 		return hotelManagementResponse;
 	}// end of updateMenu()
 }

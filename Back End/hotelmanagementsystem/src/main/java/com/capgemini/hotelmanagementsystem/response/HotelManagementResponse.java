@@ -6,7 +6,6 @@ import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
-import com.capgemini.hotelmanagementsystem.bean.ManagerBean;
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
@@ -18,22 +17,20 @@ public class HotelManagementResponse {
 	private String message;
 	private String description;
 
-	public AdminUserBean adminUserBean;
+	private AdminUserBean adminUserBean;
 
-	public List<AdminUserBean> userList;
-	public List<RoomBean> roomList;
+	private List<AdminUserBean> userList;
+	private List<RoomBean> roomList;
 
-	public List<HotelBean> hotelList;
+	private List<HotelBean> hotelList;
 
-	public List<BookingInfoBean> boookedRoomList;
+	private List<BookingInfoBean> boookedRoomList;
 
 	private UserInfoBean userInfoBean;
 
-	public List<UserInfoBean> getUserProfile;
-
-	public ManagerBean managerBean;
-
-	private List<ManagerBean> getAllManager;
+	private List<UserInfoBean> getUserProfile;
+	
+	private List<AdminUserBean> getAllManager;
 
 	private List<MenuCardBean> listMenuCard;
 
@@ -128,19 +125,13 @@ public class HotelManagementResponse {
 		this.getUserProfile = getUserProfile;
 	}
 
-	public ManagerBean getManagerBean() {
-		return managerBean;
-	}
+	
 
-	public void setManagerBean(ManagerBean managerBean) {
-		this.managerBean = managerBean;
-	}
-
-	public List<ManagerBean> getGetAllManager() {
+	public List<AdminUserBean> getGetAllManager() {
 		return getAllManager;
 	}
 
-	public void setGetAllManager(List<ManagerBean> getAllManager) {
+	public void setGetAllManager(List<AdminUserBean> getAllManager) {
 		this.getAllManager = getAllManager;
 	}
 

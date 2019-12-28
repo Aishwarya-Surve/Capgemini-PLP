@@ -31,11 +31,12 @@ public class HotelController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Hotel Added Successfully");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to Add Hotel");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to Add Hotel");
+//		}
 		return hotelManagementResponse;
 	}// end of addHotel()
 
@@ -46,11 +47,12 @@ public class HotelController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Removed Successfully");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to remove");
-		}
+		} 
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to remove");
+//		}
 		return hotelManagementResponse;
 	}// end of removeHotel()
 
@@ -61,11 +63,12 @@ public class HotelController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("update Successfully");
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to update");
 		}
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to update");
+//		}
 		return hotelManagementResponse;
 	}// end of updateHotel()
 
@@ -77,11 +80,12 @@ public class HotelController {
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Hotel List");
 			hotelManagementResponse.setHotelList(hotelList);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to fetch Hotel List");
 		}
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to fetch Hotel List");
+//		}
 		return hotelManagementResponse;
 	}// end of roomList()
 	
@@ -94,11 +98,12 @@ public class HotelController {
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Hotel List");
 			hotelManagementResponse.setHotelList(hotelList);
-		} else {
-			hotelManagementResponse.setStatusCode(401);
-			hotelManagementResponse.setMessage("Failed");
-			hotelManagementResponse.setDescription("Unable to fetch Hotel List");
 		}
+//		else {
+//			hotelManagementResponse.setStatusCode(401);
+//			hotelManagementResponse.setMessage("Failed");
+//			hotelManagementResponse.setDescription("Unable to fetch Hotel List");
+//		}
 		return hotelManagementResponse;
 	}// end of roomList()
 

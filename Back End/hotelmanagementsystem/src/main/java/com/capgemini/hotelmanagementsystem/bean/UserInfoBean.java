@@ -55,7 +55,7 @@ public class UserInfoBean {
 	private String address;
 
 	@Column(name = "nationality")
-	//@NotBlank(message = "Nationlity cacanot be null")
+	//@NotBlank(message = "Nationality cannot be null")
 	//@Pattern(regexp = "^[a-zA-z]+(?:[\\s-][a-zA-Z]+)*$", message = "It Accepts only characters")
 	private String nationality;
 

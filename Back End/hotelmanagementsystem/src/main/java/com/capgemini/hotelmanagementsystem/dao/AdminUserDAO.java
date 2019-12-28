@@ -31,8 +31,16 @@ public interface AdminUserDAO {
 	// display userprofile
 	public List<UserInfoBean> displayUserProfile(int userId);
 
-	//Email checker
+	// Email checker
 	public boolean emailPresent(String email);
+	
+	// Password checker
+	public boolean passwordChecker(String userEmail,String password);
 
+	// list of manager
+	public List<AdminUserBean> managerList();
+
+	// remove Manager by admin
+	public boolean deleteManager(int userId);
 
 }

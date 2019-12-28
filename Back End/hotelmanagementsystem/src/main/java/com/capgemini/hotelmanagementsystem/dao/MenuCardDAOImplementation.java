@@ -11,7 +11,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
+import com.capgemini.hotelmanagementsystem.exception.FetchNullListException;
+import com.capgemini.hotelmanagementsystem.exception.UnableDeleteException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToAddException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToUpdateException;
 
 @Repository
 public class MenuCardDAOImplementation implements MenuCardDAO {
@@ -23,7 +26,7 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 	EntityTransaction entityTransaction;
 
 	@Override
-	public List<MenuCardBean> menuCard() throws HotelManagementSystemExceptionController{
+	public List<MenuCardBean> menuCard() {
 		List<MenuCardBean> menuCartList = null;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -31,13 +34,13 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 			Query query = entityManager.createQuery(jpql);
 			menuCartList = query.getResultList();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Fetch  menuCartList");
+			throw new FetchNullListException();
 		}
 		return menuCartList;
 	}// end of menuCart()
 
 	@Override
-	public boolean addMenu(MenuCardBean menuCardBean) throws HotelManagementSystemExceptionController{
+	public boolean addMenu(MenuCardBean menuCardBean) {
 		boolean menuAdded = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -47,14 +50,14 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 			entityTransaction.commit();
 			menuAdded = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Add Food To menu card");
+			throw new UnableToAddException();
 		}
 		entityManager.close();
 		return menuAdded;
 	}// end of addMenu()
 
 	@Override
-	public boolean deleteMenu(int foodId)throws HotelManagementSystemExceptionController {
+	public boolean deleteMenu(int foodId) {
 		boolean menuDeleted = false;
 		try {
 			entityManager = entityManagerFactory.createEntityManager();
@@ -65,14 +68,14 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 			menuDeleted = true;
 			entityTransaction.commit();
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Delete  Food From menu card");
+			throw new UnableDeleteException();
 		}
 		entityManager.close();
 		return menuDeleted;
 	}// end of deleteMenu()
 
 	@Override
-	public boolean updateMenu(MenuCardBean menuCardBean)throws HotelManagementSystemExceptionController {
+	public boolean updateMenu(MenuCardBean menuCardBean) {
 		entityManager = entityManagerFactory.createEntityManager();
 		MenuCardBean existingMenu = entityManager.find(MenuCardBean.class, menuCardBean.getFoodId());
 		boolean menuUpdated = false;
@@ -99,7 +102,7 @@ public class MenuCardDAOImplementation implements MenuCardDAO {
 				entityTransaction.commit();
 				menuUpdated = true;
 			} catch (Exception e) {
-				throw new HotelManagementSystemExceptionController("Something went wrong......Unable To Update  Food  menu card");
+				throw new UnableToUpdateException();
 			}
 			entityManager.close();
 		}

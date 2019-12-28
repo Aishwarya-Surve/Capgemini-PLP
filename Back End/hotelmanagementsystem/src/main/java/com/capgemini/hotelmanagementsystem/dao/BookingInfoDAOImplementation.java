@@ -15,7 +15,8 @@ import org.springframework.stereotype.Repository;
 import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
+import com.capgemini.hotelmanagementsystem.exception.FetchNullListException;
+import com.capgemini.hotelmanagementsystem.exception.UnableDeleteException;
 
 @Repository
 public class BookingInfoDAOImplementation implements BookingInfoDAO {
@@ -71,7 +72,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			entityTransaction.commit();
 
 		} catch (Exception e) {
-			new HotelManagementSystemExceptionController("Something went wrong...Please enter valid Information");
+			throw new FetchNullListException();
 
 		}
 		entityManager.close();
@@ -88,7 +89,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			Query query = entityManager.createQuery(jpql);
 			bookedList = query.getResultList();
 		} catch (Exception e) {
-			new HotelManagementSystemExceptionController("Unable to fetch Data ");
+			throw new FetchNullListException();
 		}
 		return bookedList;
 	}// end of bookingList()
@@ -116,7 +117,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			entityTransaction.commit();
 			canceled = true;
 		} catch (Exception e) {
-			new HotelManagementSystemExceptionController("Something went wrong...Unable to Cancel Booking");
+			throw new UnableDeleteException();
 		}
 		return canceled;
 	}// end of cancelBooking()
@@ -143,7 +144,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 			totalBill = days * roomBean.getRoomRent();
 			bookingInfoBean.setPaymentStatus("Paid");
 		} catch (Exception e) {
-			new HotelManagementSystemExceptionController("Something went wrong...Unable to get Bill");
+			throw new FetchNullListException();
 		}
 		return totalBill;
 	}
@@ -158,7 +159,7 @@ public class BookingInfoDAOImplementation implements BookingInfoDAO {
 		try {
 			userBookedList = query.getResultList();
 		} catch (Exception e) {
-			new HotelManagementSystemExceptionController("You haven't booked room yet");
+			throw new FetchNullListException();
 		}
 		return userBookedList;
 	}// end of userBookedRooms()

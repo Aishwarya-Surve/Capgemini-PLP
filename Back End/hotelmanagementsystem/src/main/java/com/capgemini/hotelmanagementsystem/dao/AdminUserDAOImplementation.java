@@ -13,7 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
 import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
-import com.capgemini.hotelmanagementsystem.exception.HotelManagementSystemExceptionController;
+import com.capgemini.hotelmanagementsystem.exception.EmailAlreadyExistException;
+import com.capgemini.hotelmanagementsystem.exception.FetchNullListException;
+import com.capgemini.hotelmanagementsystem.exception.InvalidLoginCredentials;
+import com.capgemini.hotelmanagementsystem.exception.InvalidPasswordException;
+import com.capgemini.hotelmanagementsystem.exception.UnableDeleteException;
+import com.capgemini.hotelmanagementsystem.exception.UnableRegisterException;
+import com.capgemini.hotelmanagementsystem.exception.UnableToUpdateException;
 
 @Repository
 public class AdminUserDAOImplementation implements AdminUserDAO {
@@ -36,13 +42,13 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			adminUserBean = (AdminUserBean) query.getSingleResult();
 
 		} catch (Exception e) {
-			 new HotelManagementSystemExceptionController("please enter your correct createntials!!!!!");
+			throw new InvalidLoginCredentials();
 		}
 		return adminUserBean;
 	}
 
 	@Override
-	public boolean userRegister(AdminUserBean adminUserBean) throws HotelManagementSystemExceptionController {
+	public boolean userRegister(AdminUserBean adminUserBean){
 		boolean isRegister = false;
 
 		try {
@@ -55,7 +61,7 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			entityManager.close();
 		} catch (Exception e) {
 			System.out.println("Exception");
-			throw new HotelManagementSystemExceptionController("please enter your proper creadentials !!!");
+			throw new UnableRegisterException();
 		}
 		return isRegister;
 	}
@@ -75,7 +81,7 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 
 		} catch (Exception e) {
 
-			 new HotelManagementSystemExceptionController("Unable To Fetch All Users List!!!!");
+			throw new FetchNullListException();
 		}
 		return userList;
 		// End of showAllUsers()
@@ -96,13 +102,13 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 
 		} catch (Exception e) {
 
-			 new HotelManagementSystemExceptionController("Unable To Fetch All Employee List!!!");
+			throw new FetchNullListException();
 		}
 		return employeeList;
 	}
 
 	@Override
-	public boolean deleteEmployee(int userId) throws HotelManagementSystemExceptionController {
+	public boolean deleteEmployee(int userId){
 		EntityManagerFactory entityManagerFactory = null;
 		EntityManager entityManager = null;
 		EntityTransaction entityTransaction = null;
@@ -111,24 +117,23 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			entityManagerFactory = Persistence.createEntityManagerFactory("hotelManagementSystem");
 			entityManager = entityManagerFactory.createEntityManager();
 			String jpql = "delete AdminUserBean where userId =: userId ";
-			entityTransaction = entityManager.getTransaction();
-			entityTransaction.begin();
+//			entityTransaction = entityManager.getTransaction();
+//			entityTransaction.begin();
 			Query query = entityManager.createQuery(jpql);
 			query.setParameter("userId", userId);
 			query.executeUpdate();
-			entityTransaction.commit();
-			System.out.println("Employee Deleted Successfully");
+//			entityTransaction.commit();
 			entityManager.close();
 			isRemove = true;
 		} catch (Exception e) {
 
-			throw new HotelManagementSystemExceptionController("Unable To Delete Employee!!!");
+			throw new UnableDeleteException();
 		}
 		return isRemove;
 	}
 
 	@Override
-	public boolean deleteUser(int userId) throws HotelManagementSystemExceptionController {
+	public boolean deleteUser(int userId) {
 		EntityManagerFactory entityManagerFactory = null;
 		EntityManager entityManager = null;
 		EntityTransaction entityTransaction = null;
@@ -137,18 +142,16 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			entityManagerFactory = Persistence.createEntityManagerFactory("hotelManagementSystem");
 			entityManager = entityManagerFactory.createEntityManager();
 			String jpql = "delete AdminUserBean where userId =: userId ";
-			entityTransaction = entityManager.getTransaction();
-			entityTransaction.begin();
+//			entityTransaction = entityManager.getTransaction();
+//			entityTransaction.begin();
 			Query query = entityManager.createQuery(jpql);
 			query.setParameter("userId", userId);
 			query.executeUpdate();
-			entityTransaction.commit();
-			System.out.println("customer Deleted Successfully");
+//			entityTransaction.commit();
 			entityManager.close();
 			isRemove = true;
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController(
-					"Unable To Delete customer!!!  May be your are  not our customer ");
+			throw new UnableDeleteException();
 		}
 		return isRemove;
 	}
@@ -182,25 +185,23 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 			isUpdate = true;
 			entityManager.close();
 		} catch (Exception e) {
-			 new HotelManagementSystemExceptionController(" please register yourself ");
+			 throw new UnableToUpdateException();
 		}
 		return isUpdate;
 	}
 
 	@Override
-	public List<UserInfoBean> displayUserProfile(int userId) throws HotelManagementSystemExceptionController {
+	public List<UserInfoBean> displayUserProfile(int userId){
 		List<UserInfoBean> displayUserProfile = null;
-		System.err.println(userId);
 		entityManager = entityManagerFactory.createEntityManager();
 		entityTransaction = entityManager.getTransaction();
 		String jpql = "from UserInfoBean where userId=: userId";
 		Query query = entityManager.createQuery(jpql);
 		try {
 			query.setParameter("userId", userId);
-			displayUserProfile = query.getResultList();
-			entityManager.close();
+			displayUserProfile =(List<UserInfoBean>) query.getSingleResult();
 		} catch (Exception e) {
-			 new HotelManagementSystemExceptionController(" please register yourself ");
+			 throw new FetchNullListException();
 		}
 		return displayUserProfile;
 	}
@@ -218,15 +219,80 @@ public class AdminUserDAOImplementation implements AdminUserDAO {
 					unique = true;
 					return unique;
 				}
+			}	
+		} catch (Exception e) {
+			throw new EmailAlreadyExistException();
+		}
+		return unique;
+	
+	}
+	
+	@Override
+	public boolean passwordChecker(String userEmail,String password) {
+		entityManager = entityManagerFactory.createEntityManager();
+		boolean unique = false;
+		try {
+			String jpql = "FROM AdminUserBean where userEmail=:userEmail";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("userEmail", userEmail);
+			AdminUserBean userList = (AdminUserBean) query.getSingleResult();
+				if (password.equals(userList.getPassword())) {
+					unique = true;
+					return unique;
 			}
 			
 		} catch (Exception e) {
-			throw new HotelManagementSystemExceptionController("Failed Email Check");
+			throw new InvalidPasswordException();
 		}
 		return unique;
 	
 	}
 
+	@Override
+	public List<AdminUserBean> managerList() {
+		
+		List<AdminUserBean> managerList = null;
+		try {
+			entityManager = entityManagerFactory.createEntityManager();
+			String userType="manager";
+			String jpql = "FROM AdminUserBean  where userType =: userType";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("userType", userType);
+		
+			managerList = query.getResultList();
+			entityManager.close();
+
+		} catch (Exception e) {
+			throw new FetchNullListException();
+		}
+		return managerList;
+	}
+
+	@Override
+	public boolean deleteManager(int userId){
+		EntityManagerFactory entityManagerFactory = null;
+		EntityManager entityManager = null;
+		EntityTransaction entityTransaction = null;
+		boolean isRemove = false;
+		try {
+			entityManagerFactory = Persistence.createEntityManagerFactory("hotelManagementSystem");
+			entityManager = entityManagerFactory.createEntityManager();
+			String jpql = "delete AdminUserBean where userId =: userId";
+//			entityTransaction = entityManager.getTransaction();
+//			entityTransaction.begin();
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("userId", userId);
+			query.executeUpdate();
+//			entityTransaction.commit();
+			System.out.println("Manager Deleted Successfully");
+			entityManager.close();
+			isRemove = true;
+		} catch (Exception e) {
+
+			throw new UnableDeleteException();
+		}
+		return isRemove;
+	}
 
 	
 

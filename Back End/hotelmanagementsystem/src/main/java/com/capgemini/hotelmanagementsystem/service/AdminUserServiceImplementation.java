@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
-import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.dao.AdminUserDAO;
 
 import cucumber.api.java.lu.a;
@@ -47,22 +46,6 @@ public class AdminUserServiceImplementation implements AdminUserService {
 	}
 
 	@Override
-	public boolean userProfile(int userId,long phoneNumber, String address, String nationality) {
-		return adminUserDAO.userProfile(userId, phoneNumber, address, nationality);
-	}
-
-	@Override
-	public List<UserInfoBean> displayUserProfile(int userId) {
-//		try {
-//			return adminUserDAO.displayUserProfile(userId);
-//		} catch (HotelManagementSystemExceptionController e) {
-//			e.getMessage();
-//		}
-//		return null;
-		return adminUserDAO.displayUserProfile(userId);
-	}
-
-	@Override
 	public boolean emailPresent(String email) {
 		return adminUserDAO.emailPresent(email);
 	}
@@ -80,6 +63,11 @@ public class AdminUserServiceImplementation implements AdminUserService {
 	@Override
 	public boolean passwordChecker(String userEmail, String password) {
 		return adminUserDAO.passwordChecker(userEmail, password);
+	}
+
+	@Override
+	public AdminUserBean userProfile(int userId) {
+		return adminUserDAO.userProfile(userId);
 	}
 	
 }

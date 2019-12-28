@@ -1,22 +1,30 @@
 <body>
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
+    <!-- <div class="container h-100">
+        <div class=" h-100">
             <div class="searchbar">
                 <input class="search_input" type="text" name="" placeholder="Search..." [(ngModel)]='search'
                     placeholder="Enter location...">
                 <a routerLink="#" class="search_icon"><i class="fas fa-search"></i></a>
-                <!-- <input type="search" name="search" [(ngModel)]='search' placeholder="Enter location..." 
-            class="form-control"> -->
+            </div>
+        </div>
+    </div> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 offset-3 " >
+                <div class="input-group custom-search-form">
+                  <input type="text" class="form-control" [(ngModel)]='search' style="background-color:blanchedalmond;">
+                  <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                  <span class="glyphicon glyphicon-search" ><img src="/assets/icons/search.svg" alt=""></span>
+                 </button>
+                 </span>
+                 </div><!-- /input-group -->
             </div>
         </div>
     </div>
-<div class="text text-success" style="font-weight: bolder; margin-left: 10px;" *ngIf='statusCode===201'>{{message}}
-</div>
-<div class="text text-danger" style="font-weight: bolder;  margin-left: 10px;" *ngIf='statusCode===401'>{{message}}
-</div>
 <div class="col-md-3 mt-3 card card-body float-left" style="margin-left: 60px;"
     *ngFor='let hotel of hotelService.hotelArray | filter: search, index as i'>
-    <img src="/assets/images/{{i+101}}.jpg" style="height: 175px;" alt="">
+    <img src="{{hotel.image}}" style="height: 175px;" alt="">
     <h3 style="text-align: center;">{{hotel.hotelName}} </h3>
     <h6>Location: {{hotel.location}}</h6>
     <h6>Available AC Rooms: {{hotel.availableAcRoom}}</h6>
@@ -92,8 +100,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-danger offset-3" (click)="deleteHotel(hotel.hotelId)"><img
-                src="/assets/icons/trash-fill.svg" alt="" width="32" height="32" title="Trash"
-                (click)="deleteHotel(hotel.hotelId)"></button>
+        <button type="submit" class="btn btn-danger offset-3" (click)="deleteHotel(hotel.hotelId)"><img src="/assets/icons/trash-fill.svg" alt="" width="32" height="32" title="Trash"></button>
     </div>
 </div>

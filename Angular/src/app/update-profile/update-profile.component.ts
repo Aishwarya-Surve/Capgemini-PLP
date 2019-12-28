@@ -26,23 +26,15 @@ export class UpdateProfileComponent implements OnInit {
     const userDetails = JSON.parse(localStorage.getItem('user'));
     console.log(userDetails.adminUserBean.userId);
     this.userProfile.userId = userDetails.adminUserBean.userId;
-    this.userProfile.userName = userDetails.adminUserBean.userName;
-    this.userProfile.userType = userDetails.adminUserBean.userType;
-    this.userProfile.password = userDetails.adminUserBean.password;
-    this.userProfile.emailId = userDetails.adminUserBean.userEmail;
+    // this.userProfile.userName = userDetails.adminUserBean.userName;
+    // this.userProfile.userType = userDetails.adminUserBean.userType;
+    // this.userProfile.password = userDetails.adminUserBean.password;
+    // this.userProfile.emailId = userDetails.adminUserBean.userEmail;
   }
 
-  update(updateProfile: NgForm) {
-    this.userProfile.address = updateProfile.value.address;
-    this.userProfile.nationality = updateProfile.value.nationality;
-    this.userProfile.phoneNumber = updateProfile.value.phoneNumber;
-    console.log(this.userProfile);
-    this.auth.updateProfile(this.userProfile).subscribe(response => {
-      console.log(response);
-      this.router.navigateByUrl('/userProfile');
-    }, err => {
-      console.log(err);
-    });
+  UpdateProfile(UpdateProfileForm: NgForm) {
+    console.log(UpdateProfileForm.value);
+    // this.
   }
 
   ngOnInit() {

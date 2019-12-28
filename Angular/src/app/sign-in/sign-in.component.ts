@@ -33,6 +33,7 @@ export class SignInComponent implements OnInit {
         const userDetail = localStorage.getItem('user');
         this.message = response.description;
         if (response.adminUserBean.userType === 'user') {
+          alert(response.description);
           this.router.navigateByUrl('/bookings');
         } else {
           this.router.navigate(['/']);

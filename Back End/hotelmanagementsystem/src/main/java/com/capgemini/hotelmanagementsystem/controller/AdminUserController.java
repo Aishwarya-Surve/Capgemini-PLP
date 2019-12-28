@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
-import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.response.HotelManagementResponse;
 import com.capgemini.hotelmanagementsystem.service.AdminUserService;
 
@@ -33,7 +32,7 @@ public class AdminUserController {
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Log In Scussessfully!!!");
 			hotelManagementResponse.setAdminUserBean(adminUserBean);
-		} 
+		}
 		return hotelManagementResponse;
 
 	}// End of adminLogin()
@@ -49,15 +48,14 @@ public class AdminUserController {
 				hotelManagementResponse.setStatusCode(201);
 				hotelManagementResponse.setMessage("Success");
 				hotelManagementResponse.setDescription("User Registered Successfully.......");
-			} 
+			}
 //			else {
 //				hotelManagementResponse.setStatusCode(401);
 //				hotelManagementResponse.setMessage("Failed");
 //				hotelManagementResponse.setDescription("User Registration Failed........");
 //			}
 			return hotelManagementResponse;
-		} 
-		else {
+		} else {
 			hotelManagementResponse.setStatusCode(401);
 			hotelManagementResponse.setMessage("Failed");
 			hotelManagementResponse.setDescription("Email Already Exists........");
@@ -74,7 +72,7 @@ public class AdminUserController {
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("This Are All User");
 			hotelManagementResponse.setUserList(userList);
-		} 
+		}
 //		else {
 //			hotelManagementResponse.setStatusCode(401);
 //			hotelManagementResponse.setMessage("Failed");
@@ -93,7 +91,7 @@ public class AdminUserController {
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("This Are All User");
 			hotelManagementResponse.setUserList(userList);
-		} 
+		}
 //		else {
 //			hotelManagementResponse.setStatusCode(401);
 //			hotelManagementResponse.setMessage("Failed");
@@ -126,7 +124,7 @@ public class AdminUserController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Employee Deleted successfully.......");
-		} 
+		}
 //		else {
 //			hotelManagementResponse.setStatusCode(401);
 //			hotelManagementResponse.setMessage("Failed");
@@ -135,40 +133,17 @@ public class AdminUserController {
 		return hotelManagementResponse;
 	} // End of deleteUser()
 
-	@PostMapping(path = "/userProfile")
-	public HotelManagementResponse userProfile(@RequestBody UserInfoBean userInfoBean) {
-		boolean userProfile = adminUserService.userProfile(userInfoBean.getUserId(), userInfoBean.getPhoneNumber(),
-				userInfoBean.getAddress(), userInfoBean.getNationality());
+	@GetMapping(path = "/userProfile")
+	public HotelManagementResponse userProfile(@RequestParam int userId) {
+		AdminUserBean userProfile = adminUserService.userProfile(userId);
 		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-		if (userProfile) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setDescription("User Profile Update Scussessfully!!");
-		} 
-//		else {
-//			hotelManagementResponse.setStatusCode(401);
-//			hotelManagementResponse.setMessage("Failed");
-//			hotelManagementResponse.setDescription("Failed To Update...");
-//		}
+
+		hotelManagementResponse.setStatusCode(201);
+		hotelManagementResponse.setMessage("Success");
+		hotelManagementResponse.setDescription("User Profile Update Scussessfully!!");
+		hotelManagementResponse.setAdminUserBean(userProfile);
 		return hotelManagementResponse;
 	}// End of userProfile()
-
-	@GetMapping(path = "/getUserProfile")
-	public HotelManagementResponse getUserProfile(@RequestParam int userId) {
-		List<UserInfoBean> getUserProfile = adminUserService.displayUserProfile(userId);
-		HotelManagementResponse hotelManagementResponse = new HotelManagementResponse();
-		if (getUserProfile != null) {
-			hotelManagementResponse.setStatusCode(201);
-			hotelManagementResponse.setMessage("Success");
-			hotelManagementResponse.setGetUserProfile(getUserProfile);
-		} 
-//		else {
-//			hotelManagementResponse.setStatusCode(401);
-//			hotelManagementResponse.setMessage("Failed");
-//			hotelManagementResponse.setDescription("Information is not found");
-//		}
-		return hotelManagementResponse;
-	}// End of getUserProfile()
 
 	@GetMapping(path = "/getAllManager")
 	public HotelManagementResponse getAllManager() {
@@ -178,7 +153,7 @@ public class AdminUserController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setGetAllManager(getAllManager);
-		} 
+		}
 //		else {
 //			hotelManagementResponse.setStatusCode(401);
 //			hotelManagementResponse.setMessage("Failed");
@@ -195,7 +170,7 @@ public class AdminUserController {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Manager Deleted successfully.......");
-		} 
+		}
 //		else {
 //			hotelManagementResponse.setStatusCode(401);
 //			hotelManagementResponse.setMessage("Failed");

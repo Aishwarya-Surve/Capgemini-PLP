@@ -43,16 +43,9 @@ public class HotelController {
 	@DeleteMapping("/removeHotel")
 	public HotelManagementResponse removeHotel(@RequestParam int hotelId) {
 		boolean removedHotel = hotelService.deleteHotel(hotelId);
-		if (removedHotel) {
 			hotelManagementResponse.setStatusCode(201);
 			hotelManagementResponse.setMessage("Success");
 			hotelManagementResponse.setDescription("Removed Successfully");
-		} 
-//		else {
-//			hotelManagementResponse.setStatusCode(401);
-//			hotelManagementResponse.setMessage("Failed");
-//			hotelManagementResponse.setDescription("Unable to remove");
-//		}
 		return hotelManagementResponse;
 	}// end of removeHotel()
 

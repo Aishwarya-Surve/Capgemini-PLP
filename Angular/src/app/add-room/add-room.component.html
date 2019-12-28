@@ -1,7 +1,9 @@
-<div class="col-md-4 offset-4 mt-5">
+<div id="addRoom" class="section">
+    <div class="section-center">
+<div class="col-md-4 offset-4 mt-2">
     <div class="hotel-form card card-body">
         <form #addRoom="ngForm" (ngSubmit)="room(addRoom)">
-            <h3>Room Details</h3>
+            <h3 >Room Details</h3>
             <div class="form-group">
                 <span class="form-label">Room rent</span>
                 <input class="form-control" name="roomRent" #roomRent="ngModel" ngModel type="text"
@@ -50,9 +52,16 @@
                 <option value="NON-AC">NON AC</option>
                 </select>
             </div>
+            <div class="form-group">
+                <span class="form-label">Image URL</span>
+                <input class="form-control" name="image" #image="ngModel" ngModel type="text"
+                    placeholder="Enter Imagre Url">
+            </div>
             <div class="form-btn">
                 <button  type="submit" class="btn btn-outline-primary" [disabled]="addRoom.invalid">Add Room</button>
             </div>
         </form>
     </div>
+</div>
+</div>
 </div>

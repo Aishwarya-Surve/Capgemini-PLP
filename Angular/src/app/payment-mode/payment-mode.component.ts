@@ -24,6 +24,7 @@ export class PaymentModeComponent implements OnInit {
   paymentDone() {
     this.hotelService.paymentCashMode().subscribe(response => {
       console.log(response);
+      this.router.navigateByUrl('/bookingDone');
     }, err => {
       console.log(err);
     });

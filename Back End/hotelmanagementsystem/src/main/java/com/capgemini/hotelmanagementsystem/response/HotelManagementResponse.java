@@ -8,7 +8,6 @@ import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
-import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -26,10 +25,6 @@ public class HotelManagementResponse {
 
 	private List<BookingInfoBean> boookedRoomList;
 
-	private UserInfoBean userInfoBean;
-
-	private List<UserInfoBean> getUserProfile;
-	
 	private List<AdminUserBean> getAllManager;
 
 	private List<MenuCardBean> listMenuCard;
@@ -108,24 +103,6 @@ public class HotelManagementResponse {
 	public void setBoookedRoomList(List<BookingInfoBean> boookedRoomList) {
 		this.boookedRoomList = boookedRoomList;
 	}
-
-	public UserInfoBean getUserInfoBean() {
-		return userInfoBean;
-	}
-
-	public void setUserInfoBean(UserInfoBean userInfoBean) {
-		this.userInfoBean = userInfoBean;
-	}
-
-	public List<UserInfoBean> getGetUserProfile() {
-		return getUserProfile;
-	}
-
-	public void setGetUserProfile(List<UserInfoBean> getUserProfile) {
-		this.getUserProfile = getUserProfile;
-	}
-
-	
 
 	public List<AdminUserBean> getGetAllManager() {
 		return getAllManager;

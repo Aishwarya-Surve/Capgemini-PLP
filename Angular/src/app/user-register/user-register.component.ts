@@ -14,7 +14,10 @@ export class UserRegisterComponent implements OnInit {
     userName: null,
     password: null,
     userType: null,
-    userEmail: null
+    userEmail: null,
+    nationality: null,
+    address: null,
+    phoneNumber: null
   };
 
   message = null;
@@ -26,6 +29,9 @@ export class UserRegisterComponent implements OnInit {
     this.user.password = registrationForm.value.password;
     this.user.userType = 'user';
     this.user.userEmail = registrationForm.value.userEmail;
+    this.user.address = registrationForm.value.address;
+    this.user.nationality = registrationForm.value.nationality;
+    this.user.phoneNumber = registrationForm.value.phoneNumber;
     this.auth.registerData(this.user).subscribe(response => {
       console.log(response);
       registrationForm.reset();

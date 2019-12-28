@@ -27,7 +27,7 @@ public class HotelBean {
 	private int availableNonAcRoom;
 	
 	@Column
-	private int image;
+	private String image;
 	// getter & setter
 
 	public int getHotelId() {
@@ -70,13 +70,15 @@ public class HotelBean {
 		this.location = location;
 	}
 
-	public int getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(int image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
+
+	
 	
 
 }// end of bean class

@@ -3,7 +3,6 @@ package com.capgemini.hotelmanagementsystem.dao;
 import java.util.List;
 
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
-import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 
 //login for Admin as well as  memployee & user
 public interface AdminUserDAO {
@@ -12,6 +11,7 @@ public interface AdminUserDAO {
 
 	// user registeration
 	public boolean userRegister(AdminUserBean adminUserBean);
+	
 
 	// see all user which is present in database
 	public List<AdminUserBean> getAllUsers();
@@ -26,10 +26,7 @@ public interface AdminUserDAO {
 	public boolean deleteEmployee(int userId);
 
 	// user update his details or add
-	public boolean userProfile(int userId, long phoneNumber, String address, String nationality);
-
-	// display userprofile
-	public List<UserInfoBean> displayUserProfile(int userId);
+	public AdminUserBean userProfile(int userId);	
 
 	// Email checker
 	public boolean emailPresent(String email);

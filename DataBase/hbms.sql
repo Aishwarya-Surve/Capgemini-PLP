@@ -71,7 +71,7 @@ CREATE TABLE `hibernate_sequence` (
 /*Data for the table `hibernate_sequence` */
 
 insert  into `hibernate_sequence`(`next_val`) values 
-(54);
+(56);
 
 /*Table structure for table `hotel` */
 
@@ -86,7 +86,7 @@ CREATE TABLE `hotel` (
   `image` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`hotel_id`),
   UNIQUE KEY `hotel_name` (`hotel_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 /*Data for the table `hotel` */
 
@@ -98,9 +98,7 @@ insert  into `hotel`(`hotel_id`,`hotel_name`,`location`,`available_ac`,`availabl
 (8,'Paradise Resort','Goa',45,55,'https://cdn.pixabay.com/photo/2019/12/13/06/58/stockholm-4692351__340.jpg'),
 (11,'Mansion','Mumbai',10,20,'https://cdn.pixabay.com/photo/2015/03/26/10/10/building-691033__340.jpg'),
 (12,'Hotel Treeside','Pune',21,40,'https://cdn.pixabay.com/photo/2018/01/03/04/14/architecture-3057553__340.jpg'),
-(13,'Dwarka','Pune',30,50,'https://cdn.pixabay.com/photo/2015/11/27/07/08/singapore-1065091__340.jpg'),
-(14,'Bageecha','Banglore',35,40,'https://cdn.pixabay.com/photo/2017/03/10/06/15/quebec-2131892__340.jpg'),
-(16,'Mayuri','Goa',40,20,'https://cdn.pixabay.com/photo/2015/02/02/08/34/hotel-620641__340.jpg');
+(21,'Cosmopolitan Hotel','Delhi',100,150,'https://cdn.pixabay.com/photo/2017/07/01/09/08/cosmopolitan-hotel-2460949__340.jpg');
 
 /*Table structure for table `menu_card` */
 
@@ -183,20 +181,21 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `unique` (`user_email`),
   KEY `password` (`password`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`user_name`,`user_email`,`user_type`,`password`,`nationality`,`phoneNumber`,`address`) values 
 (1,'akash','akash@gmail.com','admin','Akash@11','Indian','7066705460','Boisar'),
-(2,'pooja','pooja@gmail.com','user','Pooja@123','Indian','7066705460','Boisar'),
+(2,'pooja','pooja@gmail.com','user','Pooja@123','Indian','7066705460','Nagpur'),
 (3,'diksha','diksha@gmail.com','employee','diksha@123','Indian','7066705460','Boisar'),
 (40,'admin','admin@gmail.com','admin','Admin@123','Indian','7066705460','Boisar'),
 (41,'user','user@gmail.com','user','User@123','Indian','7066705460','Boisar'),
 (42,'manager','manager@gmail.com','manager','Manager@123','Indian','7066705460','Boisar'),
 (43,'employee','employee@gmail.com','employee','Employee@123','Indian','7066705460','Boisar'),
 (52,'Ramesh','ramesh@gmail.com','user','Ramesh@123','Indian','9423372928','House No. 135 C,Tambada Pada,Near R'),
-(53,'Sheetal','sheetal@gmail.com','user','Sheetal@123','Indian','9512233366','Pune');
+(53,'Sheetal','sheetal@gmail.com','user','Sheetal@123','Indian','9512233366','Pune'),
+(55,'Nishi Shah','nishi@gmail.com','manager','Nishi@123','Indian','9754220236','Dombivali');
 
 /*Table structure for table `user_other_info` */
 

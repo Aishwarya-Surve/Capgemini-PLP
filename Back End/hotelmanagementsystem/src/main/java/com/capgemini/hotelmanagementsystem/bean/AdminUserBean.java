@@ -30,12 +30,22 @@ public class AdminUserBean {
 	private String userType;
 
 	@Column(name = "password")
-	
 	private String password;
 
 	@Column(name = "user_email")
 	@Email(message = "Email should be valid...")
 	private String userEmail;
+
+	@Column
+	private String address;
+
+	@Column
+	@Pattern(regexp = "[a-zA-z]+([\\s][a-zA-z]+)*")
+	private String nationality;
+
+	@Column
+	@Pattern(regexp = "[6-9]{1}[0-9]{9}")
+	private String phoneNumber;
 
 	// getter & setter
 	public int getUserId() {
@@ -78,36 +88,33 @@ public class AdminUserBean {
 		this.userEmail = userEmail;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
-		return result;
+	public String getAddress() {
+		return address;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AdminUserBean other = (AdminUserBean) obj;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (userEmail == null) {
-			if (other.userEmail != null)
-				return false;
-		} else if (!userEmail.equals(other.userEmail))
-			return false;
-		return true;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	
+	
+	
+
+
 }// end of bean class

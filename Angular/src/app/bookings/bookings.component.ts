@@ -21,7 +21,12 @@ export class BookingsComponent implements OnInit {
 
   search(bookingForm: NgForm) {
     console.log(bookingForm.value);
-    this.hotelService.searchHotel(bookingForm.value);
+    if ((bookingForm.value.checkInDate >= this.todaysDate) && (bookingForm.value.checkOutDate >= bookingForm.value.checkInDate)) {
+      this.hotelService.searchHotel(bookingForm.value);
+    } else {
+      alert('Enter Valid Check In & Check Out Dates');
+    }
+
   }
 
   ngOnInit() {

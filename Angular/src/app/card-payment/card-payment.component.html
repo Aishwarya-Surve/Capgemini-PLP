@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label for="name">Card Holder's Name:</label>
                     <input type="text" placeholder="Enter the holders name..." name="name" #name='ngModel' ngModel
-                        required pattern="[a-zA-z]+([\s][a-zA-z]+)*" minlength="6" maxlength="35" class="form-control">
+                        required pattern="[a-zA-z]+([\s][a-zA-z]+)*" minlength="3" maxlength="35" class="form-control">
                     <div *ngIf='name.touched && name.invalid'>
                         <p class="text text-danger" *ngIf='name.errors.required'>This field is mandatory</p>
                         <p class="text text-danger" *ngIf='name.errors.minlength'>Minimum 6 character
@@ -51,7 +51,12 @@
                         </div>
                         <br>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
+                                <label for="ExpYear">CVV</label>
+                                <input type="text" placeholder="cvv" name="cvv" #cvv='ngModel' ngModel
+                        required pattern="\d{3}" maxlength="3" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="ExpYear">Expire</label>
                                 <select id="ExpYear" class="form-control">
                                     <option selected>years</option>
@@ -63,7 +68,7 @@
                                     <option value="2025">2025</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="months">Expire</label>
                                 <select id="months" class="form-control">
                                     <option selected>Months</option>

@@ -2,7 +2,6 @@ package com.capgemini.hotelmanagementsystem.service;
 
 import java.util.List;
 
-import com.capgemini.hotelmanagementsystem.bean.BookingInfoBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
 
 public interface HotelService {

@@ -18,6 +18,11 @@ export class AddRoomComponent implements OnInit {
     this.hotelService.addRoom(addRoom.value).subscribe(response => {
       addRoom.reset();
       this.message = response.description;
+      if (response.statusCode === 201) {
+        alert(response.description);
+      } else {
+        alert(response.description);
+      }
     }, err => {
       console.log(err);
     });

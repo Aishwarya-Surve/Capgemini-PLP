@@ -3,7 +3,6 @@ package com.capgemini.hotelmanagementsystem.service;
 import java.util.List;
 
 import com.capgemini.hotelmanagementsystem.bean.AdminUserBean;
-import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 
 public interface AdminUserService {
 
@@ -26,10 +25,8 @@ public interface AdminUserService {
 	public boolean deleteEmployee(int userId);
 
 	// user update his details or add
-	public boolean userProfile(int userId, long phoneNumber, String address, String nationality);
+	public AdminUserBean userProfile(int userId);
 
-	// display userprofile
-	public List<UserInfoBean> displayUserProfile(int userId);
 
 	// Email checker
 	public boolean emailPresent(String email);

@@ -29,13 +29,11 @@ export class AddEmployeeComponent implements OnInit {
       console.log(response);
       registrationForm.reset();
       console.log(response.statusCode);
-      if (response.statusCode === '201') {
-        this.message = response.description;
+      if (response.statusCode === 201) {
+        alert('Employee Registered Successfully');
         console.log(this.message);
-      } else if (response.statusCode === '401') {
-        this.message = response.description;
-      } else {
-        this.message = response.description;
+      } else if (response.statusCode === 401) {
+        alert('Employee Registeration Failed');
       }
     }, err => {
       console.log(err);

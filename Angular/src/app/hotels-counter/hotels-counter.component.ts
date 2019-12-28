@@ -82,12 +82,11 @@ export class HotelsCounterComponent implements OnInit {
       this.hotelService.getHotelList();
       if (response.statusCode === '201') {
         this.message = response.description;
-        console.log(this.message);
-      } else if (response.statusCode === '401') {
-        this.message = response.description;
+        alert(response.description);
         console.log(this.message);
       } else {
         this.message = response.description;
+        alert(response.description);
       }
     });
   }

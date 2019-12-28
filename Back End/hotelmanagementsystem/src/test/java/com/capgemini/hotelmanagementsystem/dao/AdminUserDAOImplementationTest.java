@@ -75,9 +75,6 @@ class AdminUserDAOImplementationTest {
 		TestCase.assertEquals(true, adminUserDAO.deleteUser(10));
 	}
 
-	@Test
-	void testDisplayUserProfile() {
-		TestCase.assertNotNull(adminUserDAO.displayUserProfile(4));
-	}
+	
 
 }

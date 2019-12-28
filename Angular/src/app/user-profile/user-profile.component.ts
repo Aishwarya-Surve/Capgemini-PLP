@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { UserProfile } from '../user-profile';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,27 +8,31 @@ import { UserProfile } from '../user-profile';
 })
 export class UserProfileComponent implements OnInit {
 
-  userProfile: UserProfile = {
-    userId: null,
-    userName: null,
-    userType: null,
-    emailId: null,
-    address: null,
-    nationality: null,
-    phoneNumber: null,
-    password: null
-  };
+  userProfile = {};
   constructor(private auth: AuthService) {
     const userDetails = JSON.parse(localStorage.getItem('user'));
     this.getProfile(userDetails.adminUserBean.userId);
   }
 
   getProfile(userId) {
-    this.auth.getProfile(userId);
+    console.log(userId);
+    this.auth.getProfile(userId).subscribe(response => {
+      console.log(response);
+      this.userProfile = response.adminUserBean;
+    }, err => {
+      console.log(err);
+    });
+  }
 
+  updateProfile(userProfile) {
+    console.log(userProfile);
+    this.auth.updateProfile(userProfile);
   }
 
   ngOnInit() {
+
   }
 
 }
+
+

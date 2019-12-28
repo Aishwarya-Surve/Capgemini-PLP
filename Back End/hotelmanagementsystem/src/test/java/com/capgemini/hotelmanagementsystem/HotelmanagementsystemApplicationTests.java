@@ -16,7 +16,6 @@ import com.capgemini.hotelmanagementsystem.bean.FoodOrderBean;
 import com.capgemini.hotelmanagementsystem.bean.HotelBean;
 import com.capgemini.hotelmanagementsystem.bean.MenuCardBean;
 import com.capgemini.hotelmanagementsystem.bean.RoomBean;
-import com.capgemini.hotelmanagementsystem.bean.UserInfoBean;
 import com.capgemini.hotelmanagementsystem.service.AdminUserService;
 import com.capgemini.hotelmanagementsystem.service.BookingInfoService;
 import com.capgemini.hotelmanagementsystem.service.FoodOrderService;
@@ -38,7 +37,6 @@ public class HotelmanagementsystemApplicationTests {
 	public BookingInfoBean bookingInfoBean;
 	public HotelBean hotelBean;
 	public RoomBean roomBean;
-	public UserInfoBean userInfoBean;
 	public MenuCardBean menuCardBean;
 	public FoodOrderBean foodOrderBean;
 
@@ -165,11 +163,6 @@ public class HotelmanagementsystemApplicationTests {
 	// update UserProfile by user
 	
 	
-	@Test
-	public void testUpadateUserProfile() {
-		TestCase.assertEquals(true, adminUserService.userProfile(7, 9552012365l, "Mumbai" , "Indian"));
-	}
-
 //********************** Junit On Hotel Funtionality*****************
 
 	@Test

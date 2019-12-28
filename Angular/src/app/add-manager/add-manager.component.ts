@@ -13,7 +13,10 @@ export class AddManagerComponent implements OnInit {
     userName: null,
     password: null,
     userType: null,
-    userEmail: null
+    userEmail: null,
+    nationality: null,
+    phoneNumber: null,
+    address: null
   };
 
   message = null;
@@ -25,17 +28,20 @@ export class AddManagerComponent implements OnInit {
     this.user.password = registrationForm.value.password;
     this.user.userType = 'manager';
     this.user.userEmail = registrationForm.value.userEmail;
+    this.user.address = registrationForm.value.address;
+    this.user.nationality = registrationForm.value.nationality;
+    this.user.phoneNumber = registrationForm.value.phoneNumber;
     this.auth.registerData(this.user).subscribe(response => {
       console.log(response);
       registrationForm.reset();
       console.log(response.statusCode);
       if (response.statusCode === '201') {
-        this.message = response.description;
         console.log(this.message);
+        alert(response.description);
       } else if (response.statusCode === '401') {
-        this.message = response.description;
+        alert(response.description);
       } else {
-        this.message = response.description;
+        alert(response.description);
       }
     }, err => {
       console.log(err);

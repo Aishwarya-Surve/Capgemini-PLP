@@ -17,6 +17,11 @@ export class AddHotelComponent implements OnInit {
     this.hotelService.addHotel(addHotel.value).subscribe(response => {
       addHotel.reset();
       this.message = response.description;
+      if (response.statusCode === 201) {
+        alert(response.description);
+      } else {
+        alert(response.description);
+      }
     });
   }
 

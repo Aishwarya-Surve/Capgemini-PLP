@@ -9,6 +9,12 @@ import { Router } from '@angular/router';
 })
 export class CancelBookingComponent implements OnInit {
 
+  dateObject = new Date();
+  date = this.dateObject.getDate();
+  month = this.dateObject.getMonth();
+  year = this.dateObject.getFullYear();
+
+  todaysDate = `${this.year}-${this.month + 1}-${this.date}`;
 
   bookedRoomList = [];
 
@@ -25,14 +31,24 @@ export class CancelBookingComponent implements OnInit {
     });
   }
 
-  cancelBooking(bookingId) {
-    console.log(bookingId);
-    this.hotelService.cancelBooking(bookingId).subscribe(response => {
-      console.log(response);
-      this.getBookingList();
-    }, err => {
-      console.log(err);
-    });
+  cancelBooking(user) {
+    console.log(user.bookingId);
+    if (user.checkInDate > this.todaysDate) {
+      this.hotelService.cancelBooking(user.bookingId).subscribe(response => {
+        console.log(response);
+        if (response.statusCode === 201) {
+          alert(response.description);
+        } else {
+          alert(response.description);
+        }
+        this.getBookingList();
+      }, err => {
+        console.log(err);
+      });
+    } else {
+      alert('Booking Cannot Be Canceled');
+    }
+
   }
 
   ngOnInit() {

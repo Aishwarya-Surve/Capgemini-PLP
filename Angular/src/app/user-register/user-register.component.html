@@ -1,78 +1,3 @@
-<!-- <div class="col-md-4 offset-md-4 mt-4">
-    <form #RegistrationForm="ngForm" (ngSubmit)='RegisterUser(RegistrationForm)'>
-        <div class="card">
-            <div class="card-header">
-                Please Register!!!
-            </div>
-            <div class="card-body">
-                <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">User Name</span>
-                    </div>
-                    <input type="text" name="userName" #userName='ngModel' pattern="[a-zA-z]+([\s][a-zA-z]+)*" ngModel
-                        required class="form-control">
-                </div>
-             
-                <div *ngIf='userName.touched && userName.invalid'>
-                    <p class="text text-danger" *ngIf='userName.errors.required'>
-                        This Field is Mandatory
-                    </p>
-                    <p class="text text-warning" *ngIf='userName.errors.pattern'>
-                        The Field Accepts Only Characters
-                    </p>
-                </div>
-             
-                <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Email</span>
-                    </div>
-                    <input type="email" name="userEmail" #userEmail='ngModel' ngModel
-                        pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" required class="form-control" email>
-                </div>
-             
-                <div *ngIf='userEmail.touched && userEmail.invalid'>
-                    <p class="text text-danger" *ngIf='userEmail.errors.required'>
-                        This Field is Mandatory
-                    </p>
-                    <p class="text text-warning" *ngIf='userEmail.errors.pattern'>
-                        The Field Accepts Only Emails
-                    </p>
-                </div>
-
-                <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">password</span>
-                    </div>
-                    <input type="password" name="password" #password='ngModel' ngModel
-                        pattern="^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])(?=\S*?[^\w\*])\S{8,}$" required minlength="5"
-                        class="form-control">
-                </div>
-                
-                <div *ngIf='password.touched && password.invalid'>
-                    <p class="text text-danger" *ngIf='password.errors.required'>
-                        This Field is Mandatory
-                    </p>
-                    <p class="text text-danger" *ngIf='password.errors.minlength'>
-                        Minimum 8 Charaters Required
-                    </p>
-                    <p class="text text-warning" *ngIf='password.errors.password'>
-                        The Field Accepts Only passwords
-                    </p>
-                    <p class="text text-warning" *ngIf='password.errors.pattern'>
-                        Password must contain one uppercase, one smaller case,special character & number
-                    </p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary"
-                        [disabled]='RegistrationForm.invalid'>Register</button>
-                    <button type="reset" class="btn btn-dark">Reset</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div> -->
 <div id="register" class="section">
     <div class="section-center">
         <div class="container">
@@ -82,7 +7,6 @@
                         <h1> Please Register!!!</h1>
                     </div>
                 </div>
-
                 <div class="col-md-5 col-md-pull-7">
                     <div class="register-form">
                         <form #RegistrationForm="ngForm" (ngSubmit)='RegisterUser(RegistrationForm)'>
@@ -92,59 +16,114 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">User Name</span>
                                         </div>
-                                        <input type="text" name="userName" #userName='ngModel' pattern="[a-zA-z]+([\s][a-zA-z]+)*" ngModel
-                                            required class="form-control">
+                                        <input type="text" name="userName" #userName='ngModel'
+                                            pattern="[a-zA-z]+([\s][a-zA-z]+)*" ngModel required class="form-control"
+                                            maxlength="35">
                                     </div>
-                                 
+                                    <!-- UserName Validation Starts -->
                                     <div *ngIf='userName.touched && userName.invalid'>
                                         <p class="text text-danger" *ngIf='userName.errors.required'>
-                                            This Field is Mandatory
+                                            User Name is Mandatory
                                         </p>
-                                        <p class="text text-warning" *ngIf='userName.errors.pattern'>
-                                            The Field Accepts Only Characters
+                                        <p class="text text-danger" *ngIf='userName.errors.pattern'>
+                                            User Name Accepts Only Characters
                                         </p>
                                     </div>
-                                 
+                                    <!-- UserName Validation Ends -->
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Email</span>
                                         </div>
                                         <input type="email" name="userEmail" #userEmail='ngModel' ngModel
-                                            pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" required class="form-control" email>
+                                            pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" maxlength="35" required
+                                            class="form-control" email>
                                     </div>
-                                 
+                                    <!-- Email Validation Starts -->
                                     <div *ngIf='userEmail.touched && userEmail.invalid'>
                                         <p class="text text-danger" *ngIf='userEmail.errors.required'>
-                                            This Field is Mandatory
+                                            Email is Mandatory
                                         </p>
                                         <p class="text text-warning" *ngIf='userEmail.errors.pattern'>
-                                            The Field Accepts Only Emails
+                                            Email in not Valid eg.(abc@gmail.com)
                                         </p>
                                     </div>
-                    
+                                    <!-- Email Validation Ends -->
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">password</span>
                                         </div>
                                         <input type="password" name="password" #password='ngModel' ngModel
-                                            pattern="^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])(?=\S*?[^\w\*])\S{8,}$" required minlength="5"
-                                            class="form-control">
+                                            pattern="^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])(?=\S*?[^\w\*])\S{8,}$"
+                                            required minlength="5" class="form-control" maxlength="35">
                                     </div>
-                                    
+                                    <!-- password Validation Starts -->
                                     <div *ngIf='password.touched && password.invalid'>
                                         <p class="text text-danger" *ngIf='password.errors.required'>
-                                            This Field is Mandatory
+                                            Password is Mandatory
                                         </p>
                                         <p class="text text-danger" *ngIf='password.errors.minlength'>
-                                            Minimum 8 Charaters Required
+                                            Password must be 8 characters
                                         </p>
-                                        <p class="text text-warning" *ngIf='password.errors.password'>
-                                            The Field Accepts Only passwords
-                                        </p>
-                                        <p class="text text-warning" *ngIf='password.errors.pattern'>
-                                            Password must contain one uppercase, one smaller case,special character & number
+                                        <p class="text text-danger" *ngIf='password.errors.pattern'>
+                                            Password must contain at least one uppercase, one smaller case,special
+                                            character(eg: #,@!.) & number
                                         </p>
                                     </div>
+                                    <!-- password Validation Ends -->
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Nationality</span>
+                                        </div>
+                                        <input type="text" name="nationality" #nationality='ngModel'
+                                            pattern="[a-zA-z]+([\s][a-zA-z]+)*" ngModel required class="form-control"
+                                            maxlength="35">
+                                    </div>
+                                    <!-- nationality Validation Starts -->
+                                    <div *ngIf='nationality.touched && nationality.invalid'>
+                                        <p class="text text-danger" *ngIf='nationality.errors.required'>
+                                            Nationality is Mandatory
+                                        </p>
+                                        <p class="text text-danger" *ngIf='nationality.errors.pattern'>
+                                            Nationality Accepts Only Characters
+                                        </p>
+                                    </div>
+                                    <!-- nationality Validation Ends -->
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Address</span>
+                                        </div>
+                                        <input type="text" name="address" #address='ngModel' ngModel required
+                                            class="form-control" maxlength="35">
+                                    </div>
+                                    <!-- Address Validation Starts -->
+                                    <div *ngIf='address.touched && address.invalid'>
+                                        <p class="text text-danger" *ngIf='address.errors.required'>
+                                            Address is Mandatory
+                                        </p>
+                                    </div>
+                                    <!-- Address Validation Ends -->
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Phone No.</span>
+                                        </div>
+                                        <input type="text" name="phoneNumber" #phoneNumber='ngModel' ngModel required pattern="[6-9]{1}[0-9]{9}"
+                                            class="form-control" maxlength="10" minlength="10">
+                                    </div>
+                                    <!-- Address Validation Starts -->
+                                    <div *ngIf='phoneNumber.touched && phoneNumber.invalid'>
+                                        <p class="text text-danger" *ngIf='phoneNumber.errors.required'>
+                                            Phone Number is Mandatory
+                                        </p>
+                                        <p class="text text-danger" *ngIf='phoneNumber.errors.pattern'>
+                                            Phone Number should start with 6-9
+                                        </p>
+                                        <p class="text text-danger" *ngIf='phoneNumber.errors.minlength'>
+                                            Phone Number should be 10 digits
+                                        </p>
+                                    </div>
+                                    <!-- Address Validation Ends -->
+
+
                                 </div>
                                 <div class="card-footer">
                                     <div class="btn-group">

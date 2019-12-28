@@ -4,11 +4,10 @@
 </div>
 <div class="col-md-3 mt-3 card card-body float-left" style="margin-left: 60px;"
     *ngFor='let room of hotelService.roomArray, index as i'>
-    <h6>Room Id: {{room.roomId}} </h6>
-    <h6>Hotel Id: {{room.hotelId}}</h6>
-    <h6>Room Rent: {{room.roomRent}}</h6>
-    <h6>Room Type: {{room.roomType}}</h6>
-    <h6>Room Capacity: {{room.roomCapacity}}</h6>
+    <img src="{{room.image}}" alt="">
+    <h6>Room Rent:Rs. {{room.roomRent}}</h6>
+    <h6>Room Type: {{room.roomType}} Bed</h6>
+    <h6>Room Capacity: {{room.roomCapacity}} Person</h6>
     <h6>Room Status: {{room.roomStatus}}</h6>
     <h6>Room Facility: {{room.roomFacility}}</h6>
     <div class="row">

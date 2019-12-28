@@ -11,7 +11,9 @@ export class AuthService {
 
   api = 'http://localhost:8080/';
 
-  profile = {};
+  profile = [];
+
+  updateUserProfile = {};
 
   constructor(public http: HttpClient, private router: Router) { }
 
@@ -48,17 +50,13 @@ export class AuthService {
     return this.http.delete(`${this.api}deleteEmployee?userId=${data}`);
   }
 
-  updateProfile(data): Observable<any> {
+  updateProfile(data) {
     console.log(data);
-    return this.http.post<any>(`${this.api}userProfile`, data);
+    this.updateUserProfile = data;
+    this.router.navigateByUrl('/userUpdateProfile');
   }
 
-  getProfile(userId) {
-    this.http.get<any>(`${this.api}getUserProfile?userId=${userId}`).subscribe(response => {
-      console.log(response.getUserProfile);
-      this.profile = response.getUserProfile;
-    }, err => {
-      console.log(err);
-    });
+  getProfile(userId): Observable<any> {
+    return this.http.get<any>(`${this.api}userProfile?userId=${userId}`);
   }
 }
